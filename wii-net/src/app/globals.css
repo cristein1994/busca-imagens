@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #07131a;
+  --foam: #e8f4f2;
+  --mist: #9bb8b4;
+  --mist-dim: #6a8582;
+  --teal-bright: #2dd4bf;
+  --panel: rgba(8, 28, 36, 0.72);
+  --line: rgba(232, 244, 242, 0.14);
+  --line-soft: rgba(232, 244, 242, 0.06);
+  --row-hover: rgba(45, 212, 191, 0.06);
+  --signal-online: #3ecf8e;
+  --signal-offline: #e07a5f;
+  --signal-unknown: #8a9aa0;
+  --background: #07131a;
+  --foreground: #e8f4f2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.ambient-grid {
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+}
+
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 80%, rgba(14, 116, 144, 0.45), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(45, 212, 191, 0.18), transparent 50%),
+    linear-gradient(165deg, #0a1f28 0%, #07131a 55%, #0c2430 100%);
+}
+
+.hero-plane {
+  isolation: isolate;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    transform: translate(-48%, 12px) scale(1.04);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-rise-delay {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+}
+
+.animate-drift {
+  animation: drift 14s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+::selection {
+  background: rgba(45, 212, 191, 0.35);
+  color: var(--foam);
+}
