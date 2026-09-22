@@ -4,8 +4,14 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 from bot.careers import descobrir_site_por_nome, encontrar_url_carreiras
-from bot.cnpj import consultar_cnpj, extrair_site, limpar_cnpj, validar_cnpj
-from bot.formatters import escape_md, formatar_vaga
+from bot.cnpj import (
+    consultar_cnpj,
+    extrair_site,
+    extrair_socios,
+    limpar_cnpj,
+    validar_cnpj,
+)
+from bot.formatters import escape_md, formatar_lista_socios, formatar_vaga
 from bot.jobs import buscar_vagas_por_url
 
 MAX_VAGAS = 20
@@ -17,13 +23,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(
         "Olá! Envie:\n"
         "/cnpj 12345678000199\n"
-        "ou\n"
+        "/socios 12345678000199  — quem está no QSA\n"
         "/nome Nome da Empresa\n"
-        "ou\n"
         "/site empresa.com.br\n\n"
-        "Exemplo: /cnpj 00000000000191\n"
-        "Sistemas: Gupy, Greenhouse e Lever."
+        "Exemplo: /socios 00000000000191\n"
+        "Sistemas de vagas: Gupy, Greenhouse e Lever."
     )
+
+
+async def _enviar_socios(update: Update, dados: dict) -> None:
+    assert update.message
+    socios = extrair_socios(dados)
+    for bloco in formatar_lista_socios(socios):
+        await update.message.reply_text(bloco, parse_mode="Markdown")
 
 
 async def _responder_vagas(
@@ -65,15 +77,19 @@ async def _responder_vagas(
         await update.message.reply_text(formatar_vaga(v), parse_mode="Markdown")
 
 
+def _parse_cnpj_args(context: ContextTypes.DEFAULT_TYPE) -> str | None:
+    if not context.args:
+        return None
+    return limpar_cnpj(context.args[0])
+
+
 async def buscar_por_cnpj(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not update.message:
         return
-    if not context.args:
+    limpo = _parse_cnpj_args(context)
+    if not limpo:
         await update.message.reply_text("Uso: /cnpj 12345678000199")
         return
-
-    cnpj = context.args[0]
-    limpo = limpar_cnpj(cnpj)
     if len(limpo) != 14:
         await update.message.reply_text("❌ CNPJ inválido (precisa de 14 dígitos).")
         return
@@ -82,13 +98,44 @@ async def buscar_por_cnpj(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             "⚠️ Dígitos verificadores do CNPJ parecem inválidos. Continuando mesmo assim…"
         )
 
-    await update.message.reply_text(f"🔍 Buscando vagas para CNPJ {limpo}...")
+    await update.message.reply_text(f"🔍 Consultando CNPJ {limpo}...")
 
     try:
         dados = consultar_cnpj(limpo)
         razao = dados.get("razao_social") or dados.get("nome_fantasia") or "Desconhecido"
         site = extrair_site(dados)
+        await _enviar_socios(update, dados)
+        await update.message.reply_text("🔎 Em seguida, buscando vagas…")
         await _responder_vagas(update, razao=razao, site=site)
+    except Exception as e:
+        await update.message.reply_text(f"❌ Erro: {e}")
+
+
+async def buscar_socios(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Lista quem está associado ao CNPJ (QSA atual da Receita / BrasilAPI)."""
+    if not update.message:
+        return
+    limpo = _parse_cnpj_args(context)
+    if not limpo:
+        await update.message.reply_text("Uso: /socios 12345678000199")
+        return
+    if len(limpo) != 14:
+        await update.message.reply_text("❌ CNPJ inválido (precisa de 14 dígitos).")
+        return
+
+    await update.message.reply_text(f"🔍 Buscando associados do CNPJ {limpo}...")
+
+    try:
+        dados = consultar_cnpj(limpo)
+        razao = dados.get("razao_social") or dados.get("nome_fantasia") or "Desconhecido"
+        sit = dados.get("descricao_situacao_cadastral") or "?"
+        await update.message.reply_text(
+            f"🏢 *{escape_md(razao)}*\n"
+            f"📌 Situação: {escape_md(sit)}\n"
+            f"🆔 CNPJ: `{limpo}`",
+            parse_mode="Markdown",
+        )
+        await _enviar_socios(update, dados)
     except Exception as e:
         await update.message.reply_text(f"❌ Erro: {e}")
 

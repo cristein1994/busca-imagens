@@ -1,5 +1,5 @@
-from bot.cnpj import limpar_cnpj, validar_cnpj
-from bot.formatters import escape_md, formatar_vaga
+from bot.cnpj import extrair_socios, limpar_cnpj, validar_cnpj
+from bot.formatters import escape_md, formatar_lista_socios, formatar_vaga
 from bot.jobs import buscar_vagas_por_url
 
 
@@ -39,3 +39,36 @@ def test_buscar_vagas_url_vazia():
 
 def test_buscar_vagas_url_sem_ats():
     assert buscar_vagas_por_url("https://example.com/carreiras") == []
+
+
+def test_extrair_socios():
+    dados = {
+        "qsa": [
+            {
+                "nome_socio": "FULANO DA SILVA",
+                "qualificacao_socio": "Sócio-Administrador",
+                "cnpj_cpf_do_socio": "***123456**",
+                "data_entrada_sociedade": "2020-01-15",
+                "faixa_etaria": "Entre 31 a 40 anos",
+                "nome_representante_legal": "",
+            },
+            {"nome_socio": "", "qualificacao_socio": "Diretor"},
+        ]
+    }
+    socios = extrair_socios(dados)
+    assert len(socios) == 1
+    assert socios[0]["nome"] == "FULANO DA SILVA"
+    assert socios[0]["qualificacao"] == "Sócio-Administrador"
+
+
+def test_formatar_lista_socios():
+    blocos = formatar_lista_socios(
+        [{"nome": "A_B", "qualificacao": "Diretor", "documento": "***1**"}]
+    )
+    assert len(blocos) == 1
+    assert "A\\_B" in blocos[0]
+    assert "Associados ao CNPJ" in blocos[0]
+
+
+def test_formatar_lista_socios_vazia():
+    assert "Nenhum sócio" in formatar_lista_socios([])[0]

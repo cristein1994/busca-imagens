@@ -60,3 +60,33 @@ def extrair_site(dados: dict) -> str:
             return f"https://{dominio}"
 
     return ""
+
+
+def extrair_socios(dados: dict) -> list[dict]:
+    """
+    Quadro de Sócios e Administradores (QSA) da Receita, via BrasilAPI.
+    Retorna só quem está associado agora (lista atual da base pública).
+    """
+    qsa = dados.get("qsa") or []
+    if not isinstance(qsa, list):
+        return []
+
+    socios: list[dict] = []
+    for item in qsa:
+        if not isinstance(item, dict):
+            continue
+        nome = (item.get("nome_socio") or "").strip()
+        if not nome:
+            continue
+        socios.append(
+            {
+                "nome": nome,
+                "qualificacao": (item.get("qualificacao_socio") or "").strip()
+                or "Não informada",
+                "documento": (item.get("cnpj_cpf_do_socio") or "").strip(),
+                "entrada": (item.get("data_entrada_sociedade") or "").strip(),
+                "faixa_etaria": (item.get("faixa_etaria") or "").strip(),
+                "representante": (item.get("nome_representante_legal") or "").strip(),
+            }
+        )
+    return socios

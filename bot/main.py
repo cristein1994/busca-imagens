@@ -5,7 +5,13 @@ import sys
 from telegram.ext import Application, CommandHandler
 
 from bot.config import TELEGRAM_TOKEN
-from bot.handlers import buscar_por_cnpj, buscar_por_nome, buscar_por_site, start
+from bot.handlers import (
+    buscar_por_cnpj,
+    buscar_por_nome,
+    buscar_por_site,
+    buscar_socios,
+    start,
+)
 
 
 def main() -> None:
@@ -21,6 +27,7 @@ def main() -> None:
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", start))
     app.add_handler(CommandHandler("cnpj", buscar_por_cnpj))
+    app.add_handler(CommandHandler("socios", buscar_socios))
     app.add_handler(CommandHandler("nome", buscar_por_nome))
     app.add_handler(CommandHandler("site", buscar_por_site))
 

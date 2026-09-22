@@ -7,7 +7,8 @@ Consulta CNPJ (BrasilAPI), descobre a página de carreiras e lista vagas de **Gu
 | Comando | Descrição |
 |---------|-----------|
 | `/start` | Ajuda |
-| `/cnpj 00000000000191` | Busca por CNPJ |
+| `/cnpj 00000000000191` | QSA (sócios) + busca de vagas |
+| `/socios 00000000000191` | Só quem está associado ao CNPJ (QSA) |
 | `/nome Nome da Empresa` | Tenta achar o site e as vagas |
 | `/site empresa.com.br` | Usa o domínio direto |
 
@@ -39,10 +40,13 @@ O bot fica em polling até você interromper com Ctrl+C.
 
 ## Fluxo
 
-1. `/cnpj` → BrasilAPI (`/api/cnpj/v1/{cnpj}`) → razão social + site (ou domínio do e-mail).
-2. Varre caminhos comuns (`/carreiras`, `/careers`, `/vagas`, …) e links no HTML.
-3. Se a URL for Gupy / Greenhouse / Lever (ou apontar para um deles), chama a API pública de vagas.
-4. Envia até 20 vagas no chat.
+1. `/cnpj` ou `/socios` → BrasilAPI (`/api/cnpj/v1/{cnpj}`) → razão social + **QSA** (sócios/administradores atuais).
+2. Em `/cnpj`, também tenta site (ou domínio do e-mail) e vagas.
+3. Varre caminhos comuns (`/carreiras`, `/careers`, `/vagas`, …) e links no HTML.
+4. Se a URL for Gupy / Greenhouse / Lever (ou apontar para um deles), chama a API pública de vagas.
+5. Envia até 20 vagas no chat.
+
+O QSA é a lista pública da Receita Federal (via BrasilAPI): nome, cargo/qualificação, documento mascarado e data de entrada. Não inclui sócios históricos já saídos.
 
 ## Testes
 
