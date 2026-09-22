@@ -29,7 +29,9 @@ def formatar_socio(s: dict, indice: int | None = None) -> str:
         f"   Cargo: {escape_md(s.get('qualificacao') or 'Não informada')}",
     ]
     if s.get("documento"):
-        lines.append(f"   Doc: `{escape_md(s['documento'])}`")
+        # Máscara da Receita usa *; evita conflito com Markdown
+        doc = str(s["documento"]).replace("*", "•")
+        lines.append(f"   Doc: {escape_md(doc)}")
     if s.get("entrada"):
         lines.append(f"   Entrada: {escape_md(s['entrada'])}")
     if s.get("faixa_etaria"):

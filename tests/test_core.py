@@ -67,6 +67,7 @@ def test_formatar_lista_socios():
     )
     assert len(blocos) == 1
     assert "A\\_B" in blocos[0]
+    assert "•••1••" in blocos[0]
     assert "Associados ao CNPJ" in blocos[0]
 
 
