@@ -1,74 +1,79 @@
-# Busca Imagens
+# Bot Telegram — Vagas por CNPJ
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Consulta CNPJ (BrasilAPI), descobre a página de carreiras e lista vagas de **Gupy**, **Greenhouse** e **Lever**.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+## Comandos
 
-## Funcionalidades
-
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+| Comando | Descrição |
+|---------|-----------|
+| `/start` | Ajuda |
+| `/cnpj 00000000000191` | Busca por CNPJ |
+| `/nome Nome da Empresa` | Tenta achar o site e as vagas |
+| `/site empresa.com.br` | Usa o domínio direto |
 
 ## Pré-requisitos
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+- Python 3.10+
+- Token do bot no [@BotFather](https://t.me/BotFather)
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Instalação
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 
-# Instale as dependências
-npm install
-
-# Configure a chave (copie o exemplo e edite)
 cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
-npm run dev
+# Edite .env e defina TELEGRAM_TOKEN=...
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+## Executar
 
-## Scripts
+```bash
+python run.py
+# ou
+python -m bot.main
+```
 
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+O bot fica em polling até você interromper com Ctrl+C.
 
-## Variáveis de ambiente
+## Fluxo
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
+1. `/cnpj` → BrasilAPI (`/api/cnpj/v1/{cnpj}`) → razão social + site (ou domínio do e-mail).
+2. Varre caminhos comuns (`/carreiras`, `/careers`, `/vagas`, …) e links no HTML.
+3. Se a URL for Gupy / Greenhouse / Lever (ou apontar para um deles), chama a API pública de vagas.
+4. Envia até 20 vagas no chat.
 
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+## Testes
 
-## Stack
+```bash
+pip install -r requirements.txt pytest
+pytest -q
+```
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+## Limitações
+
+- BrasilAPI nem sempre informa o site da empresa.
+- Busca por `/nome` depende de resultados públicos (DuckDuckGo) e pode falhar.
+- Só ATS suportados: Gupy, Greenhouse, Lever.
+- Respeite termos de uso das APIs e sites consultados; use de forma responsável.
+
+## Estrutura
+
+```
+bot/
+  config.py      # env / token
+  cnpj.py        # BrasilAPI
+  careers.py     # descoberta de URL de carreiras
+  jobs.py        # Gupy / Greenhouse / Lever
+  handlers.py    # comandos Telegram
+  formatters.py  # Markdown
+  main.py        # bootstrap
+run.py
+requirements.txt
+.env.example
+```
 
 ## Licença
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Uso livre para estudo e automação pessoal.
