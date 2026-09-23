@@ -52,7 +52,7 @@ button:disabled { opacity: 0.55; cursor: wait; }
 
 a { color: var(--brass); }
 
-.app { width: min(1180px, calc(100% - 1.5rem)); margin: 0 auto; padding: 1.25rem 0 6rem; }
+.app { width: min(1180px, calc(100% - 1.5rem)); margin: 0 auto; padding: 1.25rem 0 8.5rem; }
 
 .top { display: flex; justify-content: space-between; gap: 1.5rem; align-items: end; padding: 0.5rem 0 1.2rem; }
 
@@ -172,7 +172,25 @@ textarea { resize: vertical; min-height: 4.6rem; }
 .card-copy strong { font-weight: 560; line-height: 1.3; }
 .card-copy em { font-style: normal; font-size: 0.78rem; }
 
-.rail, .dock { margin-top: 1rem; padding: 1rem; }
+.rail { margin-top: 1rem; padding: 1rem; }
+.dock {
+  position: fixed;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0.75rem 1rem 0.85rem;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  background: rgba(16, 14, 11, 0.96);
+  display: grid;
+  grid-template-columns: minmax(12rem, 18rem) 1fr;
+  gap: 0.8rem;
+  align-items: center;
+}
 .tor-box { display: flex; gap: 0.6rem; align-items: center; max-width: 34rem; }
 .tor-box p { margin: 0; color: var(--muted); font-size: 0.88rem; }
 .lamp { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--fail); flex: none; }
@@ -189,8 +207,8 @@ textarea { resize: vertical; min-height: 4.6rem; }
 .group { margin-top: 0.9rem; }
 .group h3 { margin: 0; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 
-.dock { display: grid; gap: 0.7rem; align-items: start; }
 .dock h2 { margin: 0; }
+.dock p { margin: 0.2rem 0 0; }
 .dock-form { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .dock-form input { flex: 1 1 16rem; }
 
@@ -207,8 +225,9 @@ textarea { resize: vertical; min-height: 4.6rem; }
 .snippet { margin: 0.3rem 0; }
 
 @media (max-width: 860px) {
-  .layout, .top, .dock, .rail-head, .tor-box { display: grid; }
+  .layout, .top, .rail-head, .tor-box, .dock { display: grid; grid-template-columns: 1fr; }
   .deck { position: static; }
   .brand h1 { font-size: 2.5rem; }
   .pill { width: 100%; }
+  .app { padding-bottom: 13rem; }
 }
