@@ -1,74 +1,55 @@
-# Busca Imagens
+# Lente
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Busca de fotos e vídeos por metadados ou pelo conteúdo descrito no arquivo. A consulta vira um dork e sai para 32 motores da surface e 10 endpoints onion.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+## O que faz
 
-## Funcionalidades
+- Modo **metadados**: `filetype`, `intitle`, `inurl`, `site`, autor, câmera, resolução, codec e intervalo de datas.
+- Modo **conteúdo**: o texto descreve o que aparece na foto ou no vídeo (título, legenda, transcrição, nome de arquivo) e a vertical de imagem ou vídeo entra na URL.
+- Interruptor **18+** para resultado adulto. Material de abuso sexual infantil é recusado.
+- Painel dos motores, com link para abrir a mesma busca em cada um.
+- Onion passa pelo SOCKS do Tor. Sem Tor, Ahmia, Torch, DuckDuckGo, Brave e MetaGer usam o espelho clearnet e os índices só-onion ficam marcados como fora.
+- Visor para imagem, arquivo de vídeo e embed conhecido (YouTube, Dailymotion, Vimeo, PeerTube).
+- Download no próprio app quando a URL é o arquivo (`image/*` ou `video/*`), com teto de 200 MB.
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
-
-## Pré-requisitos
-
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
-
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Rodar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
 cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra o endereço que o Vite mostrar, em geral `http://localhost:5173`.
+
+Tor local, se quiser a prova em `.onion`:
+
+```bash
+# Debian/Ubuntu
+sudo apt install tor
+sudo service tor start
+```
+
+`TOR_SOCKS` aponta para o SOCKS (`socks5://` ou `socks5h://`). A porta padrão do serviço `tor` é `9050`. O nome `.onion` é enviado ao Tor, sem DNS local.
 
 ## Scripts
 
 | Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| --- | --- |
+| `npm run dev` | Vite com a API `/api` no mesmo processo |
+| `npm run build` | Checagem TypeScript e build |
+| `npm run preview` | Build servido com a mesma API |
+| `npm run lint` | oxlint |
 
-## Variáveis de ambiente
+## API
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
+| Rota | Uso |
+| --- | --- |
+| `GET /api/engines` | Catálogo |
+| `GET /api/tor?probe=1` | Porta SOCKS; com `probe=1`, lê a Ahmia em `.onion` |
+| `POST /api/search` | Fan-out da busca |
+| `GET /api/inspect?url=` | Diz se a URL é arquivo de mídia |
+| `GET /api/preview?url=` | Exibe o arquivo |
+| `GET /api/download?url=` | Baixa o arquivo |
 
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
-
-## Stack
-
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
-
-## Licença
-
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Endereços `.onion` de terceiros apodrecem. Os oficiais usados aqui são os publicados pela Ahmia, pelo Torch, pelo DuckDuckGo, pelo Brave e pelo MetaGer. Os outros cinco estão como aparecem em diretórios públicos e podem estar fora.
