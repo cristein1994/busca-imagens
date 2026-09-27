@@ -76,6 +76,7 @@ function pack(kind: QueryKind, normalized: string, extra: Partial<ClassifiedQuer
 
 function force(normalized: string, kind: QueryKind): ClassifiedQuery {
   if (kind === 'keyword') return pack('keyword', normalized, {})
+  if (kind === 'surface') return pack('surface', normalized, {})
   if (kind === 'domain') {
     if (!isDomain(normalized)) throw new Error('Este valor não é um domínio.')
     return pack('domain', domainToASCII(normalized.toLowerCase()), {
@@ -108,7 +109,15 @@ function force(normalized: string, kind: QueryKind): ClassifiedQuery {
 }
 
 export function classify(rawInput: string, forced?: QueryKind): ClassifiedQuery {
-  const normalized = rawInput.trim().replace(/\s+/g, ' ')
+  let normalized = rawInput.trim().replace(/\s+/g, ' ')
+  const command = normalized.match(/^\/(?:sur|surface)\b\s*(.*)$/i)
+  if (command) {
+    normalized = command[1].trim().replace(/\s+/g, ' ')
+    if (!forced) forced = 'surface'
+  }
+  if (forced === 'surface' && normalized.length < 2) {
+    throw new Error('Escreva o termo depois de /sur.')
+  }
   if (forced) return force(normalized, forced)
 
   const url = parseUrl(normalized)

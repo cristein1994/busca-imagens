@@ -4,6 +4,8 @@ Motor de busca que cruza **fontes públicas** e guarda os casos no navegador.
 
 Consulta DNS, RDAP, transparência de certificados (crt.sh), Wayback Machine, página HTTP, `security.txt`, geolocalização de IP público, Gravatar, GitHub, perfis abertos (GitLab, Reddit, DEV, Keybase, Mastodon, Docker Hub, Hugging Face, Codeberg, Bluesky, npm), Wikipédia, DuckDuckGo Instant Answer e Hacker News.
 
+`/sur termo` (ou o tipo **Surface**) procura páginas indexadas da surface web: título, site, trecho e URL.
+
 O tipo da consulta é detetado automaticamente (domínio, IP, e-mail, usuário, URL, telefone ou termo) e pode ser forçado na interface.
 
 Telefone e termo livre usam só menções em fontes públicas. Endereços privados, loopback e metadados de nuvem não são consultados fora da máquina.
@@ -37,7 +39,9 @@ Corpo:
 | Campo | Obrigatório | Descrição |
 | --- | --- | --- |
 | `query` | sim | 2 a 180 caracteres |
-| `kind` | não | `domain`, `ip`, `email`, `username`, `url`, `phone` ou `keyword` |
+| `kind` | não | `domain`, `ip`, `email`, `username`, `url`, `phone`, `keyword` ou `surface` |
+
+`/sur linux kernel` no campo `query` equivale a `kind: "surface"`.
 
 A resposta traz `kind`, `tookMs` e `modules` (estado `ok`, `empty` ou `error`, factos e tabelas).
 

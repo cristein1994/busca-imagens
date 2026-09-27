@@ -12,18 +12,26 @@ const EXAMPLES = [
   ['example.com', 'domínio'],
   ['1.1.1.1', 'IP'],
   ['torvalds', 'usuário'],
-  ['https://example.com', 'URL'],
+  ['/sur linux kernel', 'surface'],
   ['linux kernel', 'termo'],
 ] as const
 
 type KindChoice = QueryKind | 'auto'
 
+const KIND_TEXT: Record<QueryKind, string> = {
+  ip: 'IP',
+  url: 'URL',
+  email: 'E-mail',
+  username: 'Usuário',
+  phone: 'Telefone',
+  domain: 'Domínio',
+  keyword: 'Termo',
+  surface: 'Surface',
+}
+
 const KIND_OPTIONS: Array<{ id: KindChoice; label: string }> = [
   { id: 'auto', label: 'Auto' },
-  ...QUERY_KINDS.map((id) => ({
-    id,
-    label: id === 'ip' ? 'IP' : id === 'url' ? 'URL' : id === 'email' ? 'E-mail' : id === 'username' ? 'Usuário' : id === 'phone' ? 'Telefone' : id === 'domain' ? 'Domínio' : 'Termo',
-  })),
+  ...QUERY_KINDS.map((id) => ({ id, label: KIND_TEXT[id] })),
 ]
 
 export function SearchDesk() {
@@ -131,7 +139,7 @@ export function SearchDesk() {
         <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-acid">Fontes públicas</p>
         <h1 className="mt-2 text-4xl leading-none text-foam sm:text-5xl">Procure um rasto público.</h1>
         <p className="mt-3 max-w-xl text-mist">
-          Domínio, IP, e-mail, usuário, URL ou termo. O ORBE classifica a consulta e cruza DNS, registo, certificados, arquivo web e perfis abertos.
+          Domínio, IP, e-mail, usuário, URL ou termo. <span className="text-foam">/sur termo</span> procura páginas da surface web. O resto cruza DNS, registo, certificados, arquivo web e perfis abertos.
         </p>
       </section>
 
@@ -144,7 +152,7 @@ export function SearchDesk() {
             id="q"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="example.com, 1.1.1.1, um usuário…"
+            placeholder="example.com, /sur linux kernel, um usuário…"
             maxLength={180}
             className="min-w-0 flex-1 border border-line bg-ink px-3 py-3 font-mono text-sm text-foam outline-none placeholder:text-mist/70"
             autoComplete="off"

@@ -802,6 +802,62 @@ function githubReposModule(query: string): Promise<ModuleResult> {
   })
 }
 
+function surfaceUrl(href: string): string {
+  const raw = href.replace(/&amp;/gi, '&').replace(/&quot;/gi, '"')
+  const absolute = raw.startsWith('//') ? `https:${raw}` : raw
+  try {
+    const url = new URL(absolute, 'https://duckduckgo.com')
+    const target = url.searchParams.get('uddg')
+    if (target && /^https?:\/\//i.test(target)) return target
+  } catch {
+    return ''
+  }
+  return /^https?:\/\//i.test(absolute) && !absolute.includes('duckduckgo.com/l/') ? absolute : ''
+}
+
+function hostLabel(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '')
+  } catch {
+    return '—'
+  }
+}
+
+function surfaceHits(html: string): Array<{ title: string; url: string; snippet: string }> {
+  const hits: Array<{ title: string; url: string; snippet: string }> = []
+  const blocks = html.split(/class="result results_links/)
+  for (const block of blocks.slice(1)) {
+    const titleMatch = block.match(/class="result__a"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i)
+    const snippetMatch = block.match(/class="result__snippet"[^>]*>([\s\S]*?)<\/a>/i)
+    if (!titleMatch) continue
+    const url = surfaceUrl(titleMatch[1])
+    const title = clip(titleMatch[2], 140)
+    if (!url || !title || hits.some((hit) => hit.url === url)) continue
+    hits.push({ title, url, snippet: snippetMatch ? clip(snippetMatch[1], 220) : '' })
+    if (hits.length >= 10) break
+  }
+  return hits
+}
+
+function surfaceModule(query: string): Promise<ModuleResult> {
+  return runModule('surface', 'Surface web', 'Páginas públicas', async () => {
+    const response = await requestPublic(
+      `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`,
+      { ms: 8000, accept: 'text/html', maxBytes: 400_000 },
+    )
+    if (response.status >= 400) throw new Error(`HTTP ${response.status}`)
+    const hits = surfaceHits(response.text)
+    return done(
+      hits.length ? `${hits.length} páginas indexadas da surface web.` : 'Nenhuma página pública encontrada.',
+      [],
+      {
+        columns: ['Título', 'Site', 'Trecho', 'URL'],
+        rows: hits.map((hit) => [hit.title, hostLabel(hit.url), hit.snippet || '—', hit.url]),
+      },
+    )
+  })
+}
+
 function phoneNoteModule(phone: string): ModuleResult {
   return {
     id: 'phone-scope',
@@ -865,6 +921,8 @@ export async function runSearch(input: ClassifiedQuery): Promise<ModuleResult[]>
     )
   } else if (input.kind === 'phone' && input.phone) {
     jobs.push(phoneNoteModule(input.phone), wikiModule(webQuery), ddgModule(webQuery), hnModule(webQuery))
+  } else if (input.kind === 'surface') {
+    jobs.push(surfaceModule(webQuery), ddgModule(webQuery))
   } else {
     jobs.push(ddgModule(webQuery), wikiModule(webQuery), hnModule(webQuery), githubReposModule(webQuery))
   }
