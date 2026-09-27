@@ -142,13 +142,17 @@ fi
 
 install_gh_bin() {
   local repo="$1" regex="$2" bin="$3"
-  local url tmp found
+  local url tmp found json
   if command -v "$bin" >/dev/null 2>&1; then
     echo "skip ${bin}"
     return 0
   fi
-  url="$(gh api "repos/${repo}/releases/latest" --jq "[.assets[].browser_download_url | select(test(\"${regex}\"))][0] // empty")" || {
+  json="$(gh api "repos/${repo}/releases/latest")" || {
     note_fail "${bin} (github api)"
+    return 0
+  }
+  url="$(jq -r --arg re "$regex" '[.assets[].browser_download_url | select(test($re))][0] // empty' <<<"$json")" || {
+    note_fail "${bin} (jq)"
     return 0
   }
   if [[ -z "$url" ]]; then
@@ -208,6 +212,10 @@ npm install -g --prefix "${HOME}/.local" --no-fund --no-audit --loglevel=error \
 echo "==> CLIs Python (pipx)"
 pipx ensurepath >/dev/null || true
 for tool in ruff yt-dlp poetry; do
+  if command -v "$tool" >/dev/null 2>&1; then
+    echo "skip ${tool}"
+    continue
+  fi
   if ! pipx install "$tool"; then
     note_fail "pipx:${tool}"
   fi
