@@ -6,7 +6,7 @@ export type OsintResult = {
   displayUrl: string
   snippet: string
   scrapedExcerpt: string | null
-  source: 'duckduckgo' | 'ahmia'
+  source: 'duckduckgo' | 'google-news' | 'wikipedia' | 'ahmia'
   lane: 'surface' | 'dark'
 }
 

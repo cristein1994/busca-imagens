@@ -56,6 +56,28 @@ export function parseDdg(html: string): { title: string; href: string; snippet: 
   return rows
 }
 
+export type FeedHit = { title: string; url: string; snippet: string; sourceUrl: string }
+
+export function parseRssItems(xml: string): FeedHit[] {
+  const hits: FeedHit[] = []
+  for (const match of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)) {
+    const block = match[1] ?? ''
+    const title = tagText(block, 'title')
+    const url = tagText(block, 'link')
+    const snippet = tagText(block, 'description')
+    const sourceUrl = decodeEntities(block.match(/<source\b[^>]*\burl="([^"]+)"/i)?.[1] ?? '')
+    if (!title || !url) continue
+    hits.push({ title, url, snippet, sourceUrl })
+  }
+  return hits
+}
+
+function tagText(block: string, tag: string): string {
+  const raw = block.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)</${tag}>`, 'i'))?.[1] ?? ''
+  const unwrapped = raw.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+  return stripTags(unwrapped)
+}
+
 export function ddgNextFields(html: string): Record<string, string> | null {
   const form = html.match(/<div class="nav-link">[\s\S]*?<\/form>/i)?.[0]
   if (!form) return null

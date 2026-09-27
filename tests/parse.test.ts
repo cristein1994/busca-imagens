@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { ahmiaHiddenFields, ddgNextFields, parseAhmia, parseDdg, unwrapDdgUrl } from '../lib/html.ts'
+import { ahmiaHiddenFields, ddgNextFields, parseAhmia, parseDdg, parseRssItems, unwrapDdgUrl } from '../lib/html.ts'
 import { summarize } from '../lib/summarize.ts'
 import { rejectQuery } from '../lib/guard.ts'
 
@@ -43,6 +43,13 @@ describe('parsers', () => {
     assert.equal(rows[0]?.title, 'OSINT Framework')
     assert.equal(unwrapDdgUrl(rows[0]?.href ?? ''), 'https://osintframework.com/')
     assert.equal(ddgNextFields(DDG)?.s, '10')
+  })
+
+  it('reads Google News RSS items', () => {
+    const hits = parseRssItems(`<item><title>OSINT brief - Example</title><link>https://news.google.com/rss/articles/abc</link><description>&lt;a href="https://news.google.com/rss/articles/abc"&gt;OSINT brief&lt;/a&gt;</description><source url="https://example.com">Example</source></item>`)
+    assert.equal(hits.length, 1)
+    assert.equal(hits[0]?.sourceUrl, 'https://example.com')
+    assert.match(hits[0]?.snippet ?? '', /OSINT brief/)
   })
 
   it('reads Ahmia hidden fields and onion redirects', () => {

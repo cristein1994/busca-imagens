@@ -8,7 +8,7 @@ A interface está em português.
 
 | Faixa | Fonte | O que é raspado |
 | --- | --- | --- |
-| Superfície | [DuckDuckGo HTML](https://html.duckduckgo.com/html/) | Título, URL, snippet e, nas primeiras páginas, o texto legível (meta description e parágrafos) |
+| Superfície | [DuckDuckGo HTML](https://html.duckduckgo.com/html/), e se ainda faltarem resultados o RSS do Google News e a API da Wikipedia | Título, URL, snippet e, nas primeiras páginas, o texto legível (meta description e parágrafos) |
 | Dark | Índice [Ahmia](https://ahmia.fi/) via SOCKS do Tor | Título, descrição, endereço `.onion` e data de visita do índice |
 
 Não baixa o corpo das páginas `.onion`. A faixa dark só raspa o índice público, e só com o proxy Tor aberto.
