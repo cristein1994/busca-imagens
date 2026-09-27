@@ -82,6 +82,9 @@ link_bin() {
 
 link_bin fd /usr/bin/fdfind
 link_bin bat /usr/bin/batcat
+if [[ -x /usr/libexec/docker/cli-plugins/docker-compose ]]; then
+  link_bin docker-compose /usr/libexec/docker/cli-plugins/docker-compose
+fi
 
 echo "==> runtimes (bun, deno, uv, starship, flyctl)"
 if [[ ! -x "${HOME}/.bun/bin/bun" ]]; then
@@ -142,8 +145,8 @@ fi
 
 install_gh_bin() {
   local repo="$1" regex="$2" bin="$3"
-  local url tmp found json
-  if command -v "$bin" >/dev/null 2>&1; then
+  local url tmp found json force="${4:-}"
+  if [[ "$force" != "force" ]] && command -v "$bin" >/dev/null 2>&1; then
     echo "skip ${bin}"
     return 0
   fi
@@ -190,6 +193,11 @@ install_gh_bin bootandy/dust 'x86_64-unknown-linux-musl\.tar\.gz$' dust
 install_gh_bin ClementTsang/bottom 'bottom_x86_64-unknown-linux-musl\.tar\.gz$' btm
 install_gh_bin watchexec/watchexec 'x86_64-unknown-linux-musl\.tar\.xz$' watchexec
 install_gh_bin stripe/stripe-cli 'linux_x86_64\.tar\.gz$' stripe
+if /usr/local/bin/yq --version 2>/dev/null | grep -q 'mikefarah/yq'; then
+  echo "skip yq"
+else
+  install_gh_bin mikefarah/yq 'yq_linux_amd64$' yq force
+fi
 
 echo "==> CLIs npm"
 mkdir -p "${HOME}/.local"
@@ -243,7 +251,7 @@ EXPECTED=(
   vercel netlify wrangler firebase supabase prisma neonctl apify
   serve ncu prettier tsc tsx degit
   ruff yt-dlp poetry
-  docker
+  docker docker-compose
 )
 missing=0
 for cmd in "${EXPECTED[@]}"; do
