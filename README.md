@@ -1,74 +1,63 @@
-# Busca Imagens
+# ORBE — motor de busca OSINT
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Motor de busca que cruza **fontes públicas** e guarda os casos no navegador.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+Consulta DNS, RDAP, transparência de certificados (crt.sh), Wayback Machine, página HTTP, `security.txt`, geolocalização de IP público, Gravatar, GitHub, perfis abertos (GitLab, Reddit, DEV, Keybase, Mastodon, Docker Hub, Hugging Face, Codeberg, Bluesky, npm), Wikipédia, DuckDuckGo Instant Answer e Hacker News.
 
-## Funcionalidades
+O tipo da consulta é detetado automaticamente (domínio, IP, e-mail, usuário, URL, telefone ou termo) e pode ser forçado na interface.
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+Telefone e termo livre usam só menções em fontes públicas. Endereços privados, loopback e metadados de nuvem não são consultados fora da máquina.
 
-## Pré-requisitos
+## Stack
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+- Next.js + TypeScript + Tailwind CSS
+- API em `POST /api/search`
+- Casos em `localStorage` (nada é enviado para uma base deste projeto)
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Arranque
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
+cp .env.example .env   # opcional
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra o endereço indicado no terminal (por omissão `http://localhost:3000`).
+
+## API
+
+```bash
+curl -s -X POST http://localhost:3000/api/search \
+  -H 'content-type: application/json' \
+  -d '{"query":"example.com"}'
+```
+
+Corpo:
+
+| Campo | Obrigatório | Descrição |
+| --- | --- | --- |
+| `query` | sim | 2 a 180 caracteres |
+| `kind` | não | `domain`, `ip`, `email`, `username`, `url`, `phone` ou `keyword` |
+
+A resposta traz `kind`, `tookMs` e `modules` (estado `ok`, `empty` ou `error`, factos e tabelas).
+
+Há um limite de 20 pedidos por minuto por cliente.
+
+## Variáveis
+
+| Variável | Descrição |
+| --- | --- |
+| `GITHUB_TOKEN` | Opcional. Aumenta a cota da API pública do GitHub. Só é lida no servidor. |
 
 ## Scripts
 
 | Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| --- | --- |
+| `npm run dev` | Servidor de desenvolvimento |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
+| `npm run start` | Serve o build |
 | `npm run lint` | Lint com oxlint |
 
-## Variáveis de ambiente
+## Casos
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
-
-## Stack
-
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
-
-## Licença
-
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Na busca, **Guardar caso** grava título, notas e o instantâneo JSON. A página **Casos** lê o mesmo `localStorage`, permite editar notas, apagar e exportar. Os dois ecrãs mantêm a lista sincronizada no mesmo browser.
