@@ -1,23 +1,22 @@
 :root {
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-muted: #f1f5f9;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --accent-soft: rgba(79, 70, 229, 0.18);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: var(--text);
-  background-color: var(--bg);
+  --ink: #1c140f;
+  --muted: #6e6258;
+  --line: #d9cfc2;
+  --accent: #8d3d22;
+  --ok: #1d6b45;
+  --ok-bg: #e5f4eb;
+  --tight: #8a5a10;
+  --tight-bg: #fbf3e0;
+  --bad: #9d2c2c;
+  --bad-bg: #fdecec;
+  font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--ink);
+  background: #140e0b;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -38,10 +37,16 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
-img {
-  max-width: 100%;
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
