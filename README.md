@@ -13,16 +13,17 @@ Console local para rodar **GLM-4.7-Flash-heretic** (ThalisAI / Heretic abliterat
 
 | Quant | Disco | RAM/VRAM |
 |-------|-------|----------|
-| Q4_K_M (default) | ~17 GB | ~18 GB+ |
+| Q2_K (default neste repo) | ~11 GB | ~12 GB+ / 15GB+swap OK |
+| Q4_K_M | ~17 GB | ~18 GB+ |
 | Q6_K | ~23 GB | ~24 GB+ |
 | Q8_0 | ~32 GB | ~34 GB+ |
 
-GPU NVIDIA recomendada. CPU-only é possível só com muita RAM.
+GPU NVIDIA recomendada. Em CPU, use Q2_K + swap se a RAM for apertada.
 
 Modelo padrão:
 
 ```text
-hf.co/ThalisAI/GLM-4.7-Flash-heretic:Q4_K_M
+hf.co/mradermacher/GLM-4.7-Flash-heretic-GGUF:Q2_K
 ```
 
 ## Setup rápido

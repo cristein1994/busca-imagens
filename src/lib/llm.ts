@@ -21,12 +21,35 @@ type StreamHandlers = {
   onStatus: (text: string) => void;
 };
 
-async function chatCompletion(
-  messages: ChatMessage[],
-  stream: boolean,
-): Promise<Response> {
+type LlmMessage = ChatMessage & {
+  reasoning?: string;
+  reasoning_content?: string;
+};
+
+function stripThinking(text: string): string {
+  if (!text) return "";
+  // Drop incomplete/complete thinking blocks from GLM-style output
+  let out = text.replace(/<think>[\s\S]*?<\/think>/gi, "");
+  out = out.replace(/^[\s\S]*?<\/think>/i, "");
+  out = out.replace(/<think>[\s\S]*$/i, "");
+  return out.trim();
+}
+
+function visibleContent(msg: LlmMessage): string {
+  const content = stripThinking(msg.content || "");
+  if (content) return content;
+  const reasoning = msg.reasoning_content || msg.reasoning || "";
+  // Last line of reasoning sometimes holds the intended short answer
+  const lines = reasoning
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+  return lines[lines.length - 1] || "";
+}
+
+async function chatOpenAiCompat(messages: ChatMessage[]) {
   const cfg = getLlmConfig();
-  return fetch(`${cfg.baseUrl}/chat/completions`, {
+  const res = await fetch(`${cfg.baseUrl}/chat/completions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,24 +60,95 @@ async function chatCompletion(
       messages,
       tools: TOOL_DEFINITIONS,
       tool_choice: "auto",
-      stream,
+      stream: false,
       temperature: 0.7,
+      max_tokens: 1024,
+      think: false,
     }),
   });
-}
-
-async function nonStreamOnce(messages: ChatMessage[]) {
-  const res = await chatCompletion(messages, false);
   if (!res.ok) {
     const errText = await res.text();
     throw new Error(`LLM ${res.status}: ${errText.slice(0, 800)}`);
   }
-  return (await res.json()) as {
+  const data = (await res.json()) as {
     choices: Array<{
-      message: ChatMessage & { tool_calls?: ToolCall[] };
+      message: LlmMessage & { tool_calls?: ToolCall[] };
       finish_reason?: string;
     }>;
   };
+  const msg = data.choices?.[0]?.message;
+  if (!msg) throw new Error("empty LLM response");
+  return {
+    content: visibleContent(msg),
+    tool_calls: msg.tool_calls || [],
+    raw: msg,
+  };
+}
+
+/** Ollama native /api/chat — better think:false + tool support for local GGUF */
+async function chatOllamaNative(messages: ChatMessage[]) {
+  const cfg = getLlmConfig();
+  const root = cfg.baseUrl.replace(/\/v1$/, "");
+  const res = await fetch(`${root}/api/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: cfg.model,
+      messages,
+      tools: TOOL_DEFINITIONS.map((t) => t.function),
+      stream: false,
+      think: false,
+      options: {
+        temperature: 0.7,
+        num_ctx: 4096,
+        num_predict: 1024,
+      },
+    }),
+  });
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Ollama ${res.status}: ${errText.slice(0, 800)}`);
+  }
+  const data = (await res.json()) as {
+    message?: LlmMessage & {
+      tool_calls?: Array<{
+        function: { name: string; arguments: Record<string, unknown> | string };
+      }>;
+    };
+  };
+  const msg = data.message;
+  if (!msg) throw new Error("empty Ollama response");
+
+  const tool_calls: ToolCall[] = (msg.tool_calls || []).map((tc, i) => {
+    const args =
+      typeof tc.function.arguments === "string"
+        ? tc.function.arguments
+        : JSON.stringify(tc.function.arguments ?? {});
+    return {
+      id: `call_${Date.now()}_${i}`,
+      type: "function",
+      function: { name: tc.function.name, arguments: args },
+    };
+  });
+
+  return {
+    content: visibleContent(msg),
+    tool_calls,
+    raw: msg,
+  };
+}
+
+async function nonStreamOnce(messages: ChatMessage[]) {
+  const cfg = getLlmConfig();
+  if (cfg.provider === "ollama") {
+    try {
+      return await chatOllamaNative(messages);
+    } catch (e) {
+      // fallback to openai-compat
+      console.warn("ollama native failed, falling back", e);
+    }
+  }
+  return chatOpenAiCompat(messages);
 }
 
 export async function runAgent(
@@ -74,19 +168,16 @@ export async function runAgent(
 
   for (let round = 0; round < maxRounds; round++) {
     handlers.onStatus(`round ${round + 1}/${maxRounds}`);
-    const data = await nonStreamOnce(messages);
-    const msg = data.choices?.[0]?.message;
-    if (!msg) throw new Error("empty LLM response");
+    const msg = await nonStreamOnce(messages);
 
-    const toolCalls = msg.tool_calls || [];
-    if (toolCalls.length > 0) {
+    if (msg.tool_calls.length > 0) {
       messages.push({
         role: "assistant",
         content: msg.content || "",
-        tool_calls: toolCalls,
+        tool_calls: msg.tool_calls,
       });
 
-      for (const call of toolCalls) {
+      for (const call of msg.tool_calls) {
         handlers.onStatus(`tool ${call.function.name}`);
         const result = await runTool(
           call.function.name,
@@ -108,7 +199,9 @@ export async function runAgent(
     }
 
     finalText = msg.content || "";
-    // stream tokens to UI in chunks
+    if (!finalText) {
+      finalText = "(empty model response — try again with a shorter prompt)";
+    }
     const chunkSize = 24;
     for (let i = 0; i < finalText.length; i += chunkSize) {
       handlers.onToken(finalText.slice(i, i + chunkSize));
@@ -154,7 +247,6 @@ export async function probeLlm(): Promise<{
       };
     }
 
-    // OpenAI-compatible models list
     const mres = await fetch(`${cfg.baseUrl}/models`, {
       headers: { Authorization: `Bearer ${cfg.apiKey}` },
     });

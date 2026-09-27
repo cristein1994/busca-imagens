@@ -21,7 +21,7 @@ export function getLlmConfig() {
     apiKey: process.env.OLLAMA_API_KEY || "ollama",
     model:
       process.env.OLLAMA_MODEL ||
-      "hf.co/ThalisAI/GLM-4.7-Flash-heretic:Q4_K_M",
+      "hf.co/mradermacher/GLM-4.7-Flash-heretic-GGUF:Q2_K",
   };
 }
 

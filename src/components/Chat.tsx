@@ -324,7 +324,7 @@ export function Chat() {
         className="mt-4 text-xs"
         style={{ color: "var(--muted)", fontFamily: "var(--font-mono)" }}
       >
-        model: hf.co/ThalisAI/GLM-4.7-Flash-heretic · socks5h://
+        {status?.llm?.model || "GLM-4.7-Flash-heretic"} · socks5h://
         {status?.tor?.host || "127.0.0.1"}:{status?.tor?.port || 9050}
       </footer>
     </div>
