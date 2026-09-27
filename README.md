@@ -1,74 +1,76 @@
-# Busca Imagens
+# HERETIC — GLM-4.7-Flash + Tor
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Console local para rodar **GLM-4.7-Flash-heretic** (ThalisAI / Heretic abliteration) com ferramentas de internet saindo pela **rede Tor** (SOCKS5).
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+## O que inclui
 
-## Funcionalidades
+- Chat UI (Next.js) com streaming SSE
+- Backend agent com tools: `web_search`, `fetch_url`, `tor_status` (tudo via Tor)
+- Scripts para subir Tor e puxar o modelo no Ollama
+- `docker-compose` com Tor + Ollama
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+## Requisitos do modelo
 
-## Pré-requisitos
+| Quant | Disco | RAM/VRAM |
+|-------|-------|----------|
+| Q4_K_M (default) | ~17 GB | ~18 GB+ |
+| Q6_K | ~23 GB | ~24 GB+ |
+| Q8_0 | ~32 GB | ~34 GB+ |
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+GPU NVIDIA recomendada. CPU-only é possível só com muita RAM.
 
-## Como obter a chave da API
+Modelo padrão:
 
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
+```text
+hf.co/ThalisAI/GLM-4.7-Flash-heretic:Q4_K_M
+```
 
-## Instalação e execução
+## Setup rápido
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
+cp .env.example .env
 npm install
 
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
+# Tor (local ou docker)
+npm run tor:start
+npm run tor:check
 
-# Inicie o servidor de desenvolvimento
+# Ollama + modelo (máquina com RAM/GPU suficiente)
+npm run model:pull
+# ou: docker compose up -d && docker exec -it glm-ollama ollama pull hf.co/ThalisAI/GLM-4.7-Flash-heretic:Q4_K_M
+
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra `http://localhost:3000`.
+
+## Variáveis
+
+| Var | Default |
+|-----|---------|
+| `OLLAMA_BASE_URL` | `http://127.0.0.1:11434/v1` |
+| `OLLAMA_MODEL` | `hf.co/ThalisAI/GLM-4.7-Flash-heretic:Q4_K_M` |
+| `TOR_SOCKS_HOST` | `127.0.0.1` |
+| `TOR_SOCKS_PORT` | `9050` |
+| `OPENAI_BASE_URL` / `OPENAI_API_KEY` / `OPENAI_MODEL` | opcional, endpoint OpenAI-compatible remoto |
+
+## Fluxo de rede
+
+```text
+Browser → Next.js /api/chat → Ollama (GLM heretic)
+                              ↘ tools (search/fetch) → Tor SOCKS5 → clearnet exit
+```
 
 ## Scripts
 
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
-
-## Stack
-
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+| Comando | Ação |
+|---------|------|
+| `npm run tor:start` | Sobe Tor (daemon ou compose) |
+| `npm run tor:check` | Confirma `IsTor: true` |
+| `npm run model:pull` | Instala Ollama (se preciso) e puxa o Heretic |
+| `npm run stack:up` | `docker compose up -d` (tor + ollama) |
+| `npm run dev` | UI + API em `:3000` |
 
 ## Licença
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Demo operator console. O modelo Heretic é de terceiros (Hugging Face / ThalisAI); respeite os termos das fontes.

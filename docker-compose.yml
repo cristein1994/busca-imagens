@@ -1,0 +1,31 @@
+services:
+  tor:
+    image: dperson/torproxy:latest
+    container_name: glm-tor
+    restart: unless-stopped
+    ports:
+      - "9050:9050"
+      - "8118:8118"
+    environment:
+      - TOR_ExitNodes=
+      - LOCATION=EU
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: glm-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # Uncomment when a NVIDIA GPU is available:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+volumes:
+  ollama_data:
