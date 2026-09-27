@@ -251,7 +251,7 @@ EXPECTED=(
   vercel netlify wrangler firebase supabase prisma neonctl apify
   serve ncu prettier tsc tsx degit
   ruff yt-dlp poetry
-  docker docker-compose
+  docker docker-compose yq
 )
 missing=0
 for cmd in "${EXPECTED[@]}"; do
