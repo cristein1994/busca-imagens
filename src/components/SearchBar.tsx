@@ -1,57 +1,54 @@
-import { useState, type FormEvent, type KeyboardEvent } from 'react'
+import { useId, type FormEvent } from 'react'
 import styles from './SearchBar.module.css'
 
 interface SearchBarProps {
-  onSearch: (query: string) => void
+  value: string
   loading: boolean
-  disabled?: boolean
+  onChange: (value: string) => void
+  onSubmit: () => void
 }
 
-export function SearchBar({ onSearch, loading, disabled = false }: SearchBarProps) {
-  const [query, setQuery] = useState('')
+export function SearchBar({ value, loading, onChange, onSubmit }: SearchBarProps) {
+  const inputId = useId()
 
-  function submit() {
-    const trimmed = query.trim()
-    if (!trimmed || loading || disabled) return
-    onSearch(trimmed)
-  }
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    submit()
-  }
-
-  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      submit()
-    }
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+    onSubmit()
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} role="search">
-      <label className={styles.srOnly} htmlFor="search-input">
-        Buscar imagens
+      <label className={styles.label} htmlFor={inputId}>
+        Search public Telegram channels and groups
       </label>
-      <input
-        id="search-input"
-        className={styles.input}
-        type="search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Buscar imagens…"
-        disabled={loading || disabled}
-        autoComplete="off"
-        enterKeyHint="search"
-      />
-      <button
-        className={styles.button}
-        type="submit"
-        disabled={loading || disabled || !query.trim()}
-      >
-        {loading ? 'Buscando…' : 'Buscar'}
-      </button>
+      <div className={styles.field}>
+        <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="M16 16.5 20 20.5" />
+        </svg>
+        <input
+          id={inputId}
+          className={styles.input}
+          value={value}
+          placeholder="Try python, news, crypto, or @telegram"
+          autoComplete="off"
+          enterKeyHint="search"
+          onChange={(event) => onChange(event.target.value)}
+        />
+        {value && (
+          <button
+            type="button"
+            className={styles.clear}
+            onClick={() => onChange('')}
+            aria-label="Clear search"
+          >
+            ×
+          </button>
+        )}
+        <button className={styles.submit} type="submit" disabled={loading}>
+          {loading ? 'Searching' : 'Search'}
+        </button>
+      </div>
     </form>
   )
 }

@@ -1,0 +1,157 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  text-align: left;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.card:hover,
+.active {
+  background: var(--card-hover);
+  border-color: rgba(60, 183, 255, 0.45);
+}
+
+.avatar {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 650;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verified {
+  flex: none;
+  color: #8fd4ff;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.handle {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tags span,
+.channel,
+.group {
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.channel {
+  color: #9ad7ff;
+  background: rgba(60, 183, 255, 0.12);
+}
+
+.group {
+  color: #b6f5cb;
+  background: rgba(110, 230, 160, 0.12);
+}
+
+.description {
+  color: #c5d7e4;
+  font-size: 0.92rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.members {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 84px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.members strong {
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .card {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .members {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+}

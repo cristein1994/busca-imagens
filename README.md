@@ -1,74 +1,47 @@
-# Busca Imagens
+# Channel Engine
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Search public Telegram channels and groups by topic, language, or username.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+The app keeps a catalog of public chats, refreshes the top matches from Telegram’s public `t.me` pages, and looks up extra results in the public [Lyzem](https://lyzem.com) index. It does not log into Telegram and it does not read private chats.
 
-## Funcionalidades
+## Features
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+- Search channels and groups by keyword, `@username`, or `t.me` link
+- Filter by type (channel or group), topic, and language
+- Sort by relevance or audience size
+- Open a chat for the live subscriber or member count, description, and a public post preview when Telegram publishes one
+- Copy the public link or username, or open the chat in Telegram
 
-## Pré-requisitos
-
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
-
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Run
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Open the URL Vite prints, usually `http://localhost:5173`.
+
+No API key is required.
 
 ## Scripts
 
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Dev server and search API |
+| `npm run build` | Typecheck and production build |
+| `npm run preview` | Preview the production build with the search API |
+| `npm run test` | Parser tests |
+| `npm run lint` | Lint with oxlint |
 
-## Variáveis de ambiente
+## How search works
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+1. A built-in catalog matches title, username, description, and topic. Counts in the catalog are snapshots from public `t.me` pages.
+2. A keyword search also reads Lyzem’s public search page for channels and groups.
+3. The top results, and any exact username, are refreshed from `https://t.me/<username>`.
+4. Opening a result loads that public page again, plus `https://t.me/s/<username>` when a post preview exists.
 
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
-
-## Licença
-
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+- Vite, React, and TypeScript
+- CSS modules
+- A small Vite middleware for `/api/search` and `/api/chat`
