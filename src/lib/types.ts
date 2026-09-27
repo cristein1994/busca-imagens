@@ -1,4 +1,4 @@
-export type QueryKind = 'email' | 'domain' | 'ip' | 'url' | 'username' | 'phone' | 'keyword' | 'surface'
+export type QueryKind = 'email' | 'domain' | 'ip' | 'url' | 'username' | 'phone' | 'keyword' | 'surface' | 'deep'
 
 export const KIND_LABEL: Record<QueryKind, string> = {
   email: 'E-mail',
@@ -9,6 +9,7 @@ export const KIND_LABEL: Record<QueryKind, string> = {
   phone: 'Telefone',
   keyword: 'Termo',
   surface: 'Surface web',
+  deep: 'Deep',
 }
 
 export const QUERY_KINDS = Object.keys(KIND_LABEL) as QueryKind[]

@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { Resolver, reverse } from 'node:dns/promises'
+import { runDeep, DEEP_SOURCE_COUNT } from './deep'
 import { describeIp, requestPublic, withTimeout } from './net'
 import { done, fact, facts, runModule } from './module'
 import { clip, plain } from './text'
@@ -870,8 +871,65 @@ function phoneNoteModule(phone: string): ModuleResult {
   }
 }
 
+function deepModules(query: string): Promise<ModuleResult[]> {
+  const started = Date.now()
+  return runDeep(query).then(({ hits, reports }) => {
+    const ms = Date.now() - started
+    const withData = reports.filter((report) => report.status === 'ok').length
+    const failed = reports.filter((report) => report.status === 'error').length
+    const hitsModule: ModuleResult = {
+      id: 'deep-hits',
+      source: 'Deep',
+      title: 'Registos públicos',
+      status: hits.length ? 'ok' : 'empty',
+      summary: `${DEEP_SOURCE_COUNT} diretórios e fóruns consultados. ${withData} com dados, ${hits.length} registos.`,
+      facts: facts([
+        fact('Diretórios', String(reports.length)),
+        fact('Com dados', String(withData)),
+        fact('Vazios', String(reports.filter((report) => report.status === 'empty').length)),
+        fact('Falhas', String(failed)),
+      ]),
+      table: hits.length
+        ? {
+            columns: ['Diretório', 'Tipo', 'Título', 'Trecho', 'URL'],
+            rows: hits.slice(0, 90).map((hit) => [hit.source, hit.group, hit.title, hit.snippet, hit.url]),
+          }
+        : undefined,
+      ms,
+    }
+    const coverage: ModuleResult = {
+      id: 'deep-coverage',
+      source: 'Deep',
+      title: 'Cobertura da varredura',
+      status: 'ok',
+      summary: 'Cada linha é um diretório ou fórum público incluído na varredura.',
+      facts: [],
+      table: {
+        columns: ['Diretório', 'Tipo', 'Estado', 'Registos'],
+        rows: reports.map((report) => [
+          report.name,
+          report.group,
+          report.status === 'ok' ? 'com dados' : report.status === 'empty' ? 'vazio' : `falha${report.error ? `: ${report.error}` : ''}`,
+          String(report.count),
+        ]),
+      },
+      ms,
+    }
+    return [hitsModule, coverage]
+  }).catch((error) => [{
+    id: 'deep-hits',
+    source: 'Deep',
+    title: 'Registos públicos',
+    status: 'error',
+    summary: 'A varredura não chegou a concluir.',
+    facts: [],
+    error: error instanceof Error ? error.message : 'falha',
+    ms: Date.now() - started,
+  }])
+}
+
 export async function runSearch(input: ClassifiedQuery): Promise<ModuleResult[]> {
-  const jobs: Array<Promise<ModuleResult> | ModuleResult> = []
+  const jobs: Array<Promise<ModuleResult | ModuleResult[]> | ModuleResult> = []
   const webQuery = input.normalized
 
   if (input.kind === 'domain' && input.domain) {
@@ -923,9 +981,12 @@ export async function runSearch(input: ClassifiedQuery): Promise<ModuleResult[]>
     jobs.push(phoneNoteModule(input.phone), wikiModule(webQuery), ddgModule(webQuery), hnModule(webQuery))
   } else if (input.kind === 'surface') {
     jobs.push(surfaceModule(webQuery), ddgModule(webQuery))
+  } else if (input.kind === 'deep') {
+    jobs.push(deepModules(webQuery))
   } else {
     jobs.push(ddgModule(webQuery), wikiModule(webQuery), hnModule(webQuery), githubReposModule(webQuery))
   }
 
-  return Promise.all(jobs.map((job) => Promise.resolve(job)))
+  const modules = await Promise.all(jobs)
+  return modules.flat()
 }

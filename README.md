@@ -6,6 +6,8 @@ Consulta DNS, RDAP, transparência de certificados (crt.sh), Wayback Machine, p�
 
 `/sur termo` (ou o tipo **Surface**) procura páginas indexadas da surface web: título, site, trecho e URL.
 
+`/deep termo` (ou o tipo **Deep**) varre mais de 30 diretórios públicos: fóruns (Hacker News, Stack Exchange, Lemmy, Discourse), catálogos de dados (OpenAlex, Crossref, PubMed, Zenodo, data.europa.eu, Library of Congress, NVD e outros), registos de código e mídia. A resposta traz os registos e a cobertura de cada diretório.
+
 O tipo da consulta é detetado automaticamente (domínio, IP, e-mail, usuário, URL, telefone ou termo) e pode ser forçado na interface.
 
 Telefone e termo livre usam só menções em fontes públicas. Endereços privados, loopback e metadados de nuvem não são consultados fora da máquina.
@@ -39,9 +41,9 @@ Corpo:
 | Campo | Obrigatório | Descrição |
 | --- | --- | --- |
 | `query` | sim | 2 a 180 caracteres |
-| `kind` | não | `domain`, `ip`, `email`, `username`, `url`, `phone`, `keyword` ou `surface` |
+| `kind` | não | `domain`, `ip`, `email`, `username`, `url`, `phone`, `keyword`, `surface` ou `deep` |
 
-`/sur linux kernel` no campo `query` equivale a `kind: "surface"`.
+`/sur linux kernel` equivale a `kind: "surface"`. `/deep linux` equivale a `kind: "deep"`.
 
 A resposta traz `kind`, `tookMs` e `modules` (estado `ok`, `empty` ou `error`, factos e tabelas).
 

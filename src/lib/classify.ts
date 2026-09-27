@@ -77,6 +77,7 @@ function pack(kind: QueryKind, normalized: string, extra: Partial<ClassifiedQuer
 function force(normalized: string, kind: QueryKind): ClassifiedQuery {
   if (kind === 'keyword') return pack('keyword', normalized, {})
   if (kind === 'surface') return pack('surface', normalized, {})
+  if (kind === 'deep') return pack('deep', normalized, {})
   if (kind === 'domain') {
     if (!isDomain(normalized)) throw new Error('Este valor não é um domínio.')
     return pack('domain', domainToASCII(normalized.toLowerCase()), {
@@ -110,13 +111,14 @@ function force(normalized: string, kind: QueryKind): ClassifiedQuery {
 
 export function classify(rawInput: string, forced?: QueryKind): ClassifiedQuery {
   let normalized = rawInput.trim().replace(/\s+/g, ' ')
-  const command = normalized.match(/^\/(?:sur|surface)\b\s*(.*)$/i)
+  const command = normalized.match(/^\/(sur|surface|deep)\b\s*(.*)$/i)
   if (command) {
-    normalized = command[1].trim().replace(/\s+/g, ' ')
-    if (!forced) forced = 'surface'
+    const verb = command[1].toLowerCase()
+    normalized = command[2].trim().replace(/\s+/g, ' ')
+    if (!forced) forced = verb === 'deep' ? 'deep' : 'surface'
   }
-  if (forced === 'surface' && normalized.length < 2) {
-    throw new Error('Escreva o termo depois de /sur.')
+  if ((forced === 'surface' || forced === 'deep') && normalized.length < 2) {
+    throw new Error(forced === 'deep' ? 'Escreva o termo depois de /deep.' : 'Escreva o termo depois de /sur.')
   }
   if (forced) return force(normalized, forced)
 
