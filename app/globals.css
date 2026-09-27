@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --ink: #12160f;
+  --panel: #1b2118;
+  --line: #31392b;
+  --text: #ebe6d8;
+  --muted: #a3aa96;
+  --brass: #d7b56a;
+  --moss: #c5d48a;
+  --danger: #e2a090;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(215, 181, 106, 0.08), transparent 55%),
+    var(--ink);
+  color: var(--text);
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: var(--brass);
+}

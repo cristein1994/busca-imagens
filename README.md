@@ -1,74 +1,61 @@
-# Busca Imagens
+# AgentEngine OSINT
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Busca OSINT em duas faixas: a web de superfície e o índice público da dark web. Cada faixa raspa os resultados e monta um resumo extrativo. O piso é **30 resultados** por faixa quando a fonte tem material suficiente.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+A interface está em português.
 
-## Funcionalidades
+## O que cada faixa faz
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+| Faixa | Fonte | O que é raspado |
+| --- | --- | --- |
+| Superfície | [DuckDuckGo HTML](https://html.duckduckgo.com/html/) | Título, URL, snippet e, nas primeiras páginas, o texto legível (meta description e parágrafos) |
+| Dark | Índice [Ahmia](https://ahmia.fi/) via SOCKS do Tor | Título, descrição, endereço `.onion` e data de visita do índice |
 
-## Pré-requisitos
+Não baixa o corpo das páginas `.onion`. A faixa dark só raspa o índice público, e só com o proxy Tor aberto.
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+## Tor (`systemctl`)
 
-## Como obter a chave da API
+O pacote Ubuntu expõe dois units:
 
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+- `tor.service` — unit mestre (`Type=oneshot`)
+- `tor@default.service` — daemon. O `ExecStart` usa `/usr/share/tor/tor-service-defaults-torrc`, que já define `SocksPort 9050`
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
+sudo bash scripts/configure-tor.sh
+```
 
-# Instale as dependências
+O script roda `systemctl enable tor` e `systemctl start tor` / `tor@default`. Se o host não tiver bus systemd (container sem PID 1 systemd), ele sobe o mesmo `ExecStart` de `tor@default` com `--RunAsDaemon 1` e espera o `SocksPort 9050`.
+
+No app, o painel **systemctl tor** mostra o estado e o botão **Configurar Tor** chama `POST /api/tor` (só a partir de localhost).
+
+## Executar
+
+```bash
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
+cp .env.example .env.local
+npm run tor:configure
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra `http://localhost:3000`. Escolha Superfície, Dark ou As duas, e envie a consulta.
+
+## Variáveis
+
+| Variável | Padrão | Função |
+| --- | --- | --- |
+| `TOR_SOCKS_URL` | `socks5h://127.0.0.1:9050` | Proxy SOCKS com DNS remoto (necessário para `.onion`) |
+| `OSINT_MIN_RESULTS` | `30` | Piso de resultados únicos por faixa |
 
 ## Scripts
 
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| Comando | Função |
+| --- | --- |
+| `npm run dev` | Next.js em desenvolvimento |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+| `npm test` | Parsers e resumo |
+| `npm run lint` | oxlint |
+| `npm run tor:configure` | `systemctl enable/start` do Tor |
 
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
-
-## Licença
-
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Next.js, TypeScript, Tailwind CSS. Sem chave de API: a superfície usa o HTML público do DuckDuckGo e a dark usa o índice Ahmia através do Tor local.
