@@ -1,74 +1,55 @@
-# Busca Imagens
+# TextoTube — YouTube em texto
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
-
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+Busque vídeos no YouTube e extraia legendas/transcrições em **texto corrido**.
 
 ## Funcionalidades
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+- Busca por termo no YouTube (via Apify `streamers/youtube-scraper`)
+- Extração de legendas/transcrição em português (via `starvibe/youtube-video-transcript`, com fallback no scraper oficial)
+- Painel de leitura com copiar texto
+- UI em português, responsiva
 
 ## Pré-requisitos
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+- Node.js 18+
+- Token Apify: [console.apify.com/settings/integrations](https://console.apify.com/settings/integrations)
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Instalação
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
+cp .env.example .env.local
+# Edite .env.local e defina APIFY_TOKEN=...
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
 | Comando | Descrição |
 |--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| `npm run dev` | Servidor de desenvolvimento |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| `npm run start` | Sobe o build |
+| `npm run lint` | Lint Next.js |
 
 ## Variáveis de ambiente
 
 | Variável | Descrição |
 |----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+| `APIFY_TOKEN` | Token da API Apify (obrigatório; só no servidor) |
 
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+- Next.js 15 (App Router) + TypeScript + Tailwind CSS 4
+- `apify-client` nas rotas `/api/search` e `/api/transcript`
+
+## Fluxo
+
+1. `POST /api/search` → lista vídeos pela query
+2. Clique em um resultado → `POST /api/transcript` → texto da legenda/transcrição
 
 ## Licença
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Projeto de demonstração. Conteúdo do YouTube pertence aos respectivos criadores — use apenas dados públicos e respeite os termos de uso.
