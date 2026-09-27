@@ -192,9 +192,10 @@ export async function searchChats(rawQuery: string, type: 'all' | ChatType): Pro
     : []
 
   const merged = dedupeScored([...catalogHits, ...found.hits, ...liveHit]).slice(0, 24)
+  const enriched = await enrichSome(merged, 8)
   const data: SearchResponse = {
     query,
-    results: await enrichSome(merged, 4),
+    results: type === 'all' ? enriched : enriched.filter((chat) => chat.type === type),
     warning: found.warning,
     index: found.index,
     catalogSize: catalog.length,
