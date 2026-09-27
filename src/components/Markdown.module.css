@@ -1,0 +1,73 @@
+.root {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.root p,
+.root ul {
+  margin: 0;
+}
+
+.root ul {
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.root a {
+  color: var(--accent-text);
+  text-underline-offset: 0.15em;
+}
+
+.root code {
+  font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", monospace;
+  font-size: 0.88em;
+  background: rgba(214, 255, 74, 0.1);
+  padding: 0.05em 0.3em;
+  border-radius: 0.3rem;
+}
+
+.code {
+  margin: 0;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: var(--bg-sunken);
+}
+
+.code figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+
+.code button {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+}
+
+.code pre {
+  margin: 0;
+  padding: 0.85rem 0.9rem;
+  overflow: auto;
+}
+
+.code code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: pre;
+}

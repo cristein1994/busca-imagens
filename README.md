@@ -1,74 +1,61 @@
-# Busca Imagens
+# Playground DeepSeek
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
-
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+Playground local para conversar com a API da DeepSeek, pesquisar na web e guardar páginas e respostas.
 
 ## Funcionalidades
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+- Conversa com `deepseek-chat` ou `deepseek-reasoner`
+- Modelfile editável (`SYSTEM` e `PARAMETER temperature`)
+- Deep Search: monta consultas, busca na web, lê as páginas e pede a resposta à DeepSeek com as fontes
+- Guarda web: salva páginas lidas e respostas em `data/library.json`
+- A chave da API fica no servidor. O navegador não recebe esse valor
 
 ## Pré-requisitos
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+- Node.js 20+
+- Chave em [platform.deepseek.com](https://platform.deepseek.com/)
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Executar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
 cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
+```
 
-# Inicie o servidor de desenvolvimento
+Edite `.env`:
+
+```bash
+DEEPSEEK_API_KEY=sua_chave
+```
+
+```bash
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra o endereço do terminal, em geral `http://localhost:5173`.
 
 ## Scripts
 
 | Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
+| --- | --- |
+| `npm run dev` | Servidor de desenvolvimento, com a API local |
+| `npm run build` | Checagem de tipos e build |
+| `npm run preview` | Serve o build com a mesma API |
 | `npm run lint` | Lint com oxlint |
 
-## Variáveis de ambiente
+## Variáveis
 
 | Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
+| --- | --- |
+| `DEEPSEEK_API_KEY` | Chave da API DeepSeek |
+| `DEEPSEEK_BASE_URL` | Opcional. O padrão é `https://api.deepseek.com` |
 
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+Sem a chave, a leitura de páginas e a busca web ainda funcionam. A síntese e a conversa precisam da chave.
 
-## Stack
+## Deep Search
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+A busca usa resultados públicos do Bing (RSS), da Wikipédia e, quando disponível, do DuckDuckGo. As páginas são lidas no servidor e enviadas à DeepSeek junto com a pergunta. Endereços locais e de rede privada são recusados.
 
-## Licença
+## Guarda web
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Os itens ficam em `data/library.json` nesta máquina. Esse arquivo não entra no git.

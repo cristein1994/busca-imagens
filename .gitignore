@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Páginas e respostas salvas pela Guarda web
+data/*.json

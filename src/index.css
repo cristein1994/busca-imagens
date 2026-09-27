@@ -1,23 +1,23 @@
 :root {
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-muted: #f1f5f9;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --accent-soft: rgba(79, 70, 229, 0.18);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --bg: #10120e;
+  --bg-raised: #1a1e16;
+  --bg-sunken: #0b0d09;
+  --line: rgba(236, 230, 214, 0.14);
+  --ink: #ece6d6;
+  --muted: #a8a292;
+  --accent: #d6ff4a;
+  --accent-ink: #172000;
+  --accent-text: #dffb7a;
+  --danger: #ff8b6a;
+  --ok: #9be7a8;
+  font-family: ui-sans-serif, system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: var(--text);
-  background-color: var(--bg);
+  color: var(--ink);
+  background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -35,13 +35,27 @@ body,
 
 body {
   min-width: 320px;
+  background:
+    radial-gradient(ellipse at top left, rgba(214, 255, 74, 0.08), transparent 32rem),
+    var(--bg);
 }
 
 button,
-input {
+input,
+textarea,
+select {
   font: inherit;
 }
 
-img {
-  max-width: 100%;
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(214, 255, 74, 0.28);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
