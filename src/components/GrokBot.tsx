@@ -115,7 +115,7 @@ export function GrokBot({ onSearch, searchEnabled, searching }: GrokBotProps) {
     <>
       {open && (
         <section
-          className={styles.panel}
+          className={panelStatus === 'ready' ? `${styles.panel} ${styles.panelChat}` : styles.panel}
           role="dialog"
           aria-modal="false"
           aria-labelledby="grok-title"
