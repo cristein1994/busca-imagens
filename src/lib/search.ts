@@ -99,7 +99,8 @@ function dnsModule(host: string, focus: 'domínio' | 'correio' | 'host'): Promis
       fact(
         'MX',
         data.mx
-          ?.sort((a, b) => a.priority - b.priority)
+          ?.filter((row) => row.exchange && row.exchange !== '.')
+          .sort((a, b) => a.priority - b.priority)
           .map((row) => `${row.priority} ${row.exchange}`)
           .join(' · '),
       ),
@@ -284,8 +285,16 @@ function waybackModule(host: string): Promise<ModuleResult> {
   return runModule('wayback', 'Wayback Machine', 'Arquivo da web', async () => {
     const response = await getJson(
       `https://web.archive.org/cdx/search/cdx?url=${encodeURIComponent(host)}&output=json&fl=timestamp,original,statuscode,mimetype&limit=12&collapse=digest`,
-      10000,
+      8000,
     )
+    if (response.status === 503) {
+      return {
+        status: 'error',
+        summary: 'O Internet Archive está temporariamente offline.',
+        facts: [],
+        error: 'HTTP 503',
+      }
+    }
     if (response.error) throw new Error(response.error)
     if (!Array.isArray(response.json) || response.json.length < 2) {
       return { status: 'empty', summary: 'Sem capturas públicas no arquivo.', facts: [] }

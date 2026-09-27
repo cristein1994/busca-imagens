@@ -142,11 +142,11 @@ export async function requestPublic(
   }
 
   const ms = options?.ms ?? 8000
-  const ctrl = new AbortController()
-  const timer = setTimeout(() => ctrl.abort(), ms)
-  try {
-    for (let hop = 0; hop < 4; hop += 1) {
-      await assertPublicHost(current.hostname)
+  for (let hop = 0; hop < 4; hop += 1) {
+    await assertPublicHost(current.hostname)
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), ms)
+    try {
       const response = await fetch(current, {
         redirect: 'manual',
         signal: ctrl.signal,
@@ -177,9 +177,9 @@ export async function requestPublic(
         contentType: (response.headers.get('content-type') ?? '').split(';')[0].trim(),
         finalUrl: current.toString(),
       }
+    } finally {
+      clearTimeout(timer)
     }
-    throw new Error('Demasiados redirecionamentos.')
-  } finally {
-    clearTimeout(timer)
   }
+  throw new Error('Demasiados redirecionamentos.')
 }
