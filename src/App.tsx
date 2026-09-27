@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { hasAccessKey, searchPhotos } from './api/unsplash'
 import type { UnsplashPhoto } from './types/unsplash'
 import { SearchBar } from './components/SearchBar'
+import { GrokBot } from './components/GrokBot'
 import { ImageGrid } from './components/ImageGrid'
 import { Lightbox } from './components/Lightbox'
 import { SetupMessage } from './components/SetupMessage'
@@ -15,6 +16,7 @@ export default function App() {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [lastQuery, setLastQuery] = useState('')
+  const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<UnsplashPhoto | null>(null)
 
   const handleSearch = useCallback(async (query: string) => {
@@ -48,6 +50,8 @@ export default function App() {
           </p>
         </div>
         <SearchBar
+          query={query}
+          onQueryChange={setQuery}
           onSearch={handleSearch}
           loading={status === 'loading'}
           disabled={!configured}
@@ -112,6 +116,15 @@ export default function App() {
       {selected && (
         <Lightbox photo={selected} onClose={() => setSelected(null)} />
       )}
+
+      <GrokBot
+        searchEnabled={configured}
+        searching={status === 'loading'}
+        onSearch={(nextQuery) => {
+          setQuery(nextQuery)
+          void handleSearch(nextQuery)
+        }}
+      />
     </div>
   )
 }

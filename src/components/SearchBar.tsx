@@ -1,15 +1,21 @@
-import { useState, type FormEvent, type KeyboardEvent } from 'react'
+import { type FormEvent, type KeyboardEvent } from 'react'
 import styles from './SearchBar.module.css'
 
 interface SearchBarProps {
+  query: string
+  onQueryChange: (query: string) => void
   onSearch: (query: string) => void
   loading: boolean
   disabled?: boolean
 }
 
-export function SearchBar({ onSearch, loading, disabled = false }: SearchBarProps) {
-  const [query, setQuery] = useState('')
-
+export function SearchBar({
+  query,
+  onQueryChange,
+  onSearch,
+  loading,
+  disabled = false,
+}: SearchBarProps) {
   function submit() {
     const trimmed = query.trim()
     if (!trimmed || loading || disabled) return
@@ -38,7 +44,7 @@ export function SearchBar({ onSearch, loading, disabled = false }: SearchBarProp
         className={styles.input}
         type="search"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => onQueryChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Buscar imagens…"
         disabled={loading || disabled}
