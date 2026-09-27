@@ -1,74 +1,65 @@
-# Busca Imagens
+# RODE
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Terminal do Grok. A mesma sessão vale no shell e no navegador.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+O cliente fala com a [Responses API](https://docs.x.ai/docs/guides/chat) da xAI (`grok-4.7` por padrão) e imprime o texto conforme chega. A chave fica no `.env` e não vai para o browser.
 
-## Funcionalidades
+## O que dá para fazer
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+- Sessão interativa: `rode`
+- Uma pergunta: `rode -p "texto"` ou `echo texto | rode`
+- Terminal web: `npm run dev` ou `rode serve`
+- Troca de modelo, prompt de sistema, histórico e busca (`web_search` + `x_search`)
 
-## Pré-requisitos
+## Comandos da sessão
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+| Comando | Efeito |
+| --- | --- |
+| `/help` | lista os comandos |
+| `/model <id>` | troca o modelo e reinicia o fio |
+| `/models` | modelos conhecidos |
+| `/system <texto>` | prompt de sistema e reinicia o fio |
+| `/search on` \| `/search off` | liga ou desliga busca na API |
+| `/clear` | zera a conversa |
+| `/history` | mostra o fio |
+| `/exit` | encerra o processo no shell |
 
-## Como obter a chave da API
+No navegador, Enter envia. Shift+Enter quebra a linha. Seta para cima recupera o que você já enviou.
 
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Como rodar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
 cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
+# edite .env e defina XAI_API_KEY
 
-# Inicie o servidor de desenvolvimento
+npm run rode
+# ou o binário local, depois do install:
+npx rode
+
 npm run dev
+# http://127.0.0.1:5173
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+A sessão fica em `data/rode-session.json` (não entra no git). O fio seguinte reusa o id da resposta na xAI. `/clear`, `/model` e `/system` começam um fio novo.
 
 ## Scripts
 
 | Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| --- | --- |
+| `npm run rode` | CLI |
+| `npm run dev` | terminal web com Vite |
+| `npm run build` | typecheck e build estático |
+| `npm start` | serve o build |
+| `npm test` | parser SSE, comandos e stream falso |
+| `npm run lint` | oxlint |
 
-## Variáveis de ambiente
+## Flags
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
-
-## Stack
-
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
-
-## Licença
-
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+```text
+rode -p "texto" --model grok-3-mini
+rode --fresh -p "texto"     # ignora o fio anterior
+rode --search -p "notícias" # web_search e x_search
+rode inspect
+rode serve --port 4173
+```

@@ -1,12 +1,18 @@
 {
-  "name": "busca-imagens",
+  "name": "rode",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "bin": {
+    "rode": "./bin/rode.js"
+  },
   "scripts": {
-    "dev": "vite",
+    "dev": "tsx server/index.ts",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "rode": "tsx cli/rode.ts",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "test": "tsx --test server/*.test.ts",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,6 +25,7 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "tsx": "^4.20.5",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }
