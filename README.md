@@ -11,6 +11,7 @@ Analisador de tráfego de rede no navegador, com UI estilo Wireshark: lista de p
 - Painel **Message** com stream ao vivo + payload do pacote (HTTP, DNS, ARP…)
 - Botão **Capture** / **Continuar** (Espaço liga/desliga)
 - Auto-start ao abrir o app
+- **Download all** — ZIP com `capture.pcap`, JSON completo, filtrado, mensagens e summary
 - **Save PCAP** + Export JSON
 - Hex dump + ASCII
 - Display filter: `tcp`, `dns`, `wlan`, `ip.addr == x`, `frame.len > 100`, `http contains Host`, `&&` / `||`

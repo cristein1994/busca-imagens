@@ -3,6 +3,8 @@ import type { CaptureInterface, CaptureStats, Packet } from './types/packet'
 import { parsePcap, toPackets, buildPcap } from './lib/pcap'
 import { frameToPacket, generateSimulatedFrame, type SimMode } from './lib/simulator'
 import { isFilterSyntaxOk, matchDisplayFilter } from './lib/filter'
+import { decodePacketMessage, isLiveMessagePacket } from './lib/message'
+import { buildZip, downloadBlob } from './lib/zip'
 import { Toolbar } from './components/Toolbar'
 import { FilterBar } from './components/FilterBar'
 import { PacketList } from './components/PacketList'
@@ -66,6 +68,22 @@ function buildStats(all: Packet[], displayed: Packet[]): CaptureStats {
     bytes,
     byProtocol,
   }
+}
+
+function packetsToJson(list: Packet[]) {
+  return list.map((p) => ({
+    no: p.no,
+    time: p.relativeTime,
+    source: p.source,
+    destination: p.destination,
+    protocol: p.protocol,
+    length: p.length,
+    info: p.info,
+    linkType: p.linkType,
+    hex: Array.from(p.raw)
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join(''),
+  }))
 }
 
 export default function App() {
@@ -191,40 +209,76 @@ export default function App() {
   }
 
   const handleExportJson = () => {
-    const payload = displayed.map((p) => ({
-      no: p.no,
-      time: p.relativeTime,
-      source: p.source,
-      destination: p.destination,
-      protocol: p.protocol,
-      length: p.length,
-      info: p.info,
-      linkType: p.linkType,
-      hex: Array.from(p.raw)
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join(''),
-    }))
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `nexus-capture-${Date.now()}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+    const payload = packetsToJson(displayed.length > 0 ? displayed : packets)
+    downloadBlob(
+      new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }),
+      `nexus-capture-${Date.now()}.json`,
+    )
   }
 
   const handleExportPcap = () => {
     try {
       const buf = buildPcap(displayed.length > 0 ? displayed : packets)
-      const blob = new Blob([buf], { type: 'application/vnd.tcpdump.pcap' })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `nexus-capture-${Date.now()}.pcap`
-      a.click()
-      URL.revokeObjectURL(url)
+      downloadBlob(new Blob([buf], { type: 'application/vnd.tcpdump.pcap' }), `nexus-capture-${Date.now()}.pcap`)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Falha ao exportar PCAP')
+    }
+  }
+
+  const handleDownloadAll = () => {
+    if (packets.length === 0) {
+      setError('Nenhum pacote para baixar')
+      return
+    }
+    try {
+      const stamp = new Date().toISOString().replace(/[:.]/g, '-')
+      const allJson = packetsToJson(packets)
+      const filteredJson = packetsToJson(displayed)
+      const messages = packets.filter(isLiveMessagePacket).map((p) => {
+        const msg = decodePacketMessage(p)
+        return {
+          no: p.no,
+          time: p.relativeTime,
+          source: p.source,
+          destination: p.destination,
+          kind: msg.kind,
+          summary: msg.summary,
+          body: msg.body,
+        }
+      })
+      const summary = {
+        exportedAt: new Date().toISOString(),
+        interface: iface.name,
+        totalPackets: packets.length,
+        displayedPackets: displayed.length,
+        filter: filter || null,
+        bytes: packets.reduce((n, p) => n + p.length, 0),
+        byProtocol: stats.byProtocol,
+      }
+
+      const pcapBuf = buildPcap(packets)
+      const zip = buildZip([
+        { name: `nexus-capture-${stamp}/capture.pcap`, data: new Uint8Array(pcapBuf) },
+        {
+          name: `nexus-capture-${stamp}/packets-all.json`,
+          data: new TextEncoder().encode(JSON.stringify(allJson, null, 2)),
+        },
+        {
+          name: `nexus-capture-${stamp}/packets-filtered.json`,
+          data: new TextEncoder().encode(JSON.stringify(filteredJson, null, 2)),
+        },
+        {
+          name: `nexus-capture-${stamp}/messages.json`,
+          data: new TextEncoder().encode(JSON.stringify(messages, null, 2)),
+        },
+        {
+          name: `nexus-capture-${stamp}/summary.json`,
+          data: new TextEncoder().encode(JSON.stringify(summary, null, 2)),
+        },
+      ])
+      downloadBlob(zip, `nexus-capture-all-${stamp}.zip`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha no Download all')
     }
   }
 
@@ -273,6 +327,7 @@ export default function App() {
         onRateChange={setPacketRate}
         onExportJson={handleExportJson}
         onExportPcap={handleExportPcap}
+        onDownloadAll={handleDownloadAll}
       />
       <FilterBar
         value={filter}

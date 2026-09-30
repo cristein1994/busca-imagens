@@ -16,6 +16,7 @@ interface Props {
   onRateChange: (rate: number) => void
   onExportJson: () => void
   onExportPcap: () => void
+  onDownloadAll: () => void
 }
 
 export function Toolbar({
@@ -32,6 +33,7 @@ export function Toolbar({
   onRateChange,
   onExportJson,
   onExportPcap,
+  onDownloadAll,
 }: Props) {
   return (
     <header className={styles.toolbar}>
@@ -99,6 +101,9 @@ export function Toolbar({
             }}
           />
         </label>
+        <button type="button" className={styles.downloadAll} onClick={onDownloadAll} disabled={!hasPackets}>
+          Download all
+        </button>
         <button type="button" onClick={onExportPcap} disabled={!hasPackets}>
           Save PCAP
         </button>

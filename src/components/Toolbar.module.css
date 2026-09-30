@@ -121,6 +121,12 @@
   border-color: #5c2020 !important;
 }
 
+.downloadAll {
+  background: #2a4a6b !important;
+  color: #eef5ff !important;
+  border-color: #1c3248 !important;
+}
+
 .fileBtn {
   display: inline-flex;
   align-items: center;
