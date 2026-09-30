@@ -1,74 +1,50 @@
-# Busca Imagens
+# GrupoLista
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Organize e exporte números de grupos do WhatsApp a partir de listas que **você já possui** (texto colado, CSV, planilhas).
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+> O app **não** conecta à sua conta WhatsApp e **não** faz scraping da plataforma. Os dados ficam apenas no `localStorage` do navegador.
 
 ## Funcionalidades
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+- Criar grupos e guardar listas de contatos
+- Colar texto livre ou CSV e extrair telefones automaticamente
+- Normalização para formato E.164 (foco Brasil +55)
+- Deduplicação na importação
+- Busca por nome/número
+- Exportar CSV, JSON, vCard (.vcf) ou copiar números
+- Abrir conversa via `wa.me`
+- Adicionar contatos manualmente
 
-## Pré-requisitos
+## Como obter a lista de um grupo seu
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+1. Se você é admin/membro, copie números da info do grupo, de uma exportação ou de uma planilha que já tenha.
+2. No GrupoLista: **Novo grupo** → aba **Importar** → cole o texto → **Extrair números**.
+3. Aba **Baixar** → CSV / JSON / vCard.
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Instalação
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra o endereço do Vite (geralmente `http://localhost:5173`).
 
 ## Scripts
 
 | Comando | Descrição |
 |--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| `npm run dev` | Servidor de desenvolvimento |
 | `npm run build` | Build de produção |
 | `npm run preview` | Pré-visualiza o build |
 | `npm run lint` | Lint com oxlint |
 
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
-
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+- Vite + React 19 + TypeScript
+- CSS Modules
+- Persistência local (`localStorage`)
 
-## Licença
+## Privacidade
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Use apenas listas de grupos dos quais você participa ou administra. Respeite a LGPD e os termos do WhatsApp.
