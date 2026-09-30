@@ -1,74 +1,54 @@
-# Busca Imagens
+# Nexus Capture
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Analisador de tráfego de rede no navegador, com UI estilo Wireshark: lista de pacotes, árvore de protocolos, hex dump, display filter e captura ao vivo simulada.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+> Captura raw de interface Wi-Fi (monitor mode) exige root + hardware no host — o browser não tem acesso a isso. Esta app oferece o visualizador completo + simulador live + importação de arquivos `.pcap` reais exportados do Wireshark/`tcpdump`.
 
 ## Funcionalidades
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+- Painel de pacotes (No / Time / Source / Dest / Protocol / Length / Info) com cores por protocolo
+- Detalhes em árvore (Ethernet, IP, TCP/UDP, DNS, HTTP, TLS, ARP, ICMP, 802.11/Radiotap)
+- Hex dump + ASCII
+- Display filter: `tcp`, `dns`, `wlan`, `ip.addr == x`, `frame.len > 100`, `http contains Host`, `&&` / `||`
+- Start/Stop captura simulada (Wi-Fi monitor, LAN, misto)
+- Abrir arquivos `.pcap` (Libpcap clássico)
+- Exportar pacotes filtrados em JSON
+- Navegação por teclado: `j` / `k` ou setas
 
-## Pré-requisitos
-
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
-
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Como usar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra `http://localhost:5173`.
+
+1. Escolha a interface (ex.: `wlan0 (monitor)`)
+2. Clique **Start** para ver tráfego ao vivo simulado
+3. Ou **Open PCAP** com um dump real do Wireshark
+
+### Gerar PCAP real no Linux (opcional)
+
+```bash
+# Com permissão adequada, na sua máquina:
+sudo tcpdump -i wlan0 -w capture.pcap
+# Depois abra capture.pcap neste app
+```
 
 ## Scripts
 
 | Comando | Descrição |
 |--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| `npm run dev` | Dev server (Vite) |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+| `npm run preview` | Preview do build |
+| `npm run lint` | Lint (oxlint) |
 
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+Vite + React 19 + TypeScript + CSS Modules
 
 ## Licença
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Projeto de demonstração para análise de tráfego em redes que você administra.

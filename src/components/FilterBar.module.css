@@ -1,0 +1,50 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.85rem;
+  background: #f3efe6;
+  border-bottom: 1px solid #c4b8a4;
+}
+
+.label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b6458;
+  white-space: nowrap;
+}
+
+.input {
+  flex: 1;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid #b8ad99;
+  border-radius: 0.25rem;
+  background: #fffdf8;
+  color: #1a1a2e;
+}
+
+.input:focus {
+  outline: 2px solid #3d7a5f;
+  outline-offset: 1px;
+}
+
+.valid {
+  background: #e8f8ef;
+  border-color: #3d7a5f;
+}
+
+.invalid {
+  background: #fdeaea;
+  border-color: #a04444;
+}
+
+.count {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: #4a453c;
+  min-width: 5rem;
+  text-align: right;
+}

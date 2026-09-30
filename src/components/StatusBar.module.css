@@ -1,0 +1,48 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+  padding: 0.35rem 0.85rem;
+  background: #1e3a2f;
+  color: #d5e6da;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.78rem;
+}
+
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #6b6458;
+}
+
+.live {
+  background: #5dcf8a;
+  box-shadow: 0 0 0 0 rgba(93, 207, 138, 0.7);
+  animation: pulse 1.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(93, 207, 138, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(93, 207, 138, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(93, 207, 138, 0);
+  }
+}
+
+.sep {
+  opacity: 0.45;
+}
+
+.protos {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+}
