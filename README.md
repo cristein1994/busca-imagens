@@ -1,6 +1,6 @@
 # RAIZ — Consulta CNPJ
 
-SPA/Next.js para consultar CNPJ na base pública da Receita Federal via [BrasilAPI](https://brasilapi.com.br/).
+SPA/Next.js para consultar CNPJ na base pública da Receita Federal via [BrasilAPI](https://brasilapi.com.br/), com fallback em [Minha Receita](https://minhareceita.org/).
 
 ## Funcionalidades
 
@@ -9,7 +9,7 @@ SPA/Next.js para consultar CNPJ na base pública da Receita Federal via [BrasilA
 - CNAE principal e secundários
 - Endereço, telefone, e-mail
 - QSA (quadro de sócios e administradores)
-- API route interna `GET /api/cnpj/[cnpj]` (proxy para BrasilAPI)
+- API route interna `GET /api/cnpj/[cnpj]` (BrasilAPI → fallback Minha Receita)
 
 ## Pré-requisitos
 

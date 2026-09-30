@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: "RAIZ — Consulta CNPJ",
   description:
     "Consulta pública de CNPJ via BrasilAPI: razão social, situação, CNAE, endereço e QSA.",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
