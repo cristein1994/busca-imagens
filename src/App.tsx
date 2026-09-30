@@ -156,8 +156,11 @@ export default function App() {
 
   // Auto-start capture on load (StrictMode-safe: cleanup stops, remount restarts)
   useEffect(() => {
-    startCapture()
-    return () => stopCapture()
+    const id = window.setTimeout(() => startCapture(), 0)
+    return () => {
+      window.clearTimeout(id)
+      stopCapture()
+    }
   }, [startCapture, stopCapture])
 
   const handleClear = () => {
