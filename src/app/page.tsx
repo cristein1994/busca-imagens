@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { CnpjSearch } from "@/components/CnpjSearch";
 
 export default function HomePage() {
@@ -44,11 +45,18 @@ export default function HomePage() {
             </p>
           </div>
 
-          <CnpjSearch />
+          <Suspense
+            fallback={
+              <p className="text-sm text-ink-soft/70">Carregando consulta…</p>
+            }
+          >
+            <CnpjSearch />
+          </Suspense>
         </section>
 
         <footer className="mt-auto border-t border-line/80 pt-6 text-sm text-ink-soft/65">
-          Fonte: BrasilAPI / Receita Federal (dados abertos). Uso responsável.
+          Fonte: BrasilAPI / Minha Receita / Receita Federal (dados abertos). Uso
+          responsável.
         </footer>
       </div>
     </main>

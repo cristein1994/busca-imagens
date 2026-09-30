@@ -1,26 +1,37 @@
 "use client";
 
-import { FormEvent, useId, useState, useTransition } from "react";
+import { FormEvent, useEffect, useId, useState, useTransition } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { formatCnpj, isValidCnpj, onlyDigits } from "@/lib/cnpj";
 import type { CnpjCompany, LookupResult } from "@/lib/types";
 import { CompanyResult } from "@/components/CompanyResult";
 
 export function CnpjSearch() {
   const inputId = useId();
-  const [value, setValue] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const initial = searchParams.get("cnpj") ?? "";
+
+  const [value, setValue] = useState(() =>
+    initial ? formatCnpj(initial) : "",
+  );
   const [error, setError] = useState<string | null>(null);
   const [company, setCompany] = useState<CnpjCompany | null>(null);
   const [pending, startTransition] = useTransition();
 
-  function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    const digits = onlyDigits(value);
+  function lookup(raw: string, syncUrl: boolean) {
+    const digits = onlyDigits(raw);
     setError(null);
 
     if (!isValidCnpj(digits)) {
       setCompany(null);
       setError("CNPJ inválido. Digite os 14 dígitos com verificadores corretos.");
       return;
+    }
+
+    if (syncUrl) {
+      router.replace(`${pathname}?cnpj=${digits}`);
     }
 
     startTransition(async () => {
@@ -38,6 +49,40 @@ export function CnpjSearch() {
         setError("Não foi possível consultar agora. Tente de novo.");
       }
     });
+  }
+
+  useEffect(() => {
+    const q = searchParams.get("cnpj");
+    if (!q || !isValidCnpj(q)) return;
+    const digits = onlyDigits(q);
+    setValue(formatCnpj(digits));
+    let cancelled = false;
+    setError(null);
+    startTransition(async () => {
+      try {
+        const res = await fetch(`/api/cnpj/${digits}`);
+        const json = (await res.json()) as LookupResult;
+        if (cancelled) return;
+        if (!json.ok) {
+          setCompany(null);
+          setError(json.error);
+          return;
+        }
+        setCompany(json.data);
+      } catch {
+        if (cancelled) return;
+        setCompany(null);
+        setError("Não foi possível consultar agora. Tente de novo.");
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [searchParams]);
+
+  function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    lookup(value, true);
   }
 
   return (
