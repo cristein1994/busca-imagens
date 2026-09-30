@@ -10,6 +10,7 @@ SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/
 - Grade responsiva de imagens
 - Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
 - **Dados relacionados** no lightbox: descrição, fotógrafo, local, câmera/EXIF, cor, dimensões, curtidas/views/downloads
+- **Ferramentas** no lightbox: baixar imagem, copiar crédito Markdown, exportar JSON dos dados relacionados, buscar mais fotos do fotógrafo
 - Tags clicáveis que disparam nova busca
 - Grade de imagens relacionadas (API `/photos/:id/related`)
 - Estados de carregamento, vazio e erro

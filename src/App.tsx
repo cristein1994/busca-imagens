@@ -120,6 +120,10 @@ export default function App() {
             setSelected(null)
             void handleSearch(tag)
           }}
+          onSearchPhotographer={(query) => {
+            setSelected(null)
+            void handleSearch(query)
+          }}
         />
       )}
     </div>

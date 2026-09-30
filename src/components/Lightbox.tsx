@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState } from 'react'
 import { getRelatedPhotoData } from '../api/unsplash'
 import type { UnsplashPhoto } from '../types/unsplash'
+import { ImageTools } from './ImageTools'
 import styles from './Lightbox.module.css'
 
 interface LightboxProps {
@@ -8,6 +9,7 @@ interface LightboxProps {
   onClose: () => void
   onSelectRelated: (photo: UnsplashPhoto) => void
   onSearchTag: (tag: string) => void
+  onSearchPhotographer: (query: string) => void
 }
 
 function formatLocation(photo: UnsplashPhoto): string | null {
@@ -55,6 +57,7 @@ export function Lightbox({
   onClose,
   onSelectRelated,
   onSearchTag,
+  onSearchPhotographer,
 }: LightboxProps) {
   const [copied, setCopied] = useState(false)
   const [details, setDetails] = useState<UnsplashPhoto>(photo)
@@ -204,6 +207,12 @@ export function Lightbox({
               </a>
             </div>
           </div>
+
+          <ImageTools
+            photo={details}
+            relatedIds={related.map((item) => item.id)}
+            onSearchPhotographer={onSearchPhotographer}
+          />
 
           <section className={styles.related} aria-label="Dados relacionados">
             <h3 className={styles.relatedTitle}>Dados relacionados</h3>

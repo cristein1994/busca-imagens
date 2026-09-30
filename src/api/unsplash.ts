@@ -139,3 +139,35 @@ export async function getRelatedPhotoData(id: string): Promise<RelatedPhotoData>
 
   return { details, related }
 }
+
+/**
+ * Dispara o endpoint de download do Unsplash (guideline da API)
+ * e devolve a URL final do arquivo.
+ */
+export async function getDownloadUrl(photo: UnsplashPhoto): Promise<string> {
+  const accessKey = getAccessKey()
+  if (!accessKey) {
+    throw new Error('Chave da API Unsplash não configurada.')
+  }
+
+  if (isDemoMode(accessKey)) {
+    return photo.urls.full || photo.urls.regular
+  }
+
+  const downloadEndpoint = photo.links.download
+  const response = await fetch(
+    `${downloadEndpoint}${downloadEndpoint.includes('?') ? '&' : '?'}client_id=${encodeURIComponent(accessKey)}`,
+  )
+
+  if (!response.ok) {
+    throw mapApiError(response.status, 'Erro ao preparar download')
+  }
+
+  const contentType = response.headers.get('content-type') || ''
+  if (contentType.includes('application/json')) {
+    const data = (await response.json()) as { url?: string }
+    if (data.url) return data.url
+  }
+
+  return photo.urls.full || photo.urls.regular
+}
