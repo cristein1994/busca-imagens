@@ -1,74 +1,54 @@
-# Busca Imagens
+# LINCE — Combo OSINT público
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Busca em fontes **públicas** da surface web + organizador de arquivos **locais** + **dashboard** com filtros e histórico.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+> Escopo deliberado: **sem** Deep Web, Tor, .onion, mercados ou dumps de credenciais.
 
-## Funcionalidades
+## Módulos
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+1. **Busca pública** (`/buscar`) — Wikipedia (pt), DuckDuckGo Instant Answer, Open Library
+2. **Arquivos locais** (`/arquivos`) — import CSV/JSON/TXT, tags, notas, busca no navegador (localStorage)
+3. **Dashboard** (`/dashboard`) — filtros por texto/tag/data/fonte + histórico unificado
 
-## Pré-requisitos
+## Stack
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+- Next.js 15 (App Router) + TypeScript + Tailwind CSS
+- React 19
+- Zod na API de busca
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Instalação
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
 | Comando | Descrição |
 |--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| `npm run dev` | Dev server na porta 3000 |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| `npm start` | Serve o build |
+| `npm run lint` | Lint Next.js |
 
-## Variáveis de ambiente
+## Sample data
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
+Arquivos de exemplo em `data/samples/`:
 
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+- `contatos-publicos.csv`
+- `fontes.json`
 
-## Stack
+Importe-os em **Arquivos locais** para testar o organizador.
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+## Privacidade
+
+- Resultados de busca e histórico ficam no `localStorage` do navegador.
+- Arquivos importados **não** são enviados a um servidor próprio (só parse no client).
+- A rota `/api/search` só consulta APIs públicas de terceiros.
 
 ## Licença
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Projeto de demonstração. Respeite os termos das APIs consultadas.
