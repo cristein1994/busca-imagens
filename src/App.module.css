@@ -35,27 +35,53 @@
 
 .bottom {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr 1fr;
   min-height: 0;
   overflow: hidden;
 }
 
 .detailsPane,
+.messagePane,
 .hexPane {
   min-height: 0;
   overflow: hidden;
 }
 
+.messagePane {
+  border-left: 1px solid #c4b8a4;
+  border-right: 1px solid #c4b8a4;
+}
+
+@media (max-width: 1100px) {
+  .bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .messagePane {
+    grid-column: 1 / -1;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #c4b8a4;
+    border-bottom: 1px solid #c4b8a4;
+    max-height: 12rem;
+  }
+}
+
 @media (max-width: 800px) {
   .app {
-    grid-template-rows: auto auto minmax(220px, 1fr) minmax(280px, 1.1fr) auto;
+    grid-template-rows: auto auto minmax(220px, 1fr) minmax(320px, 1.1fr) auto;
     height: auto;
     min-height: 100dvh;
   }
 
   .bottom {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(160px, 1fr) minmax(160px, 1fr);
+    grid-template-rows: minmax(140px, 1fr) minmax(140px, 1fr) minmax(140px, 1fr);
+  }
+
+  .messagePane {
+    max-height: none;
+    border-top: none;
   }
 
   .detailsPane {

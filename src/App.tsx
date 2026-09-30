@@ -8,6 +8,7 @@ import { FilterBar } from './components/FilterBar'
 import { PacketList } from './components/PacketList'
 import { PacketDetails } from './components/PacketDetails'
 import { HexDump } from './components/HexDump'
+import { MessagePane } from './components/MessagePane'
 import { StatusBar } from './components/StatusBar'
 import styles from './App.module.css'
 
@@ -249,6 +250,9 @@ export default function App() {
       <div className={styles.bottom}>
         <div className={styles.detailsPane}>
           <PacketDetails layers={selected?.layers ?? []} empty={!selected} />
+        </div>
+        <div className={styles.messagePane}>
+          <MessagePane packet={selected} />
         </div>
         <div className={styles.hexPane}>
           <HexDump data={selected?.raw ?? null} />
