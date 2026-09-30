@@ -523,6 +523,7 @@ export function parsePcap(buffer: ArrayBuffer): ParsedCapture {
       info: decoded.info,
       layers: decoded.layers,
       raw,
+      linkType,
     })
   }
 
@@ -534,7 +535,66 @@ export function toPackets(parsed: ParsedCapture): Packet[] {
   const base = parsed.packets[0]!.timestamp
   return parsed.packets.map((p, i) => ({
     ...p,
+    linkType: p.linkType ?? parsed.linkType,
     no: i + 1,
     relativeTime: (p.timestamp - base) / 1000,
   }))
+}
+
+function writeU32LE(view: DataView, offset: number, value: number) {
+  view.setUint32(offset, value >>> 0, true)
+}
+
+/** Build a classic Libpcap (.pcap) file from captured packets. */
+export function buildPcap(packets: Packet[], preferredLinkType?: number): ArrayBuffer {
+  if (packets.length === 0) throw new Error('Nenhum pacote para exportar')
+
+  const counts = new Map<number, number>()
+  for (const p of packets) {
+    const lt = p.linkType || preferredLinkType || 1
+    counts.set(lt, (counts.get(lt) || 0) + 1)
+  }
+  let linkType = preferredLinkType ?? 1
+  let best = 0
+  for (const [lt, n] of counts) {
+    if (n > best) {
+      best = n
+      linkType = lt
+    }
+  }
+
+  const selected = packets.filter((p) => (p.linkType || linkType) === linkType)
+  if (selected.length === 0) throw new Error('Nenhum pacote compatível com o linktype')
+
+  let total = 24
+  for (const p of selected) total += 16 + p.raw.length
+
+  const buf = new ArrayBuffer(total)
+  const view = new DataView(buf)
+  const bytes = new Uint8Array(buf)
+
+  // Global header (little-endian magic)
+  writeU32LE(view, 0, 0xa1b2c3d4)
+  view.setUint16(4, 2, true)
+  view.setUint16(6, 4, true)
+  writeU32LE(view, 8, 0)
+  writeU32LE(view, 12, 0)
+  writeU32LE(view, 16, 65535)
+  writeU32LE(view, 20, linkType)
+
+  let offset = 24
+  for (const p of selected) {
+    const tsMs = p.timestamp
+    const sec = Math.floor(tsMs / 1000)
+    const usec = Math.floor((tsMs % 1000) * 1000)
+    writeU32LE(view, offset, sec)
+    writeU32LE(view, offset + 4, usec)
+    writeU32LE(view, offset + 8, p.raw.length)
+    writeU32LE(view, offset + 12, p.length || p.raw.length)
+    offset += 16
+    bytes.set(p.raw, offset)
+    offset += p.raw.length
+  }
+
+  return buf
 }

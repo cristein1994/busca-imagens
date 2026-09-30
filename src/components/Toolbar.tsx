@@ -14,7 +14,8 @@ interface Props {
   onClear: () => void
   onOpenFile: (file: File) => void
   onRateChange: (rate: number) => void
-  onExport: () => void
+  onExportJson: () => void
+  onExportPcap: () => void
 }
 
 export function Toolbar({
@@ -29,7 +30,8 @@ export function Toolbar({
   onClear,
   onOpenFile,
   onRateChange,
-  onExport,
+  onExportJson,
+  onExportPcap,
 }: Props) {
   return (
     <header className={styles.toolbar}>
@@ -75,7 +77,7 @@ export function Toolbar({
       <div className={styles.actions}>
         {!capturing ? (
           <button type="button" className={styles.start} onClick={onStart}>
-            {hasPackets ? '▶ Continuar' : '▶ Start'}
+            {hasPackets ? '▶ Continuar' : '▶ Capture'}
           </button>
         ) : (
           <button type="button" className={styles.stop} onClick={onStop}>
@@ -97,7 +99,10 @@ export function Toolbar({
             }}
           />
         </label>
-        <button type="button" onClick={onExport}>
+        <button type="button" onClick={onExportPcap} disabled={!hasPackets}>
+          Save PCAP
+        </button>
+        <button type="button" onClick={onExportJson} disabled={!hasPackets}>
           Export JSON
         </button>
       </div>

@@ -33,6 +33,7 @@ export interface Packet {
   info: string
   layers: ProtocolField[]
   raw: Uint8Array
+  linkType: number
 }
 
 export interface CaptureInterface {

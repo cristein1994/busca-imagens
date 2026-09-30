@@ -294,6 +294,7 @@ export function frameToPacket(
     info: decoded.info,
     layers: decoded.layers,
     raw,
+    linkType,
   }
 }
 

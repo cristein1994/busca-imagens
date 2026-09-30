@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { CaptureInterface, CaptureStats, Packet } from './types/packet'
-import { parsePcap, toPackets } from './lib/pcap'
+import { parsePcap, toPackets, buildPcap } from './lib/pcap'
 import { frameToPacket, generateSimulatedFrame, type SimMode } from './lib/simulator'
 import { isFilterSyntaxOk, matchDisplayFilter } from './lib/filter'
 import { Toolbar } from './components/Toolbar'
@@ -82,6 +82,14 @@ export default function App() {
   const baseTimeRef = useRef(0)
   const nextNoRef = useRef(1)
   const timerRef = useRef<number | null>(null)
+  const packetCountRef = useRef(0)
+  const packetsRef = useRef<Packet[]>([])
+  const autoStarted = useRef(false)
+
+  useEffect(() => {
+    packetCountRef.current = packets.length
+    packetsRef.current = packets
+  }, [packets])
 
   const filterValid = isFilterSyntaxOk(filter)
 
@@ -119,11 +127,11 @@ export default function App() {
     setFollowLatest(true)
     setSourceLabel(`Live · ${iface.name}`)
     setCapturing(true)
-    if (packets.length === 0) {
+    if (packetCountRef.current === 0) {
       baseTimeRef.current = Date.now()
       nextNoRef.current = 1
     } else if (baseTimeRef.current === 0) {
-      baseTimeRef.current = packets[0]?.timestamp ?? Date.now()
+      baseTimeRef.current = packetsRef.current[0]?.timestamp ?? Date.now()
     }
 
     if (timerRef.current != null) window.clearInterval(timerRef.current)
@@ -145,7 +153,14 @@ export default function App() {
         return next
       })
     }, intervalMs)
-  }, [iface.name, packetRate, packets, selectedIface])
+  }, [iface.name, packetRate, selectedIface])
+
+  // Auto-start capture on first load
+  useEffect(() => {
+    if (autoStarted.current) return
+    autoStarted.current = true
+    startCapture()
+  }, [startCapture])
 
   useEffect(() => () => stopCapture(), [stopCapture])
 
@@ -176,7 +191,7 @@ export default function App() {
     }
   }
 
-  const handleExport = () => {
+  const handleExportJson = () => {
     const payload = displayed.map((p) => ({
       no: p.no,
       time: p.relativeTime,
@@ -185,6 +200,7 @@ export default function App() {
       protocol: p.protocol,
       length: p.length,
       info: p.info,
+      linkType: p.linkType,
       hex: Array.from(p.raw)
         .map((b) => b.toString(16).padStart(2, '0'))
         .join(''),
@@ -198,10 +214,31 @@ export default function App() {
     URL.revokeObjectURL(url)
   }
 
-  // Keyboard: j/k navigation
+  const handleExportPcap = () => {
+    try {
+      const buf = buildPcap(displayed.length > 0 ? displayed : packets)
+      const blob = new Blob([buf], { type: 'application/vnd.tcpdump.pcap' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `nexus-capture-${Date.now()}.pcap`
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha ao exportar PCAP')
+    }
+  }
+
+  // Keyboard: space = capture toggle, j/k navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+      if (e.code === 'Space') {
+        e.preventDefault()
+        if (capturing) stopCapture()
+        else startCapture()
+        return
+      }
       if (displayed.length === 0) return
       const idx = displayed.findIndex((p) => p.no === effectiveSelectedNo)
       if (e.key === 'j' || e.key === 'ArrowDown') {
@@ -219,7 +256,7 @@ export default function App() {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [displayed, effectiveSelectedNo])
+  }, [displayed, effectiveSelectedNo, capturing, startCapture, stopCapture])
 
   return (
     <div className={styles.app}>
@@ -235,7 +272,8 @@ export default function App() {
         onClear={handleClear}
         onOpenFile={handleOpenFile}
         onRateChange={setPacketRate}
-        onExport={handleExport}
+        onExportJson={handleExportJson}
+        onExportPcap={handleExportPcap}
       />
       <FilterBar
         value={filter}
