@@ -1,7 +1,7 @@
 /** Extrai e normaliza telefones (foco BR + E.164 genérico) a partir de texto livre. */
 
 const DIGIT_RUN =
-  /(?:\+|00)?[\d][\d\s.\-()]{7,22}\d|\b\d{10,15}\b/g
+  /(?:\+|00)?\(?\d[\d\s.\-()]{7,22}\d|\b\d{10,15}\b/g
 
 function onlyDigits(value: string): string {
   return value.replace(/\D/g, '')
@@ -63,9 +63,14 @@ type Extracted = { phone: string; e164: string; name: string; notes: string }
 
 function nameNearLine(line: string, match: string): string {
   // "João Silva: +55 11 99999-0000" ou "João - 11999990000"
-  const cleaned = line.replace(match, '').replace(/[:-–—|]+\s*$/g, '').trim()
+  const cleaned = line
+    .replace(match, '')
+    .replace(/[\s:–—|()._-]+$/g, '')
+    .replace(/^[\s:–—|()._-]+/g, '')
+    .trim()
   const withoutNoise = cleaned
     .replace(/^(nome|name|contato|tel|telefone|whatsapp|wa)\s*[:-]?\s*/i, '')
+    .replace(/[\s:–—|()._-]+$/g, '')
     .trim()
   if (withoutNoise.length >= 2 && withoutNoise.length <= 80 && !/^\d+$/.test(withoutNoise)) {
     return withoutNoise
