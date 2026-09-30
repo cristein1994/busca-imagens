@@ -5,10 +5,25 @@ interface SearchBarProps {
   onSearch: (query: string) => void
   loading: boolean
   disabled?: boolean
+  /** Quando muda (ex.: clique em tag), sincroniza o campo e mantém o texto visível. */
+  externalQuery?: string
 }
 
-export function SearchBar({ onSearch, loading, disabled = false }: SearchBarProps) {
-  const [query, setQuery] = useState('')
+export function SearchBar({
+  onSearch,
+  loading,
+  disabled = false,
+  externalQuery = '',
+}: SearchBarProps) {
+  const [query, setQuery] = useState(externalQuery)
+  const [syncedExternal, setSyncedExternal] = useState(externalQuery)
+
+  if (externalQuery !== syncedExternal) {
+    setSyncedExternal(externalQuery)
+    if (externalQuery) {
+      setQuery(externalQuery)
+    }
+  }
 
   function submit() {
     const trimmed = query.trim()

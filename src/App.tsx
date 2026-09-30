@@ -51,6 +51,7 @@ export default function App() {
           onSearch={handleSearch}
           loading={status === 'loading'}
           disabled={!configured}
+          externalQuery={lastQuery}
         />
       </header>
 
@@ -110,7 +111,16 @@ export default function App() {
       </footer>
 
       {selected && (
-        <Lightbox photo={selected} onClose={() => setSelected(null)} />
+        <Lightbox
+          key={selected.id}
+          photo={selected}
+          onClose={() => setSelected(null)}
+          onSelectRelated={setSelected}
+          onSearchTag={(tag) => {
+            setSelected(null)
+            void handleSearch(tag)
+          }}
+        />
       )}
     </div>
   )

@@ -16,11 +16,19 @@
   display: flex;
   flex-direction: column;
   width: min(920px, 100%);
-  max-height: min(92vh, 900px);
+  max-height: min(92vh, 960px);
   background: var(--surface);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  max-height: min(42vh, 420px);
 }
 
 .close {
@@ -124,6 +132,140 @@
   background: var(--border);
 }
 
+.related {
+  padding: 0 1.15rem 1.15rem;
+  border-top: 1px solid var(--border);
+}
+
+.relatedTitle {
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.description {
+  margin: 0 0 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.85rem;
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+}
+
+.metaGrid dt {
+  margin: 0;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.metaGrid dd {
+  margin: 0;
+  color: var(--text);
+}
+
+.colorRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.tagsBlock,
+.relatedPhotos {
+  margin-top: 0.25rem;
+}
+
+.tagsLabel {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tag:hover {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent-hover);
+}
+
+.relatedHint,
+.relatedError {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.relatedHint {
+  color: var(--text-muted);
+}
+
+.relatedError {
+  color: #991b1b;
+}
+
+.relatedList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.relatedThumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface-muted);
+}
+
+.relatedThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.relatedThumb:hover {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -142,5 +284,9 @@
   .primary,
   .secondary {
     flex: 1;
+  }
+
+  .body {
+    max-height: min(48vh, 460px);
   }
 }
