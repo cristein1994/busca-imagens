@@ -18,7 +18,7 @@ export function FilterBar({ value, valid, onChange, displayed, total }: Props) {
         id="display-filter"
         className={`${styles.input} ${value && !valid ? styles.invalid : value ? styles.valid : ''}`}
         value={value}
-        placeholder="tcp || dns || ip.addr == 192.168.1.10"
+        placeholder="ex: dns || tcp || ip.addr == 192.168.1.10"
         spellCheck={false}
         autoComplete="off"
         onChange={(e) => onChange(e.target.value)}

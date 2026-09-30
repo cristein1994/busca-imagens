@@ -1,8 +1,9 @@
 .app {
   display: grid;
-  grid-template-rows: auto auto auto minmax(0, 1.15fr) minmax(0, 0.95fr) auto;
+  grid-template-rows: auto auto minmax(0, 1.15fr) minmax(180px, 0.95fr) auto;
   height: 100dvh;
   min-height: 100vh;
+  position: relative;
   background:
     radial-gradient(ellipse 80% 50% at 10% -10%, rgba(61, 122, 95, 0.12), transparent 55%),
     radial-gradient(ellipse 60% 40% at 100% 0%, rgba(196, 165, 116, 0.14), transparent 50%),
@@ -11,11 +12,19 @@
 }
 
 .error {
+  position: absolute;
+  top: 6.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  max-width: min(36rem, 92vw);
   padding: 0.45rem 0.85rem;
   background: #7a2e2e;
   color: #fff5f5;
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.85rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .listPane {
@@ -39,7 +48,7 @@
 
 @media (max-width: 800px) {
   .app {
-    grid-template-rows: auto auto auto minmax(220px, 1fr) minmax(280px, 1.1fr) auto;
+    grid-template-rows: auto auto minmax(220px, 1fr) minmax(280px, 1.1fr) auto;
     height: auto;
     min-height: 100dvh;
   }

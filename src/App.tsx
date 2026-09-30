@@ -88,9 +88,14 @@ export default function App() {
     return packets.filter((p) => matchDisplayFilter(p, filter))
   }, [packets, filter, filterValid])
 
+  const effectiveSelectedNo = useMemo(() => {
+    if (selectedNo != null && displayed.some((p) => p.no === selectedNo)) return selectedNo
+    return displayed[0]?.no ?? null
+  }, [displayed, selectedNo])
+
   const selected = useMemo(
-    () => packets.find((p) => p.no === selectedNo) ?? null,
-    [packets, selectedNo],
+    () => packets.find((p) => p.no === effectiveSelectedNo) ?? null,
+    [packets, effectiveSelectedNo],
   )
 
   const stats = useMemo(() => buildStats(packets, displayed), [packets, displayed])
@@ -190,7 +195,7 @@ export default function App() {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
       if (displayed.length === 0) return
-      const idx = displayed.findIndex((p) => p.no === selectedNo)
+      const idx = displayed.findIndex((p) => p.no === effectiveSelectedNo)
       if (e.key === 'j' || e.key === 'ArrowDown') {
         e.preventDefault()
         const next = displayed[Math.min(displayed.length - 1, Math.max(0, idx) + 1)]
@@ -204,7 +209,7 @@ export default function App() {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [displayed, selectedNo])
+  }, [displayed, effectiveSelectedNo])
 
   return (
     <div className={styles.app}>
@@ -228,15 +233,15 @@ export default function App() {
         displayed={displayed.length}
         total={packets.length}
       />
-      {error && (
+      {error ? (
         <div className={styles.error} role="alert">
           {error}
         </div>
-      )}
+      ) : null}
       <div className={styles.listPane}>
         <PacketList
           packets={displayed}
-          selectedNo={selectedNo}
+          selectedNo={effectiveSelectedNo}
           onSelect={setSelectedNo}
           autoScroll={capturing && !filter.trim()}
         />
