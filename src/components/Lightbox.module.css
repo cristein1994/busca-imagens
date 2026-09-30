@@ -28,7 +28,7 @@
   flex-direction: column;
   gap: 0;
   overflow-y: auto;
-  max-height: min(42vh, 420px);
+  max-height: min(52vh, 520px);
 }
 
 .close {
@@ -62,7 +62,7 @@
 
 .image {
   max-width: 100%;
-  max-height: min(70vh, 640px);
+  max-height: min(48vh, 420px);
   object-fit: contain;
   display: block;
 }
