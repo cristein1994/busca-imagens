@@ -1,23 +1,26 @@
 :root {
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-muted: #f1f5f9;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --accent-soft: rgba(79, 70, 229, 0.18);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --ink: #071412;
+  --panel: rgba(12, 36, 32, 0.72);
+  --panel-solid: #0c2420;
+  --line: rgba(200, 245, 106, 0.14);
+  --text: #e7f6ef;
+  --muted: #8fb3a6;
+  --accent: #c8f56a;
+  --accent-2: #7fe3c2;
+  --warn: #ffb454;
+  --danger: #ff7a7a;
+  --ok: #7fe3c2;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  --radius: 18px;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
   color: var(--text);
-  background-color: var(--bg);
+  background: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -35,13 +38,42 @@ body,
 
 body {
   min-width: 320px;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(127, 227, 194, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 90% 0%, rgba(200, 245, 106, 0.12), transparent 50%),
+    linear-gradient(165deg, #071412 0%, #0a1c18 45%, #06110f 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(200, 245, 106, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 245, 106, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
+  color: inherit;
 }
 
-img {
-  max-width: 100%;
+a {
+  color: var(--accent-2);
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(200, 245, 106, 0.35);
+  color: var(--ink);
 }

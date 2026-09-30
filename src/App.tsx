@@ -1,117 +1,168 @@
 import { useCallback, useState } from 'react'
-import { hasAccessKey, searchPhotos } from './api/unsplash'
-import type { UnsplashPhoto } from './types/unsplash'
-import { SearchBar } from './components/SearchBar'
-import { ImageGrid } from './components/ImageGrid'
-import { Lightbox } from './components/Lightbox'
-import { SetupMessage } from './components/SetupMessage'
-import styles from './App.module.css'
-
-type Status = 'idle' | 'loading' | 'success' | 'empty' | 'error'
+import './App.css'
+import { PhoneForm } from './components/PhoneForm'
+import { IntelPanel } from './components/IntelPanel'
+import { PortalLinks } from './components/PortalLinks'
+import { CaseList } from './components/CaseList'
+import { analyzePhone } from './lib/phone'
+import { fetchCarrierHint } from './lib/carrier'
+import {
+  exportCaseMarkdown,
+  listCases,
+  saveCase,
+} from './lib/cases'
+import type { CarrierHint, PhoneIntel, SavedCase } from './lib/types'
 
 export default function App() {
-  const configured = hasAccessKey()
-  const [photos, setPhotos] = useState<UnsplashPhoto[]>([])
-  const [status, setStatus] = useState<Status>('idle')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [lastQuery, setLastQuery] = useState('')
-  const [selected, setSelected] = useState<UnsplashPhoto | null>(null)
+  const [query, setQuery] = useState('')
+  const [formKey, setFormKey] = useState(0)
+  const [intel, setIntel] = useState<PhoneIntel | null>(null)
+  const [error, setError] = useState('')
+  const [carrier, setCarrier] = useState<CarrierHint | null>(null)
+  const [carrierLoading, setCarrierLoading] = useState(false)
+  const [cases, setCases] = useState<SavedCase[]>(() => listCases())
+  const [flash, setFlash] = useState('')
 
-  const handleSearch = useCallback(async (query: string) => {
-    if (!configured) return
+  const refreshCases = useCallback(() => {
+    setCases(listCases())
+  }, [])
 
-    setStatus('loading')
-    setErrorMessage('')
-    setLastQuery(query)
-    setSelected(null)
+  function showFlash(message: string) {
+    setFlash(message)
+    window.setTimeout(() => setFlash(''), 2200)
+  }
 
-    try {
-      const results = await searchPhotos(query)
-      setPhotos(results)
-      setStatus(results.length === 0 ? 'empty' : 'success')
-    } catch (err) {
-      setPhotos([])
-      setStatus('error')
-      setErrorMessage(
-        err instanceof Error ? err.message : 'Erro inesperado ao buscar imagens.',
-      )
+  function runLookup(value: string) {
+    setQuery(value)
+    setCarrier(null)
+    setError('')
+    const result = analyzePhone(value)
+    if ('error' in result) {
+      setIntel(null)
+      setError(result.error)
+      return
     }
-  }, [configured])
+    setIntel(result)
+  }
+
+  async function handleCarrier() {
+    if (!intel) return
+    setCarrierLoading(true)
+    const hint = await fetchCarrierHint(intel)
+    setCarrier(hint)
+    setCarrierLoading(false)
+  }
+
+  function handleSave() {
+    if (!intel) return
+    saveCase(intel)
+    refreshCases()
+    showFlash('Caso guardado no navegador.')
+  }
+
+  async function handleCopy() {
+    if (!intel) return
+    await navigator.clipboard.writeText(intel.e164)
+    showFlash('E.164 copiado.')
+  }
+
+  async function handleExport() {
+    if (!intel) return
+    const temp: SavedCase = {
+      id: 'tmp',
+      title: intel.e164,
+      phone: intel.raw,
+      e164: intel.e164,
+      notes: '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      snapshot: intel,
+    }
+    await navigator.clipboard.writeText(exportCaseMarkdown(temp))
+    showFlash('Markdown copiado.')
+  }
 
   return (
-    <div className={styles.app}>
-      <header className={styles.header}>
-        <div className={styles.brand}>
-          <h1 className={styles.title}>Busca Imagens</h1>
-          <p className={styles.subtitle}>
-            Encontre fotos gratuitas do Unsplash
-          </p>
-        </div>
-        <SearchBar
-          onSearch={handleSearch}
-          loading={status === 'loading'}
-          disabled={!configured}
-        />
+    <div className="shell">
+      <header className="hero">
+        <p className="brand">LINHA</p>
+        <p className="tagline">
+          Mesa OSINT para números de telefone — parse E.164, DDD brasileiro e
+          portais públicos.
+        </p>
+        <p className="notice">
+          Só fontes abertas: validação local, tabela ANATEL de DDD e links de
+          busca. Não consulta assinante, breaches nem redes ocultas. Use só em
+          investigações legítimas.
+        </p>
       </header>
 
-      <main className={styles.main}>
-        {!configured && <SetupMessage />}
+      <div className="desk">
+        <PhoneForm key={formKey} onSubmit={runLookup} initial={query} />
 
-        {configured && status === 'idle' && (
-          <p className={styles.hint}>
-            Digite um termo e pressione Enter ou clique em Buscar.
+        {flash ? (
+          <p className="empty" role="status">
+            {flash}
           </p>
-        )}
+        ) : null}
 
-        {status === 'loading' && (
-          <div className={styles.state} role="status" aria-live="polite">
-            <span className={styles.spinner} aria-hidden="true" />
-            Carregando…
+        {error ? (
+          <div className="error" role="alert">
+            {error}
           </div>
-        )}
+        ) : null}
 
-        {status === 'error' && (
-          <div className={styles.error} role="alert">
-            <strong>Erro</strong>
-            <p>{errorMessage}</p>
+        {intel ? (
+          <div className="grid">
+            <div>
+              <IntelPanel
+                intel={intel}
+                carrier={carrier}
+                carrierLoading={carrierLoading}
+                onSave={handleSave}
+                onCopy={() => void handleCopy()}
+                onExport={() => void handleExport()}
+                onCarrier={() => void handleCarrier()}
+              />
+            </div>
+            <PortalLinks intel={intel} />
           </div>
-        )}
+        ) : null}
 
-        {status === 'empty' && (
-          <p className={styles.state}>
-            Sem resultados para “{lastQuery}”. Tente outro termo.
-          </p>
-        )}
+        <CaseList
+          cases={cases}
+          onChange={refreshCases}
+          onOpen={(item) => {
+            setQuery(item.e164)
+            setFormKey((k) => k + 1)
+            setIntel(item.snapshot)
+            setError('')
+            setCarrier(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      </div>
 
-        {status === 'success' && (
-          <section aria-label="Resultados">
-            <h2 className={styles.resultsTitle}>
-              Resultados
-              {lastQuery ? (
-                <span className={styles.queryTag}> — {lastQuery}</span>
-              ) : null}
-            </h2>
-            <ImageGrid photos={photos} onSelect={setSelected} />
-          </section>
-        )}
-      </main>
-
-      <footer className={styles.footer}>
+      <footer className="footer">
         <p>
-          Feito com a{' '}
-          <a
-            href="https://unsplash.com/?utm_source=busca_imagens&utm_medium=referral"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            API do Unsplash
-          </a>
+          LINHA · OSINT telefone · dados processados no seu browser · carrier
+          opcional via AbstractAPI
         </p>
       </footer>
 
-      {selected && (
-        <Lightbox photo={selected} onClose={() => setSelected(null)} />
-      )}
+      <style>{`
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+      `}</style>
     </div>
   )
 }

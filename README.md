@@ -1,74 +1,55 @@
-# Busca Imagens
+# LINHA — OSINT de números de telefone
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Mesa de investigação para telefones com **fontes públicas**: validação E.164, tipo de linha, DDD brasileiro (ANATEL) e deep links para motores de busca / diretórios abertos.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+## O que faz
 
-## Funcionalidades
+- Normaliza números BR (`11999999999` → `+5511999999999`) e internacionais
+- Mostra formato E.164, nacional, internacional, país e tipo (móvel/fixo/VoIP…)
+- Mapeia DDD → UF, região e cidades principais
+- Abre buscas em Google, DuckDuckGo, Bing, Yandex, Brave, GitHub, Reddit, Pastebin
+- Deep links WhatsApp (`wa.me`) e Telegram
+- Diretórios públicos: Truecaller Web, NumLookup, CallApp, tabela ANATEL
+- Guarda casos + notas em `localStorage` (não envia para servidor deste projeto)
+- Carrier opcional via [AbstractAPI Phone Validation](https://www.abstractapi.com/phone-validation-api)
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+## O que não faz
 
-## Pré-requisitos
+- Não consulta bases de breach, dark web, HLR privado nem assinante da operadora
+- Não burla login / paywall de diretórios
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
-
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Arranque
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
+cp .env.example .env   # opcional — só se for usar AbstractAPI
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra o endereço do Vite (em geral `http://localhost:5173`).
+
+## Variáveis
+
+| Variável | Descrição |
+| --- | --- |
+| `VITE_ABSTRACT_PHONE_KEY` | Opcional. Chave AbstractAPI para dica de operadora |
 
 ## Scripts
 
 | Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+| --- | --- |
+| `npm run dev` | Dev server |
+| `npm run build` | Build produção |
+| `npm run preview` | Preview do build |
+| `npm run lint` | oxlint |
 
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+Vite + React 19 + TypeScript + `libphonenumber-js`
 
-## Licença
+## Uso rápido
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+1. Cole `+5511999999999` ou `11999999999`
+2. Clique **Investigar**
+3. Use os portais públicos / guarde o caso com notas
+4. (Opcional) **Consultar carrier** se a chave AbstractAPI estiver configurada
