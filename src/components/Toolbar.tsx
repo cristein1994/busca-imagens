@@ -6,6 +6,7 @@ interface Props {
   interfaces: CaptureInterface[]
   selectedIface: string
   capturing: boolean
+  hasPackets: boolean
   packetRate: number
   onIfaceChange: (id: string) => void
   onStart: () => void
@@ -20,6 +21,7 @@ export function Toolbar({
   interfaces,
   selectedIface,
   capturing,
+  hasPackets,
   packetRate,
   onIfaceChange,
   onStart,
@@ -73,7 +75,7 @@ export function Toolbar({
       <div className={styles.actions}>
         {!capturing ? (
           <button type="button" className={styles.start} onClick={onStart}>
-            ▶ Start
+            {hasPackets ? '▶ Continuar' : '▶ Start'}
           </button>
         ) : (
           <button type="button" className={styles.stop} onClick={onStop}>

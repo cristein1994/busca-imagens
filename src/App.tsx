@@ -78,6 +78,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [sourceLabel, setSourceLabel] = useState('Pronto')
 
+  const [followLatest, setFollowLatest] = useState(true)
   const baseTimeRef = useRef(0)
   const nextNoRef = useRef(1)
   const timerRef = useRef<number | null>(null)
@@ -90,9 +91,12 @@ export default function App() {
   }, [packets, filter, filterValid])
 
   const effectiveSelectedNo = useMemo(() => {
+    if (capturing && followLatest && !filter.trim() && displayed.length > 0) {
+      return displayed[displayed.length - 1]!.no
+    }
     if (selectedNo != null && displayed.some((p) => p.no === selectedNo)) return selectedNo
     return displayed[0]?.no ?? null
-  }, [displayed, selectedNo])
+  }, [capturing, followLatest, filter, displayed, selectedNo])
 
   const selected = useMemo(
     () => packets.find((p) => p.no === effectiveSelectedNo) ?? null,
@@ -112,16 +116,19 @@ export default function App() {
 
   const startCapture = useCallback(() => {
     setError(null)
+    setFollowLatest(true)
     setSourceLabel(`Live · ${iface.name}`)
     setCapturing(true)
     if (packets.length === 0) {
       baseTimeRef.current = Date.now()
       nextNoRef.current = 1
+    } else if (baseTimeRef.current === 0) {
+      baseTimeRef.current = packets[0]?.timestamp ?? Date.now()
     }
 
     if (timerRef.current != null) window.clearInterval(timerRef.current)
     const mode = ifaceMode(selectedIface)
-    const intervalMs = Math.max(20, Math.floor(1000 / packetRate))
+    const intervalMs = Math.max(20, Math.floor(1000 / Math.max(1, packetRate)))
 
     timerRef.current = window.setInterval(() => {
       const burst = packetRate > 40 ? 2 : 1
@@ -138,7 +145,7 @@ export default function App() {
         return next
       })
     }, intervalMs)
-  }, [iface.name, packetRate, packets.length, selectedIface])
+  }, [iface.name, packetRate, packets, selectedIface])
 
   useEffect(() => () => stopCapture(), [stopCapture])
 
@@ -199,11 +206,13 @@ export default function App() {
       const idx = displayed.findIndex((p) => p.no === effectiveSelectedNo)
       if (e.key === 'j' || e.key === 'ArrowDown') {
         e.preventDefault()
+        setFollowLatest(false)
         const next = displayed[Math.min(displayed.length - 1, Math.max(0, idx) + 1)]
         if (next) setSelectedNo(next.no)
       }
       if (e.key === 'k' || e.key === 'ArrowUp') {
         e.preventDefault()
+        setFollowLatest(false)
         const prev = displayed[Math.max(0, (idx < 0 ? 0 : idx) - 1)]
         if (prev) setSelectedNo(prev.no)
       }
@@ -218,6 +227,7 @@ export default function App() {
         interfaces={INTERFACES}
         selectedIface={selectedIface}
         capturing={capturing}
+        hasPackets={packets.length > 0}
         packetRate={packetRate}
         onIfaceChange={setSelectedIface}
         onStart={startCapture}
@@ -243,8 +253,11 @@ export default function App() {
         <PacketList
           packets={displayed}
           selectedNo={effectiveSelectedNo}
-          onSelect={setSelectedNo}
-          autoScroll={capturing && !filter.trim()}
+          onSelect={(no) => {
+            setFollowLatest(false)
+            setSelectedNo(no)
+          }}
+          autoScroll={capturing && followLatest && !filter.trim()}
         />
       </div>
       <div className={styles.bottom}>
@@ -252,7 +265,15 @@ export default function App() {
           <PacketDetails layers={selected?.layers ?? []} empty={!selected} />
         </div>
         <div className={styles.messagePane}>
-          <MessagePane packet={selected} />
+          <MessagePane
+            packet={selected}
+            packets={displayed}
+            capturing={capturing}
+            onSelectPacket={(no) => {
+              setFollowLatest(false)
+              setSelectedNo(no)
+            }}
+          />
         </div>
         <div className={styles.hexPane}>
           <HexDump data={selected?.raw ?? null} />

@@ -147,6 +147,15 @@ export function decodePacketMessage(packet: Packet): DecodedMessage {
     }
   }
 
+  if (protocol === 'DHCP' || protocol === 'SSDP' || protocol === 'NTP') {
+    return {
+      kind: protocol,
+      summary: info,
+      body: info,
+      encoding: 'utf-8',
+    }
+  }
+
   if (protocol === 'TLS') {
     return {
       kind: 'TLS',
@@ -174,4 +183,21 @@ export function decodePacketMessage(packet: Packet): DecodedMessage {
     body: printableAscii(tail),
     encoding: 'hex',
   }
+}
+
+const LIVE_KINDS = new Set([
+  'HTTP',
+  'HTTPS',
+  'DNS',
+  'MDNS',
+  'ARP',
+  'ICMP',
+  'DHCP',
+  'SSDP',
+  'NTP',
+])
+
+/** Protocols worth showing in the continuous live message feed. */
+export function isLiveMessagePacket(packet: Packet): boolean {
+  return LIVE_KINDS.has(packet.protocol)
 }

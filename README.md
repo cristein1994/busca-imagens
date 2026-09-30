@@ -8,7 +8,8 @@ Analisador de tráfego de rede no navegador, com UI estilo Wireshark: lista de p
 
 - Painel de pacotes (No / Time / Source / Dest / Protocol / Length / Info) com cores por protocolo
 - Detalhes em árvore (Ethernet, IP, TCP/UDP, DNS, HTTP, TLS, ARP, ICMP, 802.11/Radiotap)
-- Painel **Message** com payload legível (HTTP headers, DNS query, ARP, ICMP…)
+- Painel **Message** com stream ao vivo + payload do pacote (HTTP, DNS, ARP…)
+- Botão **Continuar** retoma a captura sem apagar o buffer
 - Hex dump + ASCII
 - Display filter: `tcp`, `dns`, `wlan`, `ip.addr == x`, `frame.len > 100`, `http contains Host`, `&&` / `||`
 - Start/Stop captura simulada (Wi-Fi monitor, LAN, misto)
