@@ -84,7 +84,6 @@ export default function App() {
   const timerRef = useRef<number | null>(null)
   const packetCountRef = useRef(0)
   const packetsRef = useRef<Packet[]>([])
-  const autoStarted = useRef(false)
 
   useEffect(() => {
     packetCountRef.current = packets.length
@@ -155,14 +154,11 @@ export default function App() {
     }, intervalMs)
   }, [iface.name, packetRate, selectedIface])
 
-  // Auto-start capture on first load
+  // Auto-start capture on load (StrictMode-safe: cleanup stops, remount restarts)
   useEffect(() => {
-    if (autoStarted.current) return
-    autoStarted.current = true
     startCapture()
-  }, [startCapture])
-
-  useEffect(() => () => stopCapture(), [stopCapture])
+    return () => stopCapture()
+  }, [startCapture, stopCapture])
 
   const handleClear = () => {
     stopCapture()
