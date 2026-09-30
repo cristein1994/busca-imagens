@@ -62,9 +62,9 @@ Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
 
 | Variável | Descrição |
 |----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
+| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar). Use `demo` para dados locais de teste. |
 
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra. Com `demo`, a busca e os dados relacionados usam fixtures locais.
 
 ## Stack
 

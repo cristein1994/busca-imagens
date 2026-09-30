@@ -4,6 +4,12 @@ import type {
   UnsplashRelatedResponse,
   UnsplashSearchResponse,
 } from '../types/unsplash'
+import {
+  demoPhotoDetails,
+  demoRelatedPhotos,
+  demoSearchPhotos,
+  isDemoMode,
+} from './demoData'
 
 const API_BASE = 'https://api.unsplash.com'
 
@@ -35,6 +41,11 @@ export function getAccessKey(): string | undefined {
   return key.trim()
 }
 
+/** `demo` ativa dados locais para testar a UI sem chave Unsplash. */
+export function isUsingDemoData(): boolean {
+  return isDemoMode(getAccessKey())
+}
+
 export function hasAccessKey(): boolean {
   return Boolean(getAccessKey())
 }
@@ -47,6 +58,10 @@ export async function searchPhotos(
   const accessKey = getAccessKey()
   if (!accessKey) {
     throw new Error('Chave da API Unsplash não configurada.')
+  }
+
+  if (isDemoMode(accessKey)) {
+    return demoSearchPhotos(query).slice(0, perPage)
   }
 
   const params = new URLSearchParams({
@@ -73,6 +88,14 @@ export async function getPhotoDetails(id: string): Promise<UnsplashPhoto> {
     throw new Error('Chave da API Unsplash não configurada.')
   }
 
+  if (isDemoMode(accessKey)) {
+    const photo = demoPhotoDetails(id)
+    if (!photo) {
+      throw new Error('Recurso não encontrado na API do Unsplash.')
+    }
+    return photo
+  }
+
   const response = await fetch(`${API_BASE}/photos/${encodeURIComponent(id)}`, {
     headers: authHeaders(accessKey),
   })
@@ -88,6 +111,10 @@ export async function getRelatedPhotos(id: string): Promise<UnsplashPhoto[]> {
   const accessKey = getAccessKey()
   if (!accessKey) {
     throw new Error('Chave da API Unsplash não configurada.')
+  }
+
+  if (isDemoMode(accessKey)) {
+    return demoRelatedPhotos(id).results
   }
 
   const response = await fetch(
