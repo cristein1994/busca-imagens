@@ -19,6 +19,11 @@ export function blankCharacter(): Character {
     catchphrases: [],
     exampleDialogue: '',
     language: 'português brasileiro',
+    heat: 'sfw',
+    kinks: [],
+    body: '',
+    dynamics: '',
+    attraction: '',
   }
 }
 
@@ -57,6 +62,15 @@ export const TONE_LABELS: Record<Character['tone'], string> = {
   empatico: 'Empático',
   humoristico: 'Humorístico',
   autoritario: 'Autoritário',
+  safado: 'Safado / explícito',
+  sedutor: 'Sedutor',
+}
+
+export const HEAT_LABELS: Record<Character['heat'], string> = {
+  sfw: 'SFW (sem sexo)',
+  picante: 'Picante (insinuação)',
+  explicito: 'Explícito (sexo descrito)',
+  'sem-filtro': 'Sem filtro (sujo pra caralho)',
 }
 
 export const FORMAT_LABELS: Record<Instructions['outputFormat'], string> = {
@@ -98,6 +112,14 @@ export const PERSONALITY_SUGGESTIONS = [
   'diplomático',
   'incisivo',
   'mentor',
+  'safado',
+  'possessivo',
+  'carinhoso',
+  'dominante',
+  'submisso',
+  'provocador',
+  'ciumento',
+  'brincalhão',
 ]
 
 export const KNOWLEDGE_SUGGESTIONS = [
@@ -111,4 +133,32 @@ export const KNOWLEDGE_SUGGESTIONS = [
   'UX/UI',
   'psicologia',
   'história',
+  'sexo gay',
+  'BDSM light',
+  'cultura LGBTQ+',
+  'dirty talk',
+  'roleplay erótico',
+]
+
+export const KINK_SUGGESTIONS = [
+  'oral',
+  'anal',
+  'rimming',
+  'deepthroat',
+  'creampie',
+  'breeding kink',
+  'praise kink',
+  'degradação leve',
+  'dom/sub',
+  'edging',
+  'voyeur',
+  'public almost-caught',
+  'size difference',
+  'muscle worship',
+  'underwear / jockstrap',
+  'aftercare',
+  'dirty talk em PT-BR',
+  'beijo molhado',
+  'mão na garganta (consensual)',
+  'spit',
 ]

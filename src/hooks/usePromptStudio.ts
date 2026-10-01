@@ -12,15 +12,19 @@ import { loadStudioState, saveStudioState } from '../lib/storage'
 import { materializeCharacter, materializeInstructions } from '../data/presets'
 
 function createDefaultState(): StudioState {
-  const character = materializeCharacter('mentor-tech') ?? blankCharacter()
-  const instructions = materializeInstructions('sys-completo') ?? blankInstructions()
+  const character = materializeCharacter('gay-twink-safado') ?? blankCharacter()
+  const instructions = materializeInstructions('gay-rp-explicito') ?? blankInstructions()
   return {
     character,
     instructions,
     task: {
       ...blankTask(),
-      goal: 'Ajude-me a estruturar um plano claro para o meu pedido.',
-      context: 'Sou um profissional buscando respostas práticas.',
+      goal:
+        'Começa uma cena gay explícita comigo: tensão, dirty talk e sexo sem eufemismo. Eu também tenho 21+.',
+      context:
+        'Estamos sozinhos depois de um date. Quero oral e anal descritos com detalhes, consentimento contínuo e aftercare no fim.',
+      length: 'longo',
+      creativity: 80,
     },
     savedPresets: [],
   }

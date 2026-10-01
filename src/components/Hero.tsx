@@ -12,13 +12,13 @@ export function Hero({ onStart }: HeroProps) {
         <p className={styles.brand}>PROMPTOR</p>
         <div className={styles.line} aria-hidden />
         <h1 className={styles.headline}>
-          Forje prompts densos
+          Forje prompts densos,
           <br />
-          e personagens vivos.
+          personagens e safadeza.
         </h1>
         <p className={styles.lead}>
-          Monte identidade, regras e tarefa num system prompt pronto para colar em ChatGPT,
-          Claude, Gemini ou o seu agente.
+          Identidade, kinks, heat e instruções — inclusive RP gay explícito 21+ — num system
+          prompt pronto pra colar no ChatGPT, Claude, Gemini ou no seu agente.
         </p>
         <div className={styles.cta}>
           <button type="button" className={styles.primary} onClick={onStart}>

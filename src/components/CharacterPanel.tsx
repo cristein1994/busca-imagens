@@ -1,5 +1,7 @@
 import type { Character } from '../types/studio'
 import {
+  HEAT_LABELS,
+  KINK_SUGGESTIONS,
   KNOWLEDGE_SUGGESTIONS,
   PERSONALITY_SUGGESTIONS,
   TONE_LABELS,
@@ -18,7 +20,7 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
     <section className={styles.panel} aria-labelledby="char-title">
       <header className={styles.head}>
         <h2 id="char-title">Personagem</h2>
-        <p>Identidade, voz, conhecimento e limites.</p>
+        <p>Identidade, voz, safadeza, kinks e limites. Adultos 21+.</p>
       </header>
 
       <div className={styles.grid2}>
@@ -27,7 +29,7 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
             className={styles.control}
             value={character.name}
             onChange={(e) => onChange({ name: e.target.value })}
-            placeholder="Ex: Ada Vale"
+            placeholder="Ex: Leo Prado"
           />
         </Field>
         <Field label="Arquétipo">
@@ -35,7 +37,7 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
             className={styles.control}
             value={character.archetype}
             onChange={(e) => onChange({ archetype: e.target.value })}
-            placeholder="Ex: Mentora técnica"
+            placeholder="Ex: Twink safado"
           />
         </Field>
       </div>
@@ -63,6 +65,30 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
             ))}
           </select>
         </Field>
+        <Field label="Heat / safadeza">
+          <select
+            className={styles.control}
+            value={character.heat}
+            onChange={(e) => onChange({ heat: e.target.value as Character['heat'] })}
+          >
+            {Object.entries(HEAT_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </Field>
+      </div>
+
+      <div className={styles.grid2}>
+        <Field label="Atração / foco">
+          <input
+            className={styles.control}
+            value={character.attraction}
+            onChange={(e) => onChange({ attraction: e.target.value })}
+            placeholder="Ex: homens gays adultos 21+"
+          />
+        </Field>
         <Field label="Idioma">
           <input
             className={styles.control}
@@ -73,6 +99,25 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
         </Field>
       </div>
 
+      <Field label="Dinâmica sexual" hint="top / bottom / verse / dom…">
+        <input
+          className={styles.control}
+          value={character.dynamics}
+          onChange={(e) => onChange({ dynamics: e.target.value })}
+          placeholder="Ex: verse bottom safado"
+        />
+      </Field>
+
+      <Field label="Corpo / presença">
+        <textarea
+          className={styles.textarea}
+          rows={3}
+          value={character.body}
+          onChange={(e) => onChange({ body: e.target.value })}
+          placeholder="Idade 21+, físico, pau, bunda, cheiro, vibe…"
+        />
+      </Field>
+
       <TagInput
         label="Traços de personalidade"
         values={character.personality}
@@ -80,13 +125,21 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
         suggestions={PERSONALITY_SUGGESTIONS}
       />
 
-      <Field label="Voz" hint="como fala, ritmo, vícios">
+      <TagInput
+        label="Kinks / preferências"
+        values={character.kinks}
+        onChange={(kinks) => onChange({ kinks })}
+        suggestions={KINK_SUGGESTIONS}
+        placeholder="Kink + Enter"
+      />
+
+      <Field label="Voz" hint="como fala, dirty talk, ritmo">
         <textarea
           className={styles.textarea}
           rows={3}
           value={character.voice}
           onChange={(e) => onChange({ voice: e.target.value })}
-          placeholder="Descreva o jeito de falar..."
+          placeholder="Descreva o jeito de falar — pode ser sujo..."
         />
       </Field>
 
@@ -111,7 +164,7 @@ export function CharacterPanel({ character, onChange }: CharacterPanelProps) {
         label="Limites / tabus"
         values={character.boundaries}
         onChange={(boundaries) => onChange({ boundaries })}
-        placeholder="Ex: Não inventa fontes"
+        placeholder="Ex: Sem menores · Sem gore"
       />
 
       <TagInput

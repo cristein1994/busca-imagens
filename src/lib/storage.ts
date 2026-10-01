@@ -1,19 +1,35 @@
 import type { Character, Instructions, SavedPreset, StudioState } from '../types/studio'
 import { blankCharacter, blankInstructions, blankTask } from './defaults'
 
-const STORAGE_KEY = 'promptor_studio_v1'
+const STORAGE_KEY = 'promptor_studio_v2'
+const LEGACY_KEY = 'promptor_studio_v1'
+
+function normalizeCharacter(raw: Partial<Character> | undefined): Character {
+  return { ...blankCharacter(), ...(raw ?? {}) }
+}
+
+function normalizePreset(preset: SavedPreset): SavedPreset {
+  return {
+    ...preset,
+    character: normalizeCharacter(preset.character),
+    instructions: { ...blankInstructions(), ...preset.instructions },
+    task: { ...blankTask(), ...preset.task },
+  }
+}
 
 export function loadStudioState(): StudioState | null {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw) as StudioState
     if (!parsed.character || !parsed.instructions || !parsed.task) return null
     return {
-      character: { ...blankCharacter(), ...parsed.character },
+      character: normalizeCharacter(parsed.character),
       instructions: { ...blankInstructions(), ...parsed.instructions },
       task: { ...blankTask(), ...parsed.task },
-      savedPresets: Array.isArray(parsed.savedPresets) ? parsed.savedPresets : [],
+      savedPresets: Array.isArray(parsed.savedPresets)
+        ? parsed.savedPresets.map(normalizePreset)
+        : [],
     }
   } catch {
     return null

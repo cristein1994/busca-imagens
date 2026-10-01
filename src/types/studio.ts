@@ -7,6 +7,10 @@ export type Tone =
   | 'empatico'
   | 'humoristico'
   | 'autoritario'
+  | 'safado'
+  | 'sedutor'
+
+export type HeatLevel = 'sfw' | 'picante' | 'explicito' | 'sem-filtro'
 
 export type OutputFormat =
   | 'livre'
@@ -39,6 +43,16 @@ export interface Character {
   catchphrases: string[]
   exampleDialogue: string
   language: string
+  /** Intensidade sexual do personagem / cena */
+  heat: HeatLevel
+  /** Preferências, fetiches e dinâmicas (adulto) */
+  kinks: string[]
+  /** Descrição física / vibe corporal */
+  body: string
+  /** Dinâmica sexual (top/bottom/verse, dominante, etc.) */
+  dynamics: string
+  /** Foco afetivo/sexual — ex: homens gays, cis/trans, etc. */
+  attraction: string
 }
 
 export interface Instructions {

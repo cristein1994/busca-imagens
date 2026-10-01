@@ -82,7 +82,9 @@ export default function App() {
 
       <footer className={styles.footer}>
         <strong>PROMPTOR</strong>
-        <span>Gerador de prompts · personagens · instruções — tudo local no navegador.</span>
+        <span>
+          Prompts · personagens · safadeza gay 21+ — tudo local no navegador. Sem menores.
+        </span>
       </footer>
     </div>
   )
