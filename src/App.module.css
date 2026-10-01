@@ -1,118 +1,248 @@
-.app {
-  min-height: 100vh;
+.shell {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 1.5rem 1.15rem 2rem;
+  animation: rise 0.45s ease both;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 2rem 1.25rem 1.5rem;
-  background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
-  border-bottom: 1px solid var(--border);
+.scanline {
+  height: 1px;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--signal), transparent);
+  background-size: 200% 100%;
+  animation: scan 4s linear infinite;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .brand {
-  text-align: center;
-}
-
-.title {
   margin: 0;
-  font-size: clamp(1.75rem, 4vw, 2.35rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text);
-}
-
-.subtitle {
-  margin: 0.35rem 0 0;
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-.main {
-  flex: 1;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 2.5rem;
-}
-
-.hint,
-.state {
-  margin: 2.5rem auto;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 1.05rem;
-}
-
-.state {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.spinner {
-  width: 1.15rem;
-  height: 1.15rem;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.error {
-  margin: 1.5rem auto;
-  max-width: 480px;
-  padding: 1rem 1.15rem;
-  border-radius: 12px;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #991b1b;
-  text-align: center;
-}
-
-.error p {
-  margin: 0.35rem 0 0;
-}
-
-.resultsTitle {
-  margin: 0 0 1.15rem;
-  font-size: 1.2rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
   font-weight: 700;
-  color: var(--text);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  animation: flicker 5s ease-in-out infinite;
 }
 
-.queryTag {
-  font-weight: 500;
-  color: var(--text-muted);
+.tagline {
+  margin: 0.65rem 0 0;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.45;
 }
 
-.footer {
-  padding: 1.25rem;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.9rem;
+.statusRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.25rem 0 1rem;
 }
 
-.footer p {
-  margin: 0;
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line);
+  background: rgba(14, 17, 24, 0.75);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
 }
 
-.footer a {
+.dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+.dotOk {
+  background: var(--signal);
+}
+
+.dotWarn {
+  background: var(--accent);
+}
+
+.dotBad {
+  background: var(--danger);
+}
+
+.thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 0.5rem 0 1rem;
+  min-height: 42vh;
+}
+
+.bubble {
+  max-width: 92%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  background: rgba(22, 27, 38, 0.72);
+  animation: rise 0.35s ease both;
+}
+
+.bubbleUser {
+  align-self: flex-end;
+  border-color: rgba(232, 163, 23, 0.35);
+  background: rgba(232, 163, 23, 0.08);
+}
+
+.bubbleAssistant {
+  align-self: flex-start;
+}
+
+.role {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
 }
 
-.footer a:hover {
-  text-decoration: underline;
+.bubbleUser .role {
+  color: var(--accent);
+  text-align: right;
+}
+
+.content {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.55;
+  font-size: 0.96rem;
+}
+
+.tools {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tool {
+  border: 1px solid rgba(62, 207, 154, 0.22);
+  background: rgba(8, 14, 12, 0.55);
+  padding: 0.55rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.toolName {
+  color: var(--signal);
+  margin-bottom: 0.25rem;
+}
+
+.toolBody {
+  margin: 0;
+  max-height: 8rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.statusLine {
+  min-height: 1.2rem;
+  margin: 0 0 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-dim);
+}
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: sticky;
+  bottom: 0;
+  padding-top: 0.5rem;
+  background: linear-gradient(180deg, transparent, rgba(7, 8, 11, 0.92) 28%);
+}
+
+.input {
+  width: 100%;
+  min-height: 5.5rem;
+  resize: vertical;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  background: rgba(14, 17, 24, 0.92);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: rgba(232, 163, 23, 0.55);
+  box-shadow: 0 0 0 1px rgba(232, 163, 23, 0.2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.btn {
+  border: 1px solid rgba(232, 163, 23, 0.45);
+  background: linear-gradient(135deg, rgba(232, 163, 23, 0.22), rgba(168, 116, 15, 0.12));
+  color: var(--ink);
+  padding: 0.65rem 1.15rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(232, 163, 23, 0.35), rgba(168, 116, 15, 0.18));
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--muted);
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .shell {
+    padding: 1rem 0.85rem 1.5rem;
+  }
+
+  .bubble {
+    max-width: 100%;
+  }
 }

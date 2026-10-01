@@ -1,17 +1,22 @@
 {
-  "name": "busca-imagens",
+  "name": "darkgpt-playground",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tor:start": "bash scripts/start-tor.sh",
+    "tor:check": "bash scripts/check-tor.sh",
+    "stack:up": "docker compose up -d",
+    "stack:down": "docker compose down"
   },
   "dependencies": {
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "socks-proxy-agent": "^8.0.5"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",

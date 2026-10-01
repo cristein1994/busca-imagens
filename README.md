@@ -1,74 +1,81 @@
-# Busca Imagens
+# DarkGPT Playground
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+Console local estilo **DarkGPT**: chat com LLM OpenAI-compatible e tools de internet saindo pelo **Tor** (SOCKS5).
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+## O que inclui
 
-## Funcionalidades
+- UI de chat com streaming SSE
+- Agent com tools: `web_search`, `fetch_url`, `tor_status` (tudo via Tor)
+- Backend no Vite middleware (chave/API só no servidor)
+- Scripts Tor + `docker-compose` (Tor + Ollama)
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+## Fluxo
 
-## Pré-requisitos
+```text
+Browser → Vite /api/chat → Ollama ou OpenAI-compatible
+                         ↘ tools (search/fetch) → Tor SOCKS5 → clearnet exit
+```
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+As tools usam a clearnet através do Tor (DuckDuckGo HTML, fetch http/https). Hosts locais/privados são bloqueados.
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Setup rápido
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
+cp .env.example .env
 npm install
 
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
+# Tor
+npm run tor:start
+npm run tor:check
 
-# Inicie o servidor de desenvolvimento
+# Ollama (em outra máquina/terminal)
+ollama serve
+ollama pull llama3.2
+
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Abra `http://localhost:5173`.
+
+### API remota (opcional)
+
+No `.env`:
+
+```bash
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=meta-llama/llama-3.1-70b-instruct
+```
+
+Se `OPENAI_BASE_URL` + `OPENAI_API_KEY` estiverem definidos, eles têm prioridade sobre Ollama.
+
+## Variáveis
+
+| Var | Default |
+|-----|---------|
+| `OLLAMA_BASE_URL` | `http://127.0.0.1:11434/v1` |
+| `OLLAMA_MODEL` | `llama3.2` |
+| `TOR_SOCKS_HOST` | `127.0.0.1` |
+| `TOR_SOCKS_PORT` | `9050` |
+| `OPENAI_BASE_URL` / `OPENAI_API_KEY` / `OPENAI_MODEL` | opcional |
 
 ## Scripts
 
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
+| Comando | Ação |
+|---------|------|
+| `npm run tor:start` | Sobe Tor (docker ou daemon) |
+| `npm run tor:check` | Confirma `IsTor: true` |
+| `npm run stack:up` | `docker compose up -d` (tor + ollama) |
+| `npm run dev` | UI + API em `:5173` |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+| `npm run lint` | oxlint |
 
 ## Stack
 
 - Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+- `socks-proxy-agent` para Tor
+- Ollama ou qualquer endpoint OpenAI-compatible
 
 ## Licença
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+Demo playground. Modelos e APIs são de terceiros — respeite os termos de cada provedor.

@@ -1,0 +1,20 @@
+services:
+  tor:
+    image: dperson/torproxy:latest
+    container_name: darkgpt-tor
+    restart: unless-stopped
+    ports:
+      - "9050:9050"
+      - "8118:8118"
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: darkgpt-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:
