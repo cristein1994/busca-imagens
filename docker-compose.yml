@@ -1,0 +1,17 @@
+services:
+  pulse:
+    build: .
+    container_name: pulse-link-monitor
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      DATA_DIR: /data
+      # Troque pelo domínio público do VPS (https://seu-ip-ou-dominio)
+      NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
+    volumes:
+      - pulse_data:/data
+
+volumes:
+  pulse_data:

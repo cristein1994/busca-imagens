@@ -1,74 +1,65 @@
-# Busca Imagens
+# PULSE — monitor de links sempre online
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+App próprio (equivalente ao fluxo Grabify) para criar um link de rastreio, enviar, e acompanhar cliques **em tempo real** com dashboard SSE + SQLite persistente.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+## O que faz
 
-## Funcionalidades
-
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
-
-## Pré-requisitos
-
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
-
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
-
-```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
-npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
-npm run dev
-```
-
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
-
-## Scripts
-
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
-
-## Variáveis de ambiente
-
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
+1. Você cola a URL de destino e cria o monitor
+2. Recebe dois links:
+   - **Link para enviar** → `/l/CODIGO` (quem clica é redirecionado e logado)
+   - **Dashboard** → `/d/CODIGO?token=...` (só você; atualiza sozinho)
+3. Cada clique registra: IP, país/cidade aproximados, ISP, referer, user-agent, idioma, horário UTC
+4. Com Docker (`restart: unless-stopped`) o serviço fica 24/7
 
 ## Stack
 
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
+- Next.js 15 (App Router) + TypeScript
+- SQLite (`better-sqlite3`) em `DATA_DIR`
+- Server-Sent Events para live feed
+- Geo lookup via `ip-api.com` (sem API key)
 
-## Licença
+## Rodar local
 
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+```bash
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Abra http://localhost:3000
+
+## Sempre online (Docker / VPS)
+
+```bash
+# Defina a URL pública do servidor (IP ou domínio)
+export NEXT_PUBLIC_BASE_URL=https://seu-dominio.com
+
+docker compose up -d --build
+```
+
+- App: porta `3000`
+- Dados: volume `pulse_data` → `/data/pulse.db`
+- Reinicia sozinho se o host cair (`restart: unless-stopped`)
+
+## API rápida
+
+```bash
+# Criar link
+curl -s -X POST http://localhost:3000/api/links \
+  -H 'content-type: application/json' \
+  -d '{"url":"https://example.com","label":"teste"}'
+
+# Ver logs (precisa do token)
+curl -s "http://localhost:3000/api/links/CODIGO?token=TOKEN"
+```
+
+## Variáveis
+
+| Variável | Descrição |
+|----------|-----------|
+| `NEXT_PUBLIC_BASE_URL` | URL pública usada nos links gerados |
+| `DATA_DIR` | Pasta do SQLite (default `./data`, Docker `/data`) |
+
+## Aviso
+
+Use apenas com consentimento / para seus próprios links e campanhas. Logging de IP de terceiros sem base legal pode violar LGPD e leis locais.
