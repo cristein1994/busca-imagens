@@ -8,13 +8,13 @@ interface ChatPanelProps {
 }
 
 export function ChatPanel({ character }: ChatPanelProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: 'welcome',
       role: 'assistant',
       content:
         'Oi… me descreva o clima que você quer. Posso flertar, roleplay NSFW, o que preferir (18+).',
-      createdAt: Date.now(),
+      createdAt: 0,
     },
   ])
   const [input, setInput] = useState('')
