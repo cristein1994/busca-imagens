@@ -1,22 +1,22 @@
-# PULSE — monitor de links sempre online
+# PULSE — reprodução completa (estilo Grabify) sempre online
 
-App próprio (equivalente ao fluxo Grabify) para criar um link de rastreio, enviar, e acompanhar cliques **em tempo real** com dashboard SSE + SQLite persistente.
+Self-hosted: short link + image logger + smart logger + dashboard SSE + SQLite + Docker 24/7.
 
-## O que faz
+## O que foi reproduzido
 
-1. Você cola a URL de destino e cria o monitor
-2. Recebe dois links:
-   - **Link para enviar** → `/l/CODIGO` (quem clica é redirecionado e logado)
-   - **Dashboard** → `/d/CODIGO?token=...` (só você; atualiza sozinho)
-3. Cada clique registra: IP, país/cidade aproximados, ISP, referer, user-agent, idioma, horário UTC
-4. Com Docker (`restart: unless-stopped`) o serviço fica 24/7
+| Recurso Grabify | PULSE |
+|-----------------|-------|
+| Create / Track URL | `/` + `/l/CODIGO` |
+| Smart Logger | página intermediária + `/api/links/CODIGO/hit` |
+| Image logger | `/i/CODIGO` (pixel GIF) |
+| Dashboard / tracking page | `/d/CODIGO?token=...` ao vivo (SSE) |
+| Features list | `/features` |
+| IP Lookup | `/tools/ip` |
+| URL Expander | `/tools/expand` |
+| VPN/Proxy/Tor | via ip-api |
+| Browser/OS/Device/Bot | parse de User-Agent |
 
-## Stack
-
-- Next.js 15 (App Router) + TypeScript
-- SQLite (`better-sqlite3`) em `DATA_DIR`
-- Server-Sent Events para live feed
-- Geo lookup via `ip-api.com` (sem API key)
+Campos de log: Date/Time, IP, Local IP, Country/Region/City, ISP, Hostname, Timezone, Language, Browser, OS, Device, Bot, Screen, Orientation, Connection, Battery, Charging, GPU, Incognito, AdBlocker, VPN/Proxy, Tor, VM, Referer, User-Agent, Source.
 
 ## Rodar local
 
@@ -26,40 +26,19 @@ npm install
 npm run dev
 ```
 
-Abra http://localhost:3000
-
-## Sempre online (Docker / VPS)
+## Sempre online (VPS)
 
 ```bash
-# Defina a URL pública do servidor (IP ou domínio)
 export NEXT_PUBLIC_BASE_URL=https://seu-dominio.com
-
 docker compose up -d --build
 ```
 
-- App: porta `3000`
-- Dados: volume `pulse_data` → `/data/pulse.db`
-- Reinicia sozinho se o host cair (`restart: unless-stopped`)
+## Fluxo
 
-## API rápida
-
-```bash
-# Criar link
-curl -s -X POST http://localhost:3000/api/links \
-  -H 'content-type: application/json' \
-  -d '{"url":"https://example.com","label":"teste"}'
-
-# Ver logs (precisa do token)
-curl -s "http://localhost:3000/api/links/CODIGO?token=TOKEN"
-```
-
-## Variáveis
-
-| Variável | Descrição |
-|----------|-----------|
-| `NEXT_PUBLIC_BASE_URL` | URL pública usada nos links gerados |
-| `DATA_DIR` | Pasta do SQLite (default `./data`, Docker `/data`) |
+1. Crie o monitor na home (Smart Logger on/off)
+2. Envie `/l/CODIGO` **ou** embuta `<img src="/i/CODIGO">`
+3. Abra o dashboard e deixe aberto — cliques entram ao vivo
 
 ## Aviso
 
-Use apenas com consentimento / para seus próprios links e campanhas. Logging de IP de terceiros sem base legal pode violar LGPD e leis locais.
+Use só com base legal / consentimento. Não use para phishing nem para disfarçar rastreio como conteúdo de terceiros.

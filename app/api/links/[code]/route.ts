@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { countVisits, getLinkByCode, getVisits } from "@/lib/db";
+import { countVisits, getLinkByCode, getVisits, visitToJson } from "@/lib/db";
+import { baseUrl } from "@/lib/utils";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,18 +25,11 @@ export async function GET(req: NextRequest, ctx: Ctx) {
     code: link.code,
     label: link.label,
     targetUrl: link.target_url,
+    smartLogger: link.smart_logger === 1,
     createdAt: link.created_at,
+    trackUrl: `${baseUrl()}/l/${link.code}`,
+    imageUrl: `${baseUrl()}/i/${link.code}`,
     total: countVisits(code),
-    visits: visits.map((v) => ({
-      id: v.id,
-      ip: v.ip,
-      userAgent: v.user_agent,
-      referer: v.referer,
-      language: v.language,
-      country: v.country,
-      city: v.city,
-      isp: v.isp,
-      createdAt: v.created_at,
-    })),
+    visits: visits.map(visitToJson),
   });
 }

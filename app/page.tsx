@@ -1,27 +1,43 @@
 import { CreateLinkForm } from "./components/CreateLinkForm";
+import { SiteNav } from "./components/SiteNav";
 
 export default function HomePage() {
   return (
     <main className="shell">
       <div className="brand">
         <strong>PULSE</strong>
-        <span>link monitor</span>
+        <span>grabify-complete</span>
       </div>
+      <SiteNav />
 
       <div className="hero-copy">
-        <h1>Sempre online. Clique chega, log aparece.</h1>
+        <h1>Reprodução completa: link, pixel, smart logger, dashboard 24/7.</h1>
         <p>
-          Crie um link de rastreio, envie para quem quiser, e deixe o dashboard
-          aberto — novos acessos entram em tempo real com IP, localização
-          aproximada, ISP e user-agent.
+          Crie o monitor, envie o link ou embuta o pixel de imagem, e acompanhe
+          IP, geo, ISP, VPN/Tor, browser/OS e sinais do Smart Logger em tempo
+          real.
         </p>
       </div>
 
       <CreateLinkForm />
 
+      <div className="steps">
+        <div>
+          <strong>1. Criar</strong>
+          <p>Gera link `/l/…`, pixel `/i/…` e dashboard com token.</p>
+        </div>
+        <div>
+          <strong>2. Enviar</strong>
+          <p>Quem abre o link ou carrega a imagem é registrado.</p>
+        </div>
+        <div>
+          <strong>3. Monitorar</strong>
+          <p>Dashboard SSE fica online e atualiza sozinho.</p>
+        </div>
+      </div>
+
       <p className="hint">
-        Para ficar 24/7: rode com Docker (`docker compose up -d`) em um VPS.
-        O SQLite em `/data` guarda histórico mesmo após reinício.
+        24/7: `docker compose up -d --build` com `NEXT_PUBLIC_BASE_URL` no VPS.
       </p>
     </main>
   );

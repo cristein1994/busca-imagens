@@ -5,12 +5,32 @@ import { useEffect, useMemo, useRef, useState } from "react";
 export type Visit = {
   id: number;
   ip: string | null;
+  localIp: string | null;
   userAgent: string | null;
   referer: string | null;
   language: string | null;
   country: string | null;
   city: string | null;
+  region: string | null;
   isp: string | null;
+  hostname: string | null;
+  timezone: string | null;
+  browser: string | null;
+  os: string | null;
+  device: string | null;
+  botName: string | null;
+  screenSize: string | null;
+  orientation: string | null;
+  connectionType: string | null;
+  battery: string | null;
+  charging: string | null;
+  gpu: string | null;
+  incognito: string | null;
+  adblocker: string | null;
+  vpnProxy: string | null;
+  tor: string | null;
+  vm: string | null;
+  source: string | null;
   createdAt: string;
 };
 
@@ -21,10 +41,8 @@ type Props = {
   initialVisits: Visit[];
 };
 
-function shortUa(ua: string | null) {
-  if (!ua) return "—";
-  if (ua.length <= 72) return ua;
-  return `${ua.slice(0, 69)}…`;
+function cell(v: string | null | undefined) {
+  return v && String(v).trim() ? v : "—";
 }
 
 export function LiveMonitor({
@@ -37,6 +55,9 @@ export function LiveMonitor({
   const [total, setTotal] = useState(initialTotal);
   const [live, setLive] = useState(false);
   const [flashIds, setFlashIds] = useState<Set<number>>(new Set());
+  const [selected, setSelected] = useState<Visit | null>(
+    initialVisits.length ? initialVisits[initialVisits.length - 1] : null,
+  );
   const afterIdRef = useRef(
     initialVisits.length ? initialVisits[initialVisits.length - 1].id : 0,
   );
@@ -60,10 +81,11 @@ export function LiveMonitor({
           if (!fresh.length) return prev;
           afterIdRef.current = fresh[fresh.length - 1].id;
           setFlashIds(new Set(fresh.map((v) => v.id)));
+          setSelected(fresh[fresh.length - 1]);
           return [...prev, ...fresh];
         });
       } catch {
-        // ignore bad payload
+        // ignore
       }
     });
 
@@ -112,19 +134,20 @@ export function LiveMonitor({
       <div className="panel">
         {ordered.length === 0 ? (
           <div className="empty">
-            Aguardando o primeiro clique no link de rastreio…
+            Aguardando o primeiro clique no link ou pixel de imagem…
           </div>
         ) : (
           <div className="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Quando (UTC)</th>
+                  <th>Quando</th>
                   <th>IP</th>
                   <th>Local</th>
-                  <th>ISP</th>
-                  <th>Referer</th>
-                  <th>User-Agent</th>
+                  <th>Device</th>
+                  <th>Browser</th>
+                  <th>VPN</th>
+                  <th>Fonte</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,17 +155,22 @@ export function LiveMonitor({
                   <tr
                     key={v.id}
                     className={flashIds.has(v.id) ? "new-row" : undefined}
+                    onClick={() => setSelected(v)}
+                    style={{ cursor: "pointer" }}
                   >
-                    <td>{v.createdAt.replace("T", " ").replace("Z", "")}</td>
+                    <td>{v.createdAt.replace("T", " ")}</td>
                     <td>
-                      <code>{v.ip || "—"}</code>
+                      <code>{cell(v.ip)}</code>
                     </td>
                     <td>
-                      {[v.city, v.country].filter(Boolean).join(", ") || "—"}
+                      {[v.city, v.region, v.country]
+                        .filter(Boolean)
+                        .join(", ") || "—"}
                     </td>
-                    <td>{v.isp || "—"}</td>
-                    <td>{v.referer || "—"}</td>
-                    <td title={v.userAgent || undefined}>{shortUa(v.userAgent)}</td>
+                    <td>{cell(v.device)}</td>
+                    <td>{cell(v.browser)}</td>
+                    <td>{cell(v.vpnProxy)}</td>
+                    <td>{cell(v.source)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -150,6 +178,51 @@ export function LiveMonitor({
           </div>
         )}
       </div>
+
+      {selected ? (
+        <div className="panel detail-grid">
+          <h2 style={{ margin: "0 0 0.75rem", fontSize: "1.1rem" }}>
+            Detalhe do clique #{selected.id}
+          </h2>
+          {(
+            [
+              ["Date/Time", selected.createdAt],
+              ["IP Address", selected.ip],
+              ["Local IP", selected.localIp],
+              ["Country", selected.country],
+              ["Region", selected.region],
+              ["City", selected.city],
+              ["ISP", selected.isp],
+              ["Hostname", selected.hostname],
+              ["Timezone", selected.timezone],
+              ["Language", selected.language],
+              ["Browser", selected.browser],
+              ["Operating System", selected.os],
+              ["Device", selected.device],
+              ["Bot Name", selected.botName],
+              ["Screen Size", selected.screenSize],
+              ["Orientation", selected.orientation],
+              ["Connection Type", selected.connectionType],
+              ["Battery", selected.battery],
+              ["Charging", selected.charging],
+              ["GPU", selected.gpu],
+              ["Incognito/Private", selected.incognito],
+              ["Ad Blocker", selected.adblocker],
+              ["VPN/Proxy", selected.vpnProxy],
+              ["Tor", selected.tor],
+              ["Virtual Machine", selected.vm],
+              ["Referring URL", selected.referer],
+              ["User Agent", selected.userAgent],
+              ["Source", selected.source],
+            ] as [string, string | null][]
+          ).map(([k, val]) => (
+            <div className="detail-row" key={k}>
+              <span>{k}</span>
+              <code>{cell(val)}</code>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </>
   );
 }

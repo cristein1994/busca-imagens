@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { countVisits, getLinkByCode, getVisits } from "@/lib/db";
+import { countVisits, getLinkByCode, getVisits, visitToJson } from "@/lib/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,23 +38,13 @@ export async function GET(req: NextRequest, ctx: Ctx) {
             afterId = visits[visits.length - 1].id;
             send("visits", {
               total: countVisits(code),
-              visits: visits.map((v) => ({
-                id: v.id,
-                ip: v.ip,
-                userAgent: v.user_agent,
-                referer: v.referer,
-                language: v.language,
-                country: v.country,
-                city: v.city,
-                isp: v.isp,
-                createdAt: v.created_at,
-              })),
+              visits: visits.map(visitToJson),
             });
           } else {
             send("ping", { total: countVisits(code), at: Date.now() });
           }
         } catch {
-          // keep stream alive
+          // keep alive
         }
       }, 1500);
 

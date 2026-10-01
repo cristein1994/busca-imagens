@@ -7,13 +7,16 @@ type Created = {
   token: string;
   targetUrl: string;
   label: string | null;
+  smartLogger: boolean;
   trackUrl: string;
+  imageUrl: string;
   dashboardUrl: string;
 };
 
 export function CreateLinkForm() {
   const [url, setUrl] = useState("");
   const [label, setLabel] = useState("");
+  const [smartLogger, setSmartLogger] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [created, setCreated] = useState<Created | null>(null);
@@ -26,7 +29,7 @@ export function CreateLinkForm() {
       const res = await fetch("/api/links", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, label }),
+        body: JSON.stringify({ url, label, smartLogger }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Falha ao criar link");
@@ -69,6 +72,14 @@ export function CreateLinkForm() {
             maxLength={80}
           />
         </label>
+        <label className="check">
+          <input
+            type="checkbox"
+            checked={smartLogger}
+            onChange={(e) => setSmartLogger(e.target.checked)}
+          />
+          Smart Logger (battery, tela, GPU, WebRTC, etc.)
+        </label>
         <div className="actions">
           <button className="btn btn-primary" type="submit" disabled={loading}>
             {loading ? "Criando…" : "Criar link + dashboard"}
@@ -80,7 +91,7 @@ export function CreateLinkForm() {
       {created ? (
         <div style={{ marginTop: "1.25rem" }} className="form-grid">
           <div className="copy-box">
-            <strong>Link para enviar</strong>
+            <strong>1) Link para enviar</strong>
             <code>{created.trackUrl}</code>
             <div className="actions">
               <button
@@ -93,7 +104,21 @@ export function CreateLinkForm() {
             </div>
           </div>
           <div className="copy-box">
-            <strong>Dashboard ao vivo (guarde este link)</strong>
+            <strong>2) Image logger (pixel)</strong>
+            <code>{created.imageUrl}</code>
+            <code>{`<img src="${created.imageUrl}" width="1" height="1" alt="" />`}</code>
+            <div className="actions">
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => copy(created.imageUrl)}
+              >
+                Copiar pixel URL
+              </button>
+            </div>
+          </div>
+          <div className="copy-box">
+            <strong>3) Dashboard ao vivo (guarde)</strong>
             <code>{created.dashboardUrl}</code>
             <div className="actions">
               <button

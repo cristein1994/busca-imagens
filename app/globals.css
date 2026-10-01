@@ -310,6 +310,126 @@ tr.new-row {
   line-height: 1.5;
 }
 
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  margin: -0.5rem 0 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--teal-deep);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.1rem;
+}
+
+.site-nav a:hover {
+  border-bottom-color: var(--amber);
+}
+
+.check {
+  display: flex !important;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 500 !important;
+  color: var(--ink) !important;
+}
+
+.check input {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.steps > div {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+}
+
+.steps strong {
+  font-family: var(--font-display), Syne, sans-serif;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.98rem;
+  font-family: var(--font-display), Syne, sans-serif;
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.detail-grid .detail-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.detail-grid .detail-row span {
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.detail-grid .detail-row code {
+  overflow-wrap: anywhere;
+  background: rgba(15, 28, 26, 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 640px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid .detail-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .shell {
     width: min(100% - 1.25rem, 1100px);

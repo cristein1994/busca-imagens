@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LiveMonitor, type Visit } from "@/app/components/LiveMonitor";
-import { countVisits, getLinkByCode, getVisits } from "@/lib/db";
+import { SiteNav } from "@/app/components/SiteNav";
+import { countVisits, getLinkByCode, getVisits, visitToJson } from "@/lib/db";
 import { baseUrl } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -37,20 +38,9 @@ export default async function DashboardPage({ params, searchParams }: Props) {
     );
   }
 
-  const rows = getVisits(code, 0);
-  const visits: Visit[] = rows.map((v) => ({
-    id: v.id,
-    ip: v.ip,
-    userAgent: v.user_agent,
-    referer: v.referer,
-    language: v.language,
-    country: v.country,
-    city: v.city,
-    isp: v.isp,
-    createdAt: v.created_at,
-  }));
-
+  const visits = getVisits(code, 0).map(visitToJson) as Visit[];
   const trackUrl = `${baseUrl()}/l/${link.code}`;
+  const imageUrl = `${baseUrl()}/i/${link.code}`;
 
   return (
     <main className="shell">
@@ -58,13 +48,18 @@ export default async function DashboardPage({ params, searchParams }: Props) {
         <strong>PULSE</strong>
         <span>ao vivo</span>
       </div>
+      <SiteNav />
 
       <div className="hero-copy">
         <h1>{link.label || `Monitor ${link.code}`}</h1>
         <p>
           Destino: <a href={link.target_url}>{link.target_url}</a>
           <br />
-          Link enviado: <code>{trackUrl}</code>
+          Link: <code>{trackUrl}</code>
+          <br />
+          Pixel: <code>{imageUrl}</code>
+          <br />
+          Smart Logger: {link.smart_logger === 1 ? "ligado" : "desligado"}
         </p>
       </div>
 
@@ -76,7 +71,8 @@ export default async function DashboardPage({ params, searchParams }: Props) {
       />
 
       <p className="hint">
-        Deixe esta página aberta. Novos cliques aparecem sem recarregar.
+        Deixe esta página aberta. Novos cliques (link ou imagem) aparecem sem
+        recarregar.
       </p>
     </main>
   );
