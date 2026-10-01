@@ -1,74 +1,49 @@
-# Busca Imagens
+# SoulForge
 
-SPA moderna para buscar imagens usando a [API do Unsplash](https://unsplash.com/developers).
+App gratuito no estilo **SoulGen.ai**: geração de imagens AI com **NSFW liberado**, builder de personagem, edição/remix, Soul Chat e galeria.
 
-> **Note (EN):** The UI labels are in Portuguese (Buscar, Resultados, Carregando, etc.).
+> UI em português. Conteúdo adulto (18+).
 
-## Funcionalidades
+## Funções (free vs SoulGen)
 
-- Campo de busca com botão e suporte a Enter
-- Grade responsiva de imagens
-- Lightbox/modal ao clicar: imagem ampliada, crédito do fotógrafo, copiar URL e abrir original
-- Estados de carregamento, vazio e erro
-- Bloqueio de envio duplo enquanto carrega
-- Layout mobile-friendly
+| SoulGen | SoulForge (grátis) |
+|--------|---------------------|
+| AI Character / text-to-image | Gerar + Personagem (Pollinations, `safe=false`) |
+| NSFW | Intensidade SFW → Explícito, sem paywall |
+| Smart Edit / remix | Aba Editar (img2img por URL) |
+| Soul Chat | Chat adulto com o personagem atual |
+| Galeria | LocalStorage no browser |
+| Video HD / lip-sync | Sem equivalente free estável (nota no app) |
 
-## Pré-requisitos
+## Stack
 
-- Node.js 18+ (recomendado)
-- Conta e Access Key no Unsplash Developers
+- Vite + React 19 + TypeScript
+- Pollinations.ai (imagem + texto) — sem API key obrigatória
 
-## Como obter a chave da API
-
-1. Acesse [https://unsplash.com/developers](https://unsplash.com/developers)
-2. Crie uma conta (ou faça login)
-3. Crie um novo aplicativo (Your apps → New Application)
-4. Copie a **Access Key**
-
-## Instalação e execução
+## Como rodar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/cristein1994/busca-imagens.git
-cd busca-imagens
-
-# Instale as dependências
 npm install
-
-# Configure a chave (copie o exemplo e edite)
-cp .env.example .env
-# Edite .env e defina:
-# VITE_UNSPLASH_ACCESS_KEY=sua_access_key_aqui
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-Abra o endereço indicado no terminal (geralmente `http://localhost:5173`).
+Opcional no `.env`:
+
+```
+VITE_POLLINATIONS_TOKEN=seu_token
+```
 
 ## Scripts
 
 | Comando | Descrição |
 |--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento (Vite) |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| `npm run dev` | Dev server |
+| `npm run build` | Build produção |
+| `npm run preview` | Preview do build |
+| `npm run lint` | oxlint |
 
-## Variáveis de ambiente
+## Regras
 
-| Variável | Descrição |
-|----------|-----------|
-| `VITE_UNSPLASH_ACCESS_KEY` | Access Key do Unsplash (obrigatória para buscar) |
-
-Se a chave estiver ausente, o app exibe uma mensagem clara de configuração e **não** quebra.
-
-## Stack
-
-- Vite + React + TypeScript
-- CSS Modules (sem UI kit pesado)
-- Unsplash Photos Search API
-
-## Licença
-
-Projeto de demonstração. As fotos pertencem aos respectivos autores no Unsplash — respeite os [termos de uso da API](https://unsplash.com/api-terms).
+- Age gate 18+
+- Personagens com idade mínima 18
+- Uso por sua conta e risco; respeite leis locais
