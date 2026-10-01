@@ -1,117 +1,91 @@
-import { useCallback, useState } from 'react'
-import { hasAccessKey, searchPhotos } from './api/unsplash'
-import type { UnsplashPhoto } from './types/unsplash'
-import { SearchBar } from './components/SearchBar'
-import { ImageGrid } from './components/ImageGrid'
-import { Lightbox } from './components/Lightbox'
-import { SetupMessage } from './components/SetupMessage'
+import { useRef } from 'react'
+import { CharacterPanel } from './components/CharacterPanel'
+import { Hero } from './components/Hero'
+import { InstructionsPanel } from './components/InstructionsPanel'
+import { PresetStrip } from './components/PresetStrip'
+import { PromptPreview } from './components/PromptPreview'
+import { SavedLibrary } from './components/SavedLibrary'
+import { TaskPanel } from './components/TaskPanel'
+import { usePromptStudio } from './hooks/usePromptStudio'
 import styles from './App.module.css'
 
-type Status = 'idle' | 'loading' | 'success' | 'empty' | 'error'
-
 export default function App() {
-  const configured = hasAccessKey()
-  const [photos, setPhotos] = useState<UnsplashPhoto[]>([])
-  const [status, setStatus] = useState<Status>('idle')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [lastQuery, setLastQuery] = useState('')
-  const [selected, setSelected] = useState<UnsplashPhoto | null>(null)
+  const studioRef = useRef<HTMLElement>(null)
+  const studio = usePromptStudio()
 
-  const handleSearch = useCallback(async (query: string) => {
-    if (!configured) return
+  const scrollToStudio = () => {
+    studioRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
-    setStatus('loading')
-    setErrorMessage('')
-    setLastQuery(query)
-    setSelected(null)
+  const handleSave = () => {
+    const name = window.prompt(
+      'Nome do preset:',
+      studio.character.name
+        ? `${studio.character.name} — ${studio.instructions.title || 'custom'}`
+        : 'Meu preset',
+    )
+    if (name === null) return
+    studio.saveCurrentAsPreset(name)
+  }
 
-    try {
-      const results = await searchPhotos(query)
-      setPhotos(results)
-      setStatus(results.length === 0 ? 'empty' : 'success')
-    } catch (err) {
-      setPhotos([])
-      setStatus('error')
-      setErrorMessage(
-        err instanceof Error ? err.message : 'Erro inesperado ao buscar imagens.',
-      )
-    }
-  }, [configured])
+  if (!studio.hydrated) {
+    return <div className={styles.boot}>Carregando estúdio…</div>
+  }
 
   return (
     <div className={styles.app}>
-      <header className={styles.header}>
-        <div className={styles.brand}>
-          <h1 className={styles.title}>Busca Imagens</h1>
-          <p className={styles.subtitle}>
-            Encontre fotos gratuitas do Unsplash
-          </p>
-        </div>
-        <SearchBar
-          onSearch={handleSearch}
-          loading={status === 'loading'}
-          disabled={!configured}
-        />
-      </header>
+      <Hero onStart={scrollToStudio} />
 
       <main className={styles.main}>
-        {!configured && <SetupMessage />}
+        <PresetStrip
+          onCharacter={(id) => {
+            studio.applyCharacterPreset(id)
+            scrollToStudio()
+          }}
+          onInstructions={(id) => {
+            studio.applyInstructionPreset(id)
+            scrollToStudio()
+          }}
+        />
 
-        {configured && status === 'idle' && (
-          <p className={styles.hint}>
-            Digite um termo e pressione Enter ou clique em Buscar.
-          </p>
-        )}
-
-        {status === 'loading' && (
-          <div className={styles.state} role="status" aria-live="polite">
-            <span className={styles.spinner} aria-hidden="true" />
-            Carregando…
+        <section ref={studioRef} className={styles.studio} id="studio" aria-label="Estúdio">
+          <div className={styles.editors}>
+            <CharacterPanel character={studio.character} onChange={studio.updateCharacter} />
+            <InstructionsPanel
+              instructions={studio.instructions}
+              onChange={studio.updateInstructions}
+            />
+            <TaskPanel task={studio.task} onChange={studio.updateTask} />
           </div>
-        )}
+          <PromptPreview
+            prompt={studio.prompt}
+            mode={studio.mode}
+            onModeChange={studio.setMode}
+            character={studio.character}
+            instructions={studio.instructions}
+            onSave={handleSave}
+            onReset={() => {
+              if (window.confirm('Limpar personagem, instruções e tarefa?')) {
+                studio.resetAll()
+              }
+            }}
+          />
+        </section>
 
-        {status === 'error' && (
-          <div className={styles.error} role="alert">
-            <strong>Erro</strong>
-            <p>{errorMessage}</p>
-          </div>
-        )}
-
-        {status === 'empty' && (
-          <p className={styles.state}>
-            Sem resultados para “{lastQuery}”. Tente outro termo.
-          </p>
-        )}
-
-        {status === 'success' && (
-          <section aria-label="Resultados">
-            <h2 className={styles.resultsTitle}>
-              Resultados
-              {lastQuery ? (
-                <span className={styles.queryTag}> — {lastQuery}</span>
-              ) : null}
-            </h2>
-            <ImageGrid photos={photos} onSelect={setSelected} />
-          </section>
-        )}
+        <SavedLibrary
+          presets={studio.savedPresets}
+          onLoad={studio.loadSavedPreset}
+          onDelete={studio.deleteSavedPreset}
+          onImport={studio.importPreset}
+        />
       </main>
 
       <footer className={styles.footer}>
-        <p>
-          Feito com a{' '}
-          <a
-            href="https://unsplash.com/?utm_source=busca_imagens&utm_medium=referral"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            API do Unsplash
-          </a>
-        </p>
+        <strong>PROMPTOR</strong>
+        <span>
+          Prompts · personagens · safadeza gay 21+ — tudo local no navegador. Sem menores.
+        </span>
       </footer>
-
-      {selected && (
-        <Lightbox photo={selected} onClose={() => setSelected(null)} />
-      )}
     </div>
   )
 }

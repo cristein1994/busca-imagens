@@ -1,0 +1,164 @@
+import type { Character, Instructions, PromptTask } from '../types/studio'
+
+export function createId(prefix = 'id'): string {
+  return `${prefix}_${Math.random().toString(36).slice(2, 10)}`
+}
+
+export function blankCharacter(): Character {
+  return {
+    id: createId('char'),
+    name: '',
+    archetype: '',
+    role: '',
+    personality: [],
+    tone: 'direto',
+    voice: '',
+    background: '',
+    knowledge: [],
+    boundaries: [],
+    catchphrases: [],
+    exampleDialogue: '',
+    language: 'português brasileiro',
+    heat: 'sfw',
+    kinks: [],
+    body: '',
+    dynamics: '',
+    attraction: '',
+  }
+}
+
+export function blankInstructions(): Instructions {
+  return {
+    id: createId('inst'),
+    title: '',
+    mission: '',
+    audience: '',
+    outputFormat: 'markdown',
+    reasoning: 'explicito',
+    constraints: [],
+    mustInclude: [],
+    mustAvoid: [],
+    successCriteria: '',
+    context: '',
+  }
+}
+
+export function blankTask(): PromptTask {
+  return {
+    goal: '',
+    context: '',
+    extraNotes: '',
+    length: 'medio',
+    creativity: 55,
+  }
+}
+
+export const TONE_LABELS: Record<Character['tone'], string> = {
+  formal: 'Formal',
+  casual: 'Casual',
+  tecnico: 'Técnico',
+  poetico: 'Poético',
+  direto: 'Direto',
+  empatico: 'Empático',
+  humoristico: 'Humorístico',
+  autoritario: 'Autoritário',
+  safado: 'Safado / explícito',
+  sedutor: 'Sedutor',
+}
+
+export const HEAT_LABELS: Record<Character['heat'], string> = {
+  sfw: 'SFW (sem sexo)',
+  picante: 'Picante (insinuação)',
+  explicito: 'Explícito (sexo descrito)',
+  'sem-filtro': 'Sem filtro (sujo pra caralho)',
+}
+
+export const FORMAT_LABELS: Record<Instructions['outputFormat'], string> = {
+  livre: 'Livre',
+  markdown: 'Markdown',
+  bullets: 'Lista de bullets',
+  json: 'JSON estruturado',
+  'passo-a-passo': 'Passo a passo',
+  tabela: 'Tabela',
+  dialogo: 'Diálogo',
+  codigo: 'Código',
+}
+
+export const REASONING_LABELS: Record<Instructions['reasoning'], string> = {
+  rapido: 'Rápido e objetivo',
+  explicito: 'Raciocínio explícito',
+  socratico: 'Socrático (perguntas)',
+  critico: 'Crítico e analítico',
+  criativo: 'Criativo e exploratório',
+}
+
+export const LENGTH_LABELS: Record<PromptTask['length'], string> = {
+  curto: 'Curto',
+  medio: 'Médio',
+  longo: 'Longo',
+  'sem-limite': 'Sem limite',
+}
+
+export const PERSONALITY_SUGGESTIONS = [
+  'curioso',
+  'paciente',
+  'sarcástico',
+  'metódico',
+  'visionário',
+  'prático',
+  'caloroso',
+  'cético',
+  'entusiasta',
+  'diplomático',
+  'incisivo',
+  'mentor',
+  'safado',
+  'possessivo',
+  'carinhoso',
+  'dominante',
+  'submisso',
+  'provocador',
+  'ciumento',
+  'brincalhão',
+]
+
+export const KNOWLEDGE_SUGGESTIONS = [
+  'programação',
+  'design de produto',
+  'marketing',
+  'escrita criativa',
+  'ciência de dados',
+  'educação',
+  'negócios',
+  'UX/UI',
+  'psicologia',
+  'história',
+  'sexo gay',
+  'BDSM light',
+  'cultura LGBTQ+',
+  'dirty talk',
+  'roleplay erótico',
+]
+
+export const KINK_SUGGESTIONS = [
+  'oral',
+  'anal',
+  'rimming',
+  'deepthroat',
+  'creampie',
+  'breeding kink',
+  'praise kink',
+  'degradação leve',
+  'dom/sub',
+  'edging',
+  'voyeur',
+  'public almost-caught',
+  'size difference',
+  'muscle worship',
+  'underwear / jockstrap',
+  'aftercare',
+  'dirty talk em PT-BR',
+  'beijo molhado',
+  'mão na garganta (consensual)',
+  'spit',
+]
