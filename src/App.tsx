@@ -40,7 +40,9 @@ export default function App() {
   const [aspect, setAspect] = useState<AspectRatio>('3:4')
   const [seed, setSeed] = useState(0)
   const [useCharacter, setUseCharacter] = useState(true)
-  const [imageModel, setImageModel] = useState('flux')
+  const [imageModel, setImageModel] = useState(
+    (import.meta.env.VITE_IMAGE_MODEL as string | undefined) || 'chroma',
+  )
   const [editImageUrl, setEditImageUrl] = useState('')
   const [editPrompt, setEditPrompt] = useState(
     'same person, different pose, more dramatic lighting',

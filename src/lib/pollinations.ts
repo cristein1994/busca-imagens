@@ -17,16 +17,25 @@ export function buildImageUrl(
   const { width, height } = aspectToSize(req.aspect)
   const seed = req.seed || Math.floor(Math.random() * 1_000_000)
 
+  const model =
+    req.imageModel ||
+    (import.meta.env.VITE_IMAGE_MODEL as string | undefined) ||
+    'chroma'
+
   const params = new URLSearchParams({
     width: String(width),
     height: String(height),
     seed: String(seed),
-    model: req.imageModel || 'flux',
+    model,
     nologo: 'true',
-    enhance: 'true',
     // Liberar NSFW — equivalente ao SoulGen free com NSFW on
     safe: 'false',
   })
+
+  // enhance costuma ajudar no flux; no chroma/turbo evita
+  if (model === 'flux' || model.startsWith('black-forest-labs/')) {
+    params.set('enhance', 'true')
+  }
 
   if (opts?.imageUrl) {
     params.set('image', opts.imageUrl)

@@ -18,8 +18,10 @@ interface ControlsProps {
 
 const ASPECTS: AspectRatio[] = ['1:1', '3:4', '9:16', '4:3', '16:9']
 const MODELS = [
+  { id: 'chroma', label: 'Chroma (NSFW)' },
   { id: 'flux', label: 'Flux (qualidade)' },
   { id: 'turbo', label: 'Turbo (rápido)' },
+  { id: 'z-image-turbo', label: 'Z-Image Turbo' },
 ]
 
 export function StyleControls({

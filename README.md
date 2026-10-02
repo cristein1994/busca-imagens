@@ -19,6 +19,7 @@ App gratuito no estilo **SoulGen.ai**: geração de imagens AI com **NSFW libera
 
 - Vite + React 19 + TypeScript
 - Pollinations.ai (imagem + texto) — sem API key obrigatória
+- Modelo padrão: **Chroma** (no free da Pollinations, nomes desconhecidos podem cair em fallback `sana`)
 
 ## Como rodar
 
