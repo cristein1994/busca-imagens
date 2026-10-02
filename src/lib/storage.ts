@@ -1,8 +1,8 @@
 import type { Character, Instructions, SavedPreset, StudioState } from '../types/studio'
 import { blankCharacter, blankInstructions, blankTask } from './defaults'
 
-const STORAGE_KEY = 'promptor_studio_v3'
-const LEGACY_KEYS = ['promptor_studio_v2', 'promptor_studio_v1']
+const STORAGE_KEY = 'promptor_studio_v4'
+const LEGACY_KEYS = ['promptor_studio_v3', 'promptor_studio_v2', 'promptor_studio_v1']
 
 function normalizeCharacter(raw: Partial<Character> | undefined): Character {
   return { ...blankCharacter(), ...(raw ?? {}) }
