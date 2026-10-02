@@ -39,6 +39,8 @@ npm run dev
 
 Abra `http://localhost:3000`. Escolha Superfície, Dark ou As duas, e envie a consulta.
 
+O quadro LabFert fica em `http://localhost:3000/labfert`. Ele organiza a planilha colada (nome, cargo, cidade, e-mail, LinkedIn) e cruza a cidade com as unidades publicadas em [labfert.agr.br/unidades](https://labfert.agr.br/unidades). E-mails individuais só aparecem quando já vinham na planilha. Links `ACw…` ficam marcados como identificador interno.
+
 ## Variáveis
 
 | Variável | Padrão | Função |

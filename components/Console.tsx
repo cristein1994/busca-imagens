@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { Nav } from '@/components/Nav'
 import type { Lane, LaneFailure, LaneReport, TorStatus } from '@/lib/types'
 
 type SearchPayload = {
@@ -91,6 +92,7 @@ export function Console() {
 
   return (
     <div className="mx-auto min-h-screen max-w-6xl px-4 py-6 md:px-8">
+      <Nav current="busca" />
       <header className="border-b border-[var(--line)] pb-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
