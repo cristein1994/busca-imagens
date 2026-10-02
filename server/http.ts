@@ -135,7 +135,7 @@ export async function startServer(port = Number(process.env.PORT || 5173)) {
     const { createServer: createViteServer } = await import('vite')
     vite = await createViteServer({
       root,
-      server: { middlewareMode: true },
+      server: { middlewareMode: true, host: true, allowedHosts: true },
       appType: 'spa',
     })
   }
@@ -161,6 +161,6 @@ export async function startServer(port = Number(process.env.PORT || 5173)) {
     }
   })
 
-  await new Promise<void>((resolve) => server.listen(port, '127.0.0.1', resolve))
+  await new Promise<void>((resolve) => server.listen(port, '0.0.0.0', resolve))
   return { server, port, vite }
 }
