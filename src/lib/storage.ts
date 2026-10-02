@@ -1,8 +1,9 @@
 import type { Character, Instructions, SavedPreset, StudioState } from '../types/studio'
 import { blankCharacter, blankInstructions, blankTask } from './defaults'
 
-const STORAGE_KEY = 'promptor_studio_v5'
+const STORAGE_KEY = 'promptor_studio_v6'
 const LEGACY_KEYS = [
+  'promptor_studio_v5',
   'promptor_studio_v4',
   'promptor_studio_v3',
   'promptor_studio_v2',
