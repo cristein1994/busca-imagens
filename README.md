@@ -1,44 +1,98 @@
-# PROMPTOR
+# LINC SCRAPE
 
-Gerador de **prompts completos** com personalização de **personagens de IA** e **instruções de sistema**.
+Scraper de **dados públicos do LinkedIn** (perfis, busca de pessoas, empresas e vagas) usando Actors da Apify Store.
 
-SPA em Vite + React + TypeScript. Tudo roda no navegador — sem backend e sem API key.
+Vite + React (UI) · Express + `apify-client` (API) · token só no servidor.
 
-## Funcionalidades
+## O que scrapa
 
-- **Personagem**: nome, arquétipo, papel, tom, heat/safadeza, atração, dinâmica, corpo, kinks, voz, background, limites
-- **Instruções**: missão, público, formato de saída, raciocínio, regras, must-include / must-avoid, critérios de sucesso
-- **Tarefa**: objetivo, contexto, extensão e criatividade
-- **Prompt ao vivo** em modo completo ou compacto (inclui diretivas NSFW quando heat > SFW)
-- **Presets** SFW + **Safadeza gay** (personagens e pacotes explícitos 21+)
-- **Biblioteca local** (localStorage): salvar, carregar, apagar, importar/exportar JSON e baixar Markdown
-- Copiar para a área de transferência
+| Modo | Actor Apify |
+|------|-------------|
+| Perfis | `harvestapi/linkedin-profile-scraper` |
+| Busca pessoas | `harvestapi/linkedin-profile-search` |
+| Empresas | `harvestapi/linkedin-company` |
+| Vagas | `curious_coder/linkedin-jobs-scraper` |
 
-> Conteúdo adulto opcional é ficção entre adultos (21+). Nada envolvendo menores.
+Não usa login/cookies do LinkedIn. Actors são pay-per-event na Apify (tier gratuito cobre testes pequenos).
 
-## Instalação e execução
+## Setup
+
+1. Copie o env e cole o token:
+
+```bash
+cp .env.example .env
+# edite APIFY_TOKEN=apify_api_...
+```
+
+Token: [console.apify.com/settings/integrations](https://console.apify.com/settings/integrations)
+
+2. Instale e rode UI + API juntos:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abra o endereço indicado (geralmente `http://localhost:5173`).
+- UI: `http://localhost:5173`
+- API: `http://localhost:3001`
+
+## API
+
+```http
+GET  /api/health
+POST /api/scrape/profile
+POST /api/scrape/search
+POST /api/scrape/company
+POST /api/scrape/jobs
+```
+
+### Exemplos
+
+**Perfil**
+
+```bash
+curl -s http://localhost:3001/api/scrape/profile \
+  -H 'content-type: application/json' \
+  -d '{"queries":["https://www.linkedin.com/in/williamhgates"]}'
+```
+
+**Busca**
+
+```bash
+curl -s http://localhost:3001/api/scrape/search \
+  -H 'content-type: application/json' \
+  -d '{"searchQuery":"Software Engineer","locations":["Brazil"],"maxItems":10}'
+```
+
+**Empresa**
+
+```bash
+curl -s http://localhost:3001/api/scrape/company \
+  -H 'content-type: application/json' \
+  -d '{"companies":["https://www.linkedin.com/company/google"]}'
+```
+
+**Vagas**
+
+```bash
+curl -s http://localhost:3001/api/scrape/jobs \
+  -H 'content-type: application/json' \
+  -d '{"keywords":"react developer","location":"São Paulo, Brazil","maxItems":15}'
+```
 
 ## Scripts
 
 | Comando | Descrição |
 |--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento |
+| `npm run dev` | Vite + API juntos |
+| `npm run dev:web` | Só frontend |
+| `npm run dev:api` | Só API |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| `npm run lint` | Lint |
 
-## Stack
+## Uso responsável
 
-- Vite + React 19 + TypeScript
-- CSS Modules + design tokens
-- Persistência via `localStorage`
+Use apenas dados públicos, respeite os Termos do LinkedIn e os limites de cobrança da Apify. O UI limita resultados (máx. 50) para controlar custo.
 
 ## Licença
 
