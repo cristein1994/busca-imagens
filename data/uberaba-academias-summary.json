@@ -1,0 +1,68 @@
+{
+  "title": "Academias em Uberaba/MG",
+  "uniquePlaces": 33,
+  "withPhone": 22,
+  "withWebsite": 17,
+  "withRating": 17,
+  "apifyStatus": "blocked_monthly_limit",
+  "primarySources": [
+    "OpenStreetMap Overpass (leisure=fitness_centre bbox Uberaba)",
+    "Smart Fit official unit pages",
+    "Wellhub partner pages",
+    "Exa Places / Google Maps-derived public listings",
+    "Brand sites (DoctorFit, Studio Classic, CrossFit.com)",
+    "Public CNPJ / directory pages"
+  ],
+  "topByReviews": [
+    {
+      "name": "Bio Tech Academy (BioFit)",
+      "rating": 4.5,
+      "reviewsCount": 611
+    },
+    {
+      "name": "Over Prime Fitness",
+      "rating": 4.79,
+      "reviewsCount": 418
+    },
+    {
+      "name": "Academia Tasmanian Gym",
+      "rating": 4.84,
+      "reviewsCount": 186
+    },
+    {
+      "name": "URA26 Academia",
+      "rating": 4.85,
+      "reviewsCount": 176
+    },
+    {
+      "name": "Academia Performance",
+      "rating": 4.7,
+      "reviewsCount": 145
+    },
+    {
+      "name": "Academia American Fit Uberaba",
+      "rating": 4.7,
+      "reviewsCount": 130
+    },
+    {
+      "name": "CrossFit Uberaba",
+      "rating": 4.8,
+      "reviewsCount": 103
+    },
+    {
+      "name": "Studio Pró Corpo",
+      "rating": 4.9,
+      "reviewsCount": 65
+    },
+    {
+      "name": "Trainerfit Academia",
+      "rating": 4.89,
+      "reviewsCount": 63
+    },
+    {
+      "name": "Academia Profit",
+      "rating": 4.9,
+      "reviewsCount": 61
+    }
+  ]
+}

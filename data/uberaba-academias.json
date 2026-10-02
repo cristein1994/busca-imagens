@@ -1,0 +1,586 @@
+[
+  {
+    "name": "DoctorFit Uberaba",
+    "address": "Rua Aristeu Píres França, 361 - Mercês, Uberaba - MG, 38060-490",
+    "phone": "(34) 99732-1242",
+    "website": "https://doctorfit.com.br/unidades/uberaba/",
+    "rating": 5.0,
+    "reviewsCount": 31,
+    "category": "Estúdio / Personal training",
+    "lat": -19.750713,
+    "lon": -47.948675,
+    "sources": [
+      "doctorfit-official",
+      "wellhub",
+      "exa-places",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.750713%2C-47.948675",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.750713%2C-47.948675",
+    "recordId": "4bd049435f07"
+  },
+  {
+    "name": "Scultura Academia",
+    "address": "Rua Vigário Silva, 760, Uberaba - MG, 38022-190",
+    "phone": "(34) 3076-1808",
+    "website": "",
+    "rating": 5.0,
+    "reviewsCount": 23,
+    "category": "Academia / Gym",
+    "lat": -19.75591,
+    "lon": -47.93515,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.75591%2C-47.93515",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.75591%2C-47.93515",
+    "recordId": "ef684315973d"
+  },
+  {
+    "name": "Studio Pró Corpo",
+    "address": "Av. da Saudade, 1105, Uberaba - MG, 38061-220",
+    "phone": "(34) 98429-1192",
+    "website": "",
+    "rating": 4.9,
+    "reviewsCount": 65,
+    "category": "Academia / Gym",
+    "lat": -19.743842,
+    "lon": -47.956429,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.743842%2C-47.956429",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.743842%2C-47.956429",
+    "recordId": "319260920a61"
+  },
+  {
+    "name": "Academia Profit",
+    "address": "Av. Edilson Lamartine Mendes - Parque das Américas, Uberaba - MG, 38045-120",
+    "phone": "(34) 99331-5400",
+    "website": "",
+    "rating": 4.9,
+    "reviewsCount": 61,
+    "category": "Academia / Gym",
+    "lat": -19.77066,
+    "lon": -47.95125,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.77066%2C-47.95125",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.77066%2C-47.95125",
+    "recordId": "39bb41c8222d"
+  },
+  {
+    "name": "Academia Sport Fitness",
+    "address": "Rua Tenente Wenceslau de Oliveira, 860 - Nossa Senhora da Abadia, Uberaba - MG, 38026-020",
+    "phone": "(34) 3322-8575",
+    "website": "",
+    "rating": 4.9,
+    "reviewsCount": 42,
+    "category": "Academia / Gym",
+    "lat": -19.75973,
+    "lon": -47.92606,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.75973%2C-47.92606",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.75973%2C-47.92606",
+    "recordId": "e46eec6eb355"
+  },
+  {
+    "name": "Academia AGS Fitness",
+    "address": "Rua Vital de Negreiros, 610, Uberaba - MG, 38065-290",
+    "phone": "",
+    "website": "",
+    "rating": 4.9,
+    "reviewsCount": 24,
+    "category": "Academia / Gym",
+    "lat": -19.737338,
+    "lon": -47.93712,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.737338%2C-47.93712",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.737338%2C-47.93712",
+    "recordId": "f0443f9a20a0"
+  },
+  {
+    "name": "Trainerfit Academia",
+    "address": "Av. Nossa Senhora do Desterro, 1286 - Cidade Nova, Uberaba - MG, 38082-350",
+    "phone": "(34) 98809-4506",
+    "website": "https://instagram.com/TRAINERFITUBERABA",
+    "rating": 4.89,
+    "reviewsCount": 63,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "wellhub"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Trainerfit+Academia+Av.+Nossa+Senhora+do+Desterro,+1286+-+Cidade+Nova,+Uberaba+-+MG,+38082-350",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Trainerfit+Academia+Av.+Nossa+Senhora+do+Desterro,+1286+-+Cidade+Nova,+Uberaba+-+MG,+38082-350",
+    "recordId": "e567a37edd38"
+  },
+  {
+    "name": "Studio Classic Academia",
+    "address": "Av. da Saudade, 1060 - Santa Marta, Uberaba - MG",
+    "phone": "(34) 3313-7979",
+    "website": "https://academiaemuberaba.com.br/",
+    "rating": 4.86,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "wellhub",
+      "official-site"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Studio+Classic+Academia+Av.+da+Saudade,+1060+-+Santa+Marta,+Uberaba+-+MG",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Studio+Classic+Academia+Av.+da+Saudade,+1060+-+Santa+Marta,+Uberaba+-+MG",
+    "recordId": "9b280ca27798"
+  },
+  {
+    "name": "URA26 Academia",
+    "address": "Rua Pedro Floro, 2-72, Uberaba - MG, 38015-380",
+    "phone": "(34) 99863-8747",
+    "website": "https://www.instagram.com/ura26oficial/",
+    "rating": 4.85,
+    "reviewsCount": 176,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "wellhub"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=URA26+Academia+Rua+Pedro+Floro,+2-72,+Uberaba+-+MG,+38015-380",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=URA26+Academia+Rua+Pedro+Floro,+2-72,+Uberaba+-+MG,+38015-380",
+    "recordId": "198c2151be0f"
+  },
+  {
+    "name": "Academia Tasmanian Gym",
+    "address": "Rua Píres de Campos, 409 - Estados Unidos, Uberaba - MG, 38015-120",
+    "phone": "(34) 99124-8767",
+    "website": "https://instagram.com/tasmaniangym",
+    "rating": 4.84,
+    "reviewsCount": 186,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "wellhub"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Academia+Tasmanian+Gym+Rua+Píres+de+Campos,+409+-+Estados+Unidos,+Uberaba+-+MG,+38015-120",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Academia+Tasmanian+Gym+Rua+Píres+de+Campos,+409+-+Estados+Unidos,+Uberaba+-+MG,+38015-120",
+    "recordId": "7ac39ca376ec"
+  },
+  {
+    "name": "CrossFit Uberaba",
+    "address": "Rua Veríssimo, 161 - São Benedito, Uberaba - MG, 38020-260",
+    "phone": "(34) 99275-4700",
+    "website": "https://www.crossfit.com/gym/34972/crossfit-uberaba",
+    "rating": 4.8,
+    "reviewsCount": 103,
+    "category": "CrossFit",
+    "lat": -19.758081,
+    "lon": -47.945033,
+    "sources": [
+      "exa-places",
+      "crossfit-com",
+      "wellhub",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.758081%2C-47.945033",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.758081%2C-47.945033",
+    "recordId": "1ec60e60ef50"
+  },
+  {
+    "name": "SkyFit Academia Uberaba",
+    "address": "Av. Abílio Borges de Araújo, 427 - Nossa Senhora da Abadia, Uberaba - MG, 38026-070",
+    "phone": "(34) 99716-0606",
+    "website": "https://skyfitacademia.com/",
+    "rating": 4.8,
+    "reviewsCount": 44,
+    "category": "Academia / Gym",
+    "lat": -19.76719,
+    "lon": -47.92433,
+    "sources": [
+      "exa-places",
+      "wellhub",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.76719%2C-47.92433",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.76719%2C-47.92433",
+    "recordId": "215398d0646c"
+  },
+  {
+    "name": "Over Prime Fitness",
+    "address": "Av. Edilson Lamartine Mendes, 65 - Parque das Américas, Uberaba - MG, 38045-000",
+    "phone": "(34) 99736-8784",
+    "website": "https://www.instagram.com/overprimeoficial/",
+    "rating": 4.79,
+    "reviewsCount": 418,
+    "category": "Academia / Gym",
+    "lat": -19.7704304,
+    "lon": -47.9454744,
+    "sources": [
+      "wellhub",
+      "wanderboat",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7704304%2C-47.9454744",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7704304%2C-47.9454744",
+    "recordId": "d12ba4e79b15"
+  },
+  {
+    "name": "Academia Performance",
+    "address": "Av. Elias Cruvinel - Boa Vista, Uberaba - MG, 38070-100",
+    "phone": "(34) 3479-3440",
+    "website": "https://www.instagram.com/academiaperformanceura/",
+    "rating": 4.7,
+    "reviewsCount": 145,
+    "category": "Academia / Gym",
+    "lat": -19.735003,
+    "lon": -47.918507,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.735003%2C-47.918507",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.735003%2C-47.918507",
+    "recordId": "015c1534bab0"
+  },
+  {
+    "name": "Academia American Fit Uberaba",
+    "address": "Av. João XXIII, 695, Uberaba - MG, 38051-131",
+    "phone": "(34) 98426-7100",
+    "website": "",
+    "rating": 4.7,
+    "reviewsCount": 130,
+    "category": "Academia / Gym",
+    "lat": -19.774044,
+    "lon": -47.949978,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.774044%2C-47.949978",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.774044%2C-47.949978",
+    "recordId": "f147af4229c8"
+  },
+  {
+    "name": "Pró Fitness Academia",
+    "address": "Rua Benjamin Bernardino da Costa - Uberaba - MG, 38035-350",
+    "phone": "(34) 3314-4069",
+    "website": "",
+    "rating": 4.6,
+    "reviewsCount": 51,
+    "category": "Academia / Gym",
+    "lat": -19.76216,
+    "lon": -47.91304,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.76216%2C-47.91304",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.76216%2C-47.91304",
+    "recordId": "30a93d53b2ea"
+  },
+  {
+    "name": "Bio Tech Academy (BioFit)",
+    "address": "Praça Dr. Thomaz Ulhôa, 461 - Nossa Senhora da Abadia, Uberaba - MG, 38025-050",
+    "phone": "(34) 3313-6845",
+    "website": "https://www.biofitacademia.com.br/",
+    "rating": 4.5,
+    "reviewsCount": 611,
+    "category": "Academia / Gym",
+    "lat": -19.75312,
+    "lon": -47.93158,
+    "sources": [
+      "exa-places",
+      "diario-cidade",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.75312%2C-47.93158",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.75312%2C-47.93158",
+    "recordId": "bd42d102d9d5"
+  },
+  {
+    "name": "Academia Corpo Em Construção",
+    "address": "Av. Djalma Castro Alves, 829 - Amoroso Costa, Uberaba - MG, 38073-000",
+    "phone": "(34) 3322-3677",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "diario-cidade"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Academia+Corpo+Em+Construção+Av.+Djalma+Castro+Alves,+829+-+Amoroso+Costa,+Uberaba+-+MG,+38073-000",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Academia+Corpo+Em+Construção+Av.+Djalma+Castro+Alves,+829+-+Amoroso+Costa,+Uberaba+-+MG,+38073-000",
+    "recordId": "d31e8769cf78"
+  },
+  {
+    "name": "Academia Persona",
+    "address": "Rua Princesa do Sertão, 180, Uberaba - MG, 38020-090",
+    "phone": "(34) 3336-5008",
+    "website": "http://www.academiapersona.com.br/",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "empresasbrasil"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Academia+Persona+Rua+Princesa+do+Sertão,+180,+Uberaba+-+MG,+38020-090",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Academia+Persona+Rua+Princesa+do+Sertão,+180,+Uberaba+-+MG,+38020-090",
+    "recordId": "954f1f339e5f"
+  },
+  {
+    "name": "AKAD Academia",
+    "address": "Av. Fernando Costa, 640 - São Benedito, Uberaba - MG, 38022-300",
+    "phone": "(34) 3311-0385",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "cnpj-databrasil"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=AKAD+Academia+Av.+Fernando+Costa,+640+-+São+Benedito,+Uberaba+-+MG,+38022-300",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AKAD+Academia+Av.+Fernando+Costa,+640+-+São+Benedito,+Uberaba+-+MG,+38022-300",
+    "recordId": "178434ed3b90"
+  },
+  {
+    "name": "Biotech Prime Academia",
+    "address": "Av. Nenê Sabino, 915 - Olinda, Uberaba - MG, 38055-500",
+    "phone": "(34) 3313-4335",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.7509921,
+    "lon": -47.9630886,
+    "sources": [
+      "totalhealth",
+      "cnpj",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7509921%2C-47.9630886",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7509921%2C-47.9630886",
+    "recordId": "bf1975aa5726"
+  },
+  {
+    "name": "Bluefit Uberaba Centro",
+    "address": "Av. Leopoldino de Oliveira, 2520 - Estados Unidos, Uberaba - MG, 38015-000",
+    "phone": "(11) 3392-3811",
+    "website": "https://www.bluefit.com.br/unidade/uberaba-centro",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.7515159,
+    "lon": -47.9261287,
+    "sources": [
+      "bluefit-cnpj",
+      "wellhub",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7515159%2C-47.9261287",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7515159%2C-47.9261287",
+    "recordId": "a5fa1a968d4b"
+  },
+  {
+    "name": "Center Prime Fitness",
+    "address": "Rua João Dallacqua, 420 - Beija-Flor, Uberaba - MG, 38051-331",
+    "phone": "(34) 3073-7306",
+    "website": "https://www.facebook.com/centerprimefitness/",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.75391,
+    "lon": -47.987688,
+    "sources": [
+      "exa-places",
+      "applocal",
+      "cnpj"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.75391%2C-47.987688",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.75391%2C-47.987688",
+    "recordId": "5f07a8529b57"
+  },
+  {
+    "name": "CrossFit Zebu",
+    "address": "Rua Doutor Silvério José Bernardes, 29, Uberaba - MG",
+    "phone": "",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "CrossFit",
+    "lat": -19.7497508,
+    "lon": -47.9454191,
+    "sources": [
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7497508%2C-47.9454191",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7497508%2C-47.9454191",
+    "recordId": "c927a474cc95"
+  },
+  {
+    "name": "CT Conectados",
+    "address": "Alameda Vereador Júlio César de Rezende, 84, Uberaba - MG",
+    "phone": "",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.74255,
+    "lon": -47.9263966,
+    "sources": [
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.74255%2C-47.9263966",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.74255%2C-47.9263966",
+    "recordId": "8ece0a9880cb"
+  },
+  {
+    "name": "Dumont Crossfit",
+    "address": "Av. Santos Dumont, 2899, Uberaba - MG",
+    "phone": "",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "CrossFit",
+    "lat": -19.7622593,
+    "lon": -47.9586911,
+    "sources": [
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7622593%2C-47.9586911",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7622593%2C-47.9586911",
+    "recordId": "9709d55394e0"
+  },
+  {
+    "name": "Fitsse / Academia em Uberaba",
+    "address": "Rua da Constituição, 364, Uberaba - MG, 38022-130",
+    "phone": "",
+    "website": "https://www.fitsse.com.br/",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.75584,
+    "lon": -47.93602,
+    "sources": [
+      "exa-places"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.75584%2C-47.93602",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.75584%2C-47.93602",
+    "recordId": "8b467eeee376"
+  },
+  {
+    "name": "Praça Cross Training",
+    "address": "Uberaba - MG",
+    "phone": "",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "CrossFit / Functional",
+    "lat": -19.7369782,
+    "lon": -47.9446958,
+    "sources": [
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7369782%2C-47.9446958",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7369782%2C-47.9446958",
+    "recordId": "b5aa4b3523e8"
+  },
+  {
+    "name": "Prime Fit",
+    "address": "Uberaba - MG",
+    "phone": "",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.7624532,
+    "lon": -47.9591925,
+    "sources": [
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7624532%2C-47.9591925",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7624532%2C-47.9591925",
+    "recordId": "a154030b53d6"
+  },
+  {
+    "name": "Smart Fit Mata do Ipê",
+    "address": "Av. Guilherme Ferreira, 1550 - São Benedito, Uberaba - MG, 38022-200",
+    "phone": "",
+    "website": "https://www.smartfit.com.br/academias/mata-do-ipe",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.7631048,
+    "lon": -47.9361921,
+    "sources": [
+      "smartfit-official",
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.7631048%2C-47.9361921",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.7631048%2C-47.9361921",
+    "recordId": "e9f68d38f7b2"
+  },
+  {
+    "name": "Smart Fit Uberaba (Santos Dumont)",
+    "address": "Av. Santos Dumont, 1000 - Santos Dumont, Uberaba - MG, 38050-590",
+    "phone": "",
+    "website": "https://www.smartfit.com.br/academias/uberaba",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "placeId": "ChIJzep4Z0I7WpMRch7doZ3dHPw",
+    "lat": -19.7517805,
+    "lon": -47.9453758,
+    "sources": [
+      "smartfit-official",
+      "osm",
+      "waze"
+    ],
+    "googleUrl": "https://www.google.com/maps/place/?q=place_id:ChIJzep4Z0I7WpMRch7doZ3dHPw",
+    "mapsUrl": "https://www.google.com/maps/place/?q=place_id:ChIJzep4Z0I7WpMRch7doZ3dHPw",
+    "recordId": "d35645c0933f"
+  },
+  {
+    "name": "Smart Fit Uberaba Av. N. S. do Desterro",
+    "address": "Av. Nossa Senhora do Desterro, 140 - Jardim Esplanada, Uberaba - MG, 38082-025",
+    "phone": "",
+    "website": "https://www.smartfit.com.br/academias/uberaba-av-n-s-do-desterro",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": null,
+    "lon": null,
+    "sources": [
+      "smartfit-official"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Smart+Fit+Uberaba+Av.+N.+S.+do+Desterro+Av.+Nossa+Senhora+do+Desterro,+140+-+Jardim+Esplanada,+Uberaba+-+MG,+38082-025",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Smart+Fit+Uberaba+Av.+N.+S.+do+Desterro+Av.+Nossa+Senhora+do+Desterro,+140+-+Jardim+Esplanada,+Uberaba+-+MG,+38082-025",
+    "recordId": "b8b2f65e749a"
+  },
+  {
+    "name": "Ótima Forma",
+    "address": "Uberaba - MG",
+    "phone": "",
+    "website": "",
+    "rating": null,
+    "reviewsCount": null,
+    "category": "Academia / Gym",
+    "lat": -19.759823,
+    "lon": -47.9274896,
+    "sources": [
+      "osm"
+    ],
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=-19.759823%2C-47.9274896",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-19.759823%2C-47.9274896",
+    "recordId": "5f7dc332c90f"
+  }
+]

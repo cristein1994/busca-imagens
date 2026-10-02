@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-10-02T23:57:23.411451+00:00",
+  "city": "Uberaba, MG, Brazil",
+  "queriesAttempted": [
+    "academia Uberaba",
+    "academia Uberaba MG",
+    "gym Uberaba",
+    "crossfit Uberaba",
+    "smart fit Uberaba",
+    "fitness Uberaba"
+  ],
+  "apify": {
+    "preferredActor": "compass/crawler-google-places",
+    "status": "FAILED",
+    "error": "Monthly usage hard limit exceeded (platform-feature-disabled)",
+    "alsoTried": [
+      "scraperlink/google-maps-scraper",
+      "apify/rag-web-browser"
+    ],
+    "maxTotalChargeUsdPlanned": 1.5,
+    "reportedVia": "Apify MCP report-problem"
+  },
+  "fallbackSources": [
+    "OpenStreetMap Overpass (leisure=fitness_centre bbox Uberaba)",
+    "Smart Fit official unit pages",
+    "Wellhub partner pages",
+    "Exa Places / Google Maps-derived public listings",
+    "Brand sites (DoctorFit, Studio Classic, CrossFit.com)",
+    "Public CNPJ / directory pages"
+  ],
+  "counts": {
+    "uniquePlaces": 33,
+    "withPhone": 22,
+    "withWebsite": 17,
+    "withRating": 17
+  },
+  "files": [
+    "uberaba-academias.json",
+    "uberaba-academias.csv",
+    "uberaba-academias-ios.csv",
+    "uberaba-academias.xlsx",
+    "uberaba-academias.html",
+    "uberaba-academias-runs.json",
+    "uberaba-academias-summary.json"
+  ]
+}
