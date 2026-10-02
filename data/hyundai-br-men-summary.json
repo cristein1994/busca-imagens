@@ -1,0 +1,17 @@
+{
+  "total": 78,
+  "men": 65,
+  "women": 13,
+  "unknown": 0,
+  "withEmail": 0,
+  "note": "HarvestAPI linkedin-company-employees free-tier limit exceeded; used linkedin-profile-search with currentCompanies=hyundai-motor-company + locations=Brazil. No separate LinkedIn page for Hyundai Motor Brasil (companyId 825160 resolves to global Hyundai Motor Company). Classification via Brazilian first-name heuristics.",
+  "method": "brazilian-first-name-heuristics",
+  "companyLinkedInUrl": "https://www.linkedin.com/company/hyundai-motor-company/",
+  "companyId": "825160",
+  "relatedCompany": {
+    "name": "Grupo CAOA",
+    "linkedinUrl": "https://www.linkedin.com/company/caoa-do-brasil/",
+    "employeeCount": 5984,
+    "note": "Hyundai distributor/conglomerate in Brazil (not the Motor Brasil factory entity)"
+  }
+}

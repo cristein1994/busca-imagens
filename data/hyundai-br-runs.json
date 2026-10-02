@@ -1,0 +1,63 @@
+{
+  "company": {
+    "name": "Hyundai Motor Brasil (via Hyundai Motor Company + Brazil)",
+    "linkedinUrl": "https://www.linkedin.com/company/hyundai-motor-company/",
+    "companyId": "825160",
+    "website": "https://www.hyundai.com.br/",
+    "employeeCountLinkedInGlobal": 67147,
+    "linkedInSearchTotalBrazilApprox": 5202,
+    "scrapedUnique": 78,
+    "note": "No dedicated LinkedIn company page for Hyundai Motor Brasil; profiles use companyId 825160 (hyundai-motor-company). Grupo CAOA (caoa-do-brasil) is the related distributor conglomerate."
+  },
+  "actors": {
+    "companyLookup": {
+      "actor": "harvestapi/linkedin-company",
+      "runId": "kEf0ak74bFrK89Rvp",
+      "datasetId": "D8w0mTpnhV7pxcy9H"
+    },
+    "peopleSearchShortP1": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "OP5RFuqqvKg2m8Dbv",
+      "datasetId": "wC1MRcbGDbZfgvsp8",
+      "items": 25
+    },
+    "peopleSearchShortP2": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "f6lnF8epaVKPLtumL",
+      "datasetId": "mloPkKyPIbuyxUC8d",
+      "items": 25
+    },
+    "peopleSearchShortP6": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "C4u6KEhdK8yehvepc",
+      "datasetId": "irvlgG0hcqIdxh5g1",
+      "items": 25
+    },
+    "peopleSearchFuzzy": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "spp4ykHrdQNvbpK0v",
+      "datasetId": "t7sViGI8cNqxeBnc0",
+      "items": 25
+    },
+    "employeesBlocked": {
+      "actor": "harvestapi/linkedin-company-employees",
+      "status": "free user run limit exceeded"
+    },
+    "emailEnrichmentBlocked": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "mode": "Full + email search",
+      "status": "free user run limit reached"
+    }
+  },
+  "uniquePeople": 78,
+  "men": 65,
+  "women": 13,
+  "unknown": 0,
+  "withEmail": 0,
+  "notes": [
+    "Official Hyundai Motor Brasil LinkedIn resolves to global Hyundai Motor Company (825160).",
+    "Related: Grupo CAOA https://www.linkedin.com/company/caoa-do-brasil/ (5984 employees).",
+    "Scraped Short profiles via profile-search (company filter + Brazil). Free-tier caps stopped further pages and email enrichment.",
+    "Men filter uses Brazilian first-name heuristics (no gender field in source)."
+  ]
+}
