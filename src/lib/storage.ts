@@ -1,8 +1,8 @@
 import type { Character, Instructions, SavedPreset, StudioState } from '../types/studio'
 import { blankCharacter, blankInstructions, blankTask } from './defaults'
 
-const STORAGE_KEY = 'promptor_studio_v2'
-const LEGACY_KEY = 'promptor_studio_v1'
+const STORAGE_KEY = 'promptor_studio_v3'
+const LEGACY_KEYS = ['promptor_studio_v2', 'promptor_studio_v1']
 
 function normalizeCharacter(raw: Partial<Character> | undefined): Character {
   return { ...blankCharacter(), ...(raw ?? {}) }
@@ -19,7 +19,10 @@ function normalizePreset(preset: SavedPreset): SavedPreset {
 
 export function loadStudioState(): StudioState | null {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_KEY)
+    const raw =
+      localStorage.getItem(STORAGE_KEY) ??
+      LEGACY_KEYS.map((k) => localStorage.getItem(k)).find(Boolean) ??
+      null
     if (!raw) return null
     const parsed = JSON.parse(raw) as StudioState
     if (!parsed.character || !parsed.instructions || !parsed.task) return null
