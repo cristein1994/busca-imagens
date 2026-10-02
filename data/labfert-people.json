@@ -1,0 +1,672 @@
+[
+  {
+    "fullName": "Fernando Borges",
+    "headline": "Engenheiro Químico",
+    "title": "Gerente",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/fernando-borges-4497a9186",
+    "email": "fborges@labfert.agr.br",
+    "phone": null
+  },
+  {
+    "fullName": "Thiago Torres",
+    "headline": "Gerente Regional - Sul | Instrutor de Laboratório | Processos Químicos | Análises Instrumentais | Controle de Qualidade | Gestão de Pessoas",
+    "title": "Gerente Regional - Sul",
+    "company": "Labfert",
+    "location": "Paranaguá, Paraná, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/thiago-torres-37359a119",
+    "email": "t.torres@labfert.agr.br",
+    "phone": null
+  },
+  {
+    "fullName": "Ana Carolina Pontes Barbosa",
+    "headline": "Analista de Laboratório Sênior",
+    "title": "Analista de garantia de qualidade sênior",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ana-carolina-pontes-barbosa-056441254",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Ana Claudia Caixeta",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert - Analises de Solos, Tecidos Vegetais e Fertilizantes",
+    "location": "Serrania, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADCHKisBdYMBfBWCh8ECkvVIvY3KdK6FLEE",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Ana Cristina Silva",
+    "headline": "Assistente administrativo",
+    "title": "Assistente administrativo",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAEv7WdMBlAHYmVbIPnXu6-kZBNtmmwHRFb0",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Ana Júlia Almeida",
+    "headline": "Analista de Laboratório",
+    "title": "Analista de Laboratório",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADvPCJgBj3KZIAktkq2k5BPfER-pBqbG2FI",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Andre Reis Dias",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAC21cK4BxjGEZoxocEe-eclzimUHXoLOCu8",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Anny Beatriz Corse Manzano",
+    "headline": "Analista júnior",
+    "title": "Analista júnior",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAGQZDPcBsvNpQ6JfqVJSP_PgcIaFDe-abho",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "ANTONIO PADUA LIMA",
+    "headline": "GERENTE ADMINISTRATIVO",
+    "title": "GERENTE ADMINISTRATIVO",
+    "company": "LABFERT ANALISES LTDA",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAA9tS0cBHiNG7Kve56mZeoH_wAj8ov_x63c",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Aurea Cristina",
+    "headline": "Técnico em Química",
+    "title": "Técnico em Química",
+    "company": "Labfert Análises",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAAdBShQBMG4PfJ4lVXgr-86kknkDPy_bK4M",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Beatriz Vilarim",
+    "headline": "Química  | Analista  | Bromatologia Animal | Agroquímica| Fertilizantes",
+    "title": "Analista",
+    "company": "Labfert",
+    "location": "Igarapava, São Paulo, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/beatriz-vilarim-b95661218",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Caduuu",
+    "headline": "Analista químico",
+    "title": "Analista químico",
+    "company": "Labfert",
+    "location": "Curitiba, Paraná, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAE72WmABFW_TCvK0lJQmtJFdOwTWs9WIXOk",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Cleide Barros",
+    "headline": "Administrativo",
+    "title": "Administrativo",
+    "company": "Labfert",
+    "location": "Recife, Pernambuco, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAAe9P8YBUjWmNlvcTYONssifDE-mXSyoF54",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "clenio queiroz de barros",
+    "headline": "Responsável tecnico/ escultor",
+    "title": "Responsável tecnico/ escultor",
+    "company": "Labfert-laboratório ambiental/profissional liberal",
+    "location": "Camaragibe, Pernambuco, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAABjSsEQBseq1xu7yjmSFbpdpKb4ZJXZRM3U",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Cédrick Philipe",
+    "headline": "Analista",
+    "title": "Analista",
+    "company": "Labfert",
+    "location": "Candeias, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAE9d9YYB7x3XN9PZKweJzTF5U19jXLtiMUQ",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Daniel S.",
+    "headline": "Pós-Graduado em Química Analítica- Faculdade Metropolitana do Estado de São Paulo",
+    "title": "Analista de Laboratório  Sênior",
+    "company": "Labfert",
+    "location": "Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/daniel-s-890476120",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Danila de Paula",
+    "headline": "Auxiliar Administrativo",
+    "title": "Auxiliar Administrativo",
+    "company": "Labfert Análises",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAA9DmjYBO9IGuBWx_BwaWO7fum549xXioIc",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Darlan Sarmento",
+    "headline": "Técnico pleno",
+    "title": "Técnico pleno",
+    "company": "Labfert",
+    "location": "Bonito, Pará, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADk6P5IBgVK1voJyLLsIWkbOe17uQ7CmaQY",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Darlan Sarmento",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Bonito, Pará, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAACXoU04ByxgltUSnt6Y09OWXxhk839ygt6A",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Eduardo Andrade",
+    "headline": "Auxiliar administrativo",
+    "title": "Auxiliar administrativo",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAF481b4BTWBAArOIAOfaieqif0mdpw9aTME",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Elis Fernanda dos Santos do Nascimento Pereira",
+    "headline": "Técnica em Recursos Humanos | Área Administrativa",
+    "title": "Assistente administrativo",
+    "company": "Labfert",
+    "location": "Paranaguá, Paraná, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/elis-fernanda-dos-santos-do-nascimento-pereira-1803a5115",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Ezequias Weriglis",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Candeias, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAGEGFn8BMJXbI4aFeKiQt5m3hkB01EuNUxw",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Fillipe Cruz",
+    "headline": "Oceanógrafo",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Rio Grande, Rio Grande do Sul, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/fillipe-cruz-1ba607214",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Gabriel Lacerda Campos",
+    "headline": "Gerente de Operações",
+    "title": "Gerente de operações laboratoriais",
+    "company": "LABFERT ANALISES LTDA",
+    "location": "Camaçari, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/gabriel-lacerda-campos-3bb2027b",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Gabriel Souza",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Portugal",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAC-0W38Bj5a0JmZlH039Jbr1M8ldsgI1a6U",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Gabriel ViIlar",
+    "headline": "Formado na UFTM - Universidade Federal do Triângulo Mineiro. Pós graduado UNIFEI- Universidade federal de Itajubá",
+    "title": "analista solos,foliar e alimento animal",
+    "company": "Labfert",
+    "location": "Pindamonhangaba, São Paulo, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/gabriel-viilar-b4611924b",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Gabriela Lemos",
+    "headline": "Técnica em Química",
+    "title": "Analista de laboratório Junior",
+    "company": "Labfert",
+    "location": "Camaçari, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/lemos04",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Giovanni Sousa",
+    "headline": "Técnico de laboratório",
+    "title": "Técnico de laboratório",
+    "company": "Labfert",
+    "location": "Itumbiara, Goiás, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAEVbdv8BUxlLC1FZ7yBgY4GVf2nFlz_gGD8",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Gracieti Juliani",
+    "headline": "Analista de Qualidade",
+    "title": "Supervisora de Laboratório de Meio Ambiente",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/gracieti-juliani-7665ab217",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Gracieti Juliani",
+    "headline": "Analista de Qualidade",
+    "title": "Supervisora de laboratório",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/gracieti-juliani-44aa88394",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Henrique Daniel Santos Silveira",
+    "headline": "Gerente de Laboratório (Fertilizantes) Unidade Bonito PA na LABFERT ANÁLISES",
+    "title": "Gerente de Laboratório (Fertilizantes) Unidade Bonito PA",
+    "company": "LABFERT ANÁLISES",
+    "location": "Capanema, Pará, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/henrique-daniel-santos-silveira-a241b759",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Henrique Gonçalves",
+    "headline": "Analista júnior",
+    "title": "Analista júnior",
+    "company": "labfert",
+    "location": "Paranaguá, Paraná, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADNMiDkBrtZkaqHR5PP38FGGY6ntZDSwHbQ",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Jenifer Santos",
+    "headline": "Bacharel em Ciências Biológicas | Laboratório de Meio Ambiente | Microbiologia | Controle de Qualidade | P&D",
+    "title": "Analista de laboratório Pleno",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/jenifersantosr",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Jhonathan Braga",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAGel9A8BJs8aWjoRWndQNq-W_9WE55CcUHc",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Jhonathan Braga",
+    "headline": "Auxiliar de laboratório",
+    "title": "Auxiliar de laboratório",
+    "company": "Labfert",
+    "location": "Bonito, Pará, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAC-aBvwBH2jrMeQnc6Zx5mcJxFYR_PzcqQs",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "joao max gomes",
+    "headline": "Analista de laboratório na Mejer óleos e gorduras Vegetais",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Bonito, Pará, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/joao-max-gomes-271527137",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Jobert Silva",
+    "headline": "Líder de equipe",
+    "title": "Líder de equipe",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADKAvkEBtU3XEZYlSx-LJlxlMcT3EqY0_g4",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "João Paulo Martins Locci",
+    "headline": "Analista químico",
+    "title": "Analista químico",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAGXSargBgl4SJhwOkEOrKmCyHVea3PlOvTo",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "João Paulo Oliveira",
+    "headline": "Preparador de amostra",
+    "title": "Preparador de amostra",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADy5PUIBBOlcNdPZm3whsq8UL63EtZrNXl8",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Juliane Severo",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Camaçari, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADD68KcBDW0LqKilch_K-i4zwihQySmH1EQ",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Kauane Siqueira",
+    "headline": "Analista de laboratório Pl",
+    "title": "Analista de laboratório Pl",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAD8EIAQBOZPU2hHCMZz_f6jLybmaDjABEuM",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Lauany Helena",
+    "headline": "--",
+    "title": "Assistente administrativo",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/lauany-helena-037239266",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Lavinia Rocha Pita",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Greater Salvador",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAEwfSZgB6R3DZr6QZUoeCCqT2jhXlTKVvRQ",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Liz Hellen",
+    "headline": "Gerente da qualidade",
+    "title": "Gerente da qualidade",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAFDvWeoBCqhy-yZ5KYe6WdsoVK_qFspPmYs",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Luana Silvano",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAE-K9H0B3K8vsMLEEALKTt_Ml1Fo66ZwDqw",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Lílian Pontes",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert análises",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAACMZ8oQB4djT37O-_HtL72Sd7ZwEaUMDbrs",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Maria Ivone",
+    "headline": "Analista de Laboratório Pleno",
+    "title": "Analista de Laboratório Pleno",
+    "company": "Labfert Análises",
+    "location": "Bonito, Pará, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADEFGfUBFDoypCfekxJR0ex-0p6a_ZU67B8",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Maria Oliveira",
+    "headline": "Supervisora de Laboratório | Controle de Qualidade | Fertilizantes | Eng. de Produção | Téc. em Agroindústria | Em evolução em Processos Químicos",
+    "title": "Supervisora de laboratório",
+    "company": "Labfert Análises",
+    "location": "São Luís, Maranhão, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/mariaioliveira20",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Marucia Costa",
+    "headline": "Analista de Laboratorio( Estágio)",
+    "title": "Analista de Laboratorio( Estágio)",
+    "company": "Labfert Análises de Fertilizantes e solos",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAADB1tMYB6kIqILRGPmqRIQbvhCXX2Qn7DAs",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Mauricea Honório",
+    "headline": "Técnico em química",
+    "title": "Técnico em química",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAACiMi6YBxunmt1Yee4yoYF2xPYTkucLecns",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Nayany Gomes Mendes",
+    "headline": "--",
+    "title": "Assistente administrativo",
+    "company": "Labfert",
+    "location": "Paranaguá, Paraná, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/nayany-gomes-mendes-39b12730a",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Paloma Gomes",
+    "headline": "Analista júnior",
+    "title": "Analista júnior",
+    "company": "Labfert",
+    "location": "Candeias, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAFDN4ncBSCIuJmOlO9hFEsEehDIkAC4_xj0",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Sabrina Cristina",
+    "headline": "Analista de laboratório Pl/ Graduanda em Licenciatura em Química",
+    "title": "Analista de laboratório pleno",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/sabrina-cristina-7a16ab357",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Sabrina Silva",
+    "headline": "Técnico de garantia de qualidade",
+    "title": "Técnico de garantia de qualidade",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAEaRCuwBwoOo4nScjrgUQT6raopbtSUYQqM",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Sara Candido",
+    "headline": "Feminina",
+    "title": "Assistente",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/saraacandido-b2b8671ba",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Sarah Maira",
+    "headline": "Analista Júnior",
+    "title": "Analista Júnior",
+    "company": "Labfert",
+    "location": "Candeias, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAFiQCiEB7k7rl7aEmb-RNC48yY0W4imPdbM",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Tainá Mendes",
+    "headline": "Analista de Laboratório Sênior",
+    "title": "Analista de Laboratório Sênior",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAD_4VRkBenJhzLueMUDntEMTKFh2hH6dA-4",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Tiago Henrique da Silva",
+    "headline": "Supervisor",
+    "title": "Supervisor",
+    "company": "Labfert",
+    "location": "Aramina, São Paulo, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAABvtHvABVYBJOswJoqEU3Iew4KToZpBzILw",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Tiago Labfert",
+    "headline": "Gerente de Laboratório",
+    "title": "Gerente de Laboratório",
+    "company": "Labfert",
+    "location": "Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAABJYQgsBS2_0zSXhh01lpZCIMDLin5BVXCM",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Verônica Ramos da cruz RAMOS",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Camaçari, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAC0JTu0BOpqgZ03PhXR-aL1btGkMcwnasto",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Victor Tsutsui",
+    "headline": "Frequentou a instituição de ensino Uniube - Universidade de Uberaba",
+    "title": "Information Technology Specialist",
+    "company": "Labfert análises",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/victor-tsutsui-ab0982351",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "VINICIOS MARGATO",
+    "headline": "CEO & Founder | Margato Consultoria",
+    "title": "CEO & Founder",
+    "company": "Margato Consultoria",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/vinicios-margato-1b1b8861",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Vitória Viana dos Santos",
+    "headline": "Analista químico",
+    "title": "Analista químico",
+    "company": "Labfert",
+    "location": "Camaçari, Bahia, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAD4OiMQBvptAKOIcImrBCsHQmRGnJ-MwLj0",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Wendre Fernando",
+    "headline": "Diretor administrativo na Labfert Analises",
+    "title": "Diretor administrativo",
+    "company": "Labfert Analises",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/wendre-fernando-135625388",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Wesley Ribeiro",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAAEAPCHYBnThsuE9zRiTzh6TEBLdW4roarc4",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Yasmin Barretos",
+    "headline": "Analista de laboratório",
+    "title": "Analista de laboratório",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ACwAABzwex8BA_bylrocWkmvvv6rmjsVuXHiiDE",
+    "email": null,
+    "phone": null
+  },
+  {
+    "fullName": "Ítalo José Silva",
+    "headline": "Técnico químico",
+    "title": "Técnico químico",
+    "company": "Labfert",
+    "location": "Uberaba, Minas Gerais, Brazil",
+    "linkedinUrl": "https://www.linkedin.com/in/ítalo-josé-silva-a09983435",
+    "email": null,
+    "phone": null
+  }
+]

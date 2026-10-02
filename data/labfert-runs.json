@@ -1,0 +1,54 @@
+{
+  "company": {
+    "name": "Labfert",
+    "linkedinUrl": "https://www.linkedin.com/company/labfert/",
+    "website": "http://labfert.agr.br",
+    "employeeCountLinkedIn": 67,
+    "companyPhone": "(34) 3314.3980"
+  },
+  "actors": {
+    "companyLookup": {
+      "actor": "harvestapi/linkedin-company",
+      "runId": "fGi6p9Q8rj3rqWfB7",
+      "datasetId": "6F7FxDMxldcWhndoe"
+    },
+    "employeesFullEmail": {
+      "actor": "harvestapi/linkedin-company-employees",
+      "runId": "Fc4OsUxTZUJUnBzkP",
+      "datasetId": "4nQTc6dl1mJZFe8vv",
+      "items": 10
+    },
+    "peopleSearchFullEmail": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "t9rG4lf3yMiWAfvd9",
+      "datasetId": "RTbdt2hFNJasXtruj",
+      "items": 24
+    },
+    "peopleSearchShortP1": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "HyT3lX51fRWrOXTrK",
+      "datasetId": "jcqU5jItXgLSvfMIh",
+      "items": 25
+    },
+    "peopleSearchShortP2": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "uFPdMJY0NhM0KZorN",
+      "datasetId": "H00dh6dQ3yheZNs7b",
+      "items": 25
+    },
+    "peopleSearchShortP3": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "runId": "Svlk5iiK7eocAhO9k",
+      "datasetId": "ndjyRurfdYqARri7E",
+      "items": 17
+    }
+  },
+  "uniquePeople": 67,
+  "withEmail": 2,
+  "notes": [
+    "LinkedIn reports ~67 employees; short search returned 67 page slots across 3 pages (some duplicate-name distinct profiles).",
+    "Email enrichment (Full + email) found 2 deliverable emails.",
+    "No personal phones returned; company HQ phone is (34) 3314.3980.",
+    "Short-mode URLs may be LinkedIn member IDs (ACwAA...); vanity URLs preferred when available from Full mode."
+  ]
+}
