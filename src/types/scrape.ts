@@ -1,4 +1,4 @@
-export type ScrapeMode = 'profile' | 'search' | 'company' | 'jobs'
+export type ScrapeMode = 'contacts' | 'profile' | 'search' | 'company' | 'jobs'
 
 export type ScrapeResult = {
   mode: ScrapeMode
@@ -9,6 +9,11 @@ export type ScrapeResult = {
   datasetId?: string
   itemCount: number
   items: Record<string, unknown>[]
+  enrichments?: {
+    email: boolean
+    phone: boolean
+    phoneMatches: number
+  }
 }
 
 export type HealthResponse = {
@@ -25,6 +30,12 @@ export type ModeConfig = {
 }
 
 export const MODES: ModeConfig[] = [
+  {
+    id: 'contacts',
+    label: 'Contatos',
+    blurb: 'Usuários com e-mail e telefone (enrichment Apify).',
+    actor: 'dev_fusion + email + phone enrich',
+  },
   {
     id: 'profile',
     label: 'Perfis',

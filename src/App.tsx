@@ -6,23 +6,34 @@ import styles from './App.module.css'
 
 type FormState = {
   query: string
+  searchQuery: string
   location: string
   maxItems: number
   datePosted: string
   profileMode: string
   searches: string
+  includeEmail: boolean
+  includePhone: boolean
+  onlyWithEmail: boolean
+  onlyWithPhone: boolean
 }
 
 const INITIAL: FormState = {
   query: '',
+  searchQuery: '',
   location: 'Brazil',
   maxItems: 10,
   datePosted: 'pastMonth',
-  profileMode: 'Short',
+  profileMode: 'Full + email search',
   searches: '',
+  includeEmail: true,
+  includePhone: true,
+  onlyWithEmail: false,
+  onlyWithPhone: false,
 }
 
 const PLACEHOLDERS: Record<ScrapeMode, string> = {
+  contacts: 'https://www.linkedin.com/in/williamhgates\noutro-perfil',
   profile: 'https://www.linkedin.com/in/williamhgates\noutra-url-ou-slug',
   search: 'Software Engineer',
   company: 'https://www.linkedin.com/company/google',
@@ -30,7 +41,7 @@ const PLACEHOLDERS: Record<ScrapeMode, string> = {
 }
 
 export default function App() {
-  const [mode, setMode] = useState<ScrapeMode>('profile')
+  const [mode, setMode] = useState<ScrapeMode>('contacts')
   const [form, setForm] = useState<FormState>(INITIAL)
   const [health, setHealth] = useState<HealthResponse | null>(null)
   const [loading, setLoading] = useState(false)
@@ -61,6 +72,7 @@ export default function App() {
   }
 
   const active = MODES.find((m) => m.id === mode)!
+  const columns = result ? previewColumns(result.items, mode) : []
 
   return (
     <div className={styles.shell}>
@@ -68,10 +80,10 @@ export default function App() {
       <header className={styles.header}>
         <div className={styles.brandBlock}>
           <p className={styles.brand}>LINC SCRAPE</p>
-          <h1 className={styles.headline}>LinkedIn público, estruturado.</h1>
+          <h1 className={styles.headline}>Usuários, e-mail e telefone.</h1>
           <p className={styles.lede}>
-            Perfis, busca de pessoas, empresas e vagas via Actors Apify — sem cookie, token só no
-            servidor.
+            Contatos LinkedIn via Apify: perfil + busca de e-mail + enrichment de telefone. Token só
+            no servidor.
           </p>
         </div>
         <div className={styles.status}>
@@ -103,23 +115,58 @@ export default function App() {
           <p className={styles.panelBlurb}>{active.blurb}</p>
 
           <form className={styles.form} onSubmit={onSubmit}>
-            <label className={styles.label}>
-              {mode === 'profile'
-                ? 'URLs / slugs (um por linha)'
-                : mode === 'company'
-                  ? 'URLs de empresa (um por linha)'
-                  : mode === 'jobs'
-                    ? 'Keywords'
-                    : 'Termo de busca'}
-              <textarea
-                className={mode === 'profile' || mode === 'company' ? styles.textarea : styles.input}
-                rows={mode === 'profile' || mode === 'company' ? 4 : 1}
-                value={form.query}
-                onChange={(e) => setForm((f) => ({ ...f, query: e.target.value }))}
-                placeholder={PLACEHOLDERS[mode]}
-                required
-              />
-            </label>
+            {mode === 'contacts' ? (
+              <>
+                <label className={styles.label}>
+                  URLs de perfil (um por linha) — ou deixe vazio e use a busca
+                  <textarea
+                    className={styles.textarea}
+                    rows={4}
+                    value={form.query}
+                    onChange={(e) => setForm((f) => ({ ...f, query: e.target.value }))}
+                    placeholder={PLACEHOLDERS.contacts}
+                  />
+                </label>
+                <label className={styles.label}>
+                  Busca por cargo/skill (se não informar URLs)
+                  <input
+                    className={styles.input}
+                    value={form.searchQuery}
+                    onChange={(e) => setForm((f) => ({ ...f, searchQuery: e.target.value }))}
+                    placeholder="CTO, Recruiter, Software Engineer"
+                  />
+                </label>
+                <label className={styles.label}>
+                  Localização (busca)
+                  <input
+                    className={styles.input}
+                    value={form.location}
+                    onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
+                    placeholder="Brazil / São Paulo"
+                  />
+                </label>
+              </>
+            ) : (
+              <label className={styles.label}>
+                {mode === 'profile'
+                  ? 'URLs / slugs (um por linha)'
+                  : mode === 'company'
+                    ? 'URLs de empresa (um por linha)'
+                    : mode === 'jobs'
+                      ? 'Keywords'
+                      : 'Termo de busca'}
+                <textarea
+                  className={
+                    mode === 'profile' || mode === 'company' ? styles.textarea : styles.input
+                  }
+                  rows={mode === 'profile' || mode === 'company' ? 4 : 1}
+                  value={form.query}
+                  onChange={(e) => setForm((f) => ({ ...f, query: e.target.value }))}
+                  placeholder={PLACEHOLDERS[mode]}
+                  required
+                />
+              </label>
+            )}
 
             {mode === 'company' && (
               <label className={styles.label}>
@@ -160,6 +207,54 @@ export default function App() {
               </label>
             )}
 
+            {mode === 'profile' && (
+              <label className={styles.check}>
+                <input
+                  type="checkbox"
+                  checked={form.includeEmail}
+                  onChange={(e) => setForm((f) => ({ ...f, includeEmail: e.target.checked }))}
+                />
+                Buscar e-mail (~$0.01/perfil)
+              </label>
+            )}
+
+            {mode === 'contacts' && (
+              <div className={styles.checkGrid}>
+                <label className={styles.check}>
+                  <input
+                    type="checkbox"
+                    checked={form.includeEmail}
+                    onChange={(e) => setForm((f) => ({ ...f, includeEmail: e.target.checked }))}
+                  />
+                  E-mail
+                </label>
+                <label className={styles.check}>
+                  <input
+                    type="checkbox"
+                    checked={form.includePhone}
+                    onChange={(e) => setForm((f) => ({ ...f, includePhone: e.target.checked }))}
+                  />
+                  Telefone
+                </label>
+                <label className={styles.check}>
+                  <input
+                    type="checkbox"
+                    checked={form.onlyWithEmail}
+                    onChange={(e) => setForm((f) => ({ ...f, onlyWithEmail: e.target.checked }))}
+                  />
+                  Só com e-mail
+                </label>
+                <label className={styles.check}>
+                  <input
+                    type="checkbox"
+                    checked={form.onlyWithPhone}
+                    onChange={(e) => setForm((f) => ({ ...f, onlyWithPhone: e.target.checked }))}
+                  />
+                  Só com telefone
+                </label>
+              </div>
+            )}
+
             {mode === 'jobs' && (
               <label className={styles.label}>
                 Período
@@ -176,14 +271,14 @@ export default function App() {
               </label>
             )}
 
-            {(mode === 'search' || mode === 'jobs') && (
+            {(mode === 'search' || mode === 'jobs' || mode === 'contacts') && (
               <label className={styles.label}>
-                Limite (máx. 50)
+                Limite (máx. {mode === 'contacts' ? 25 : 50})
                 <input
                   className={styles.input}
                   type="number"
                   min={1}
-                  max={50}
+                  max={mode === 'contacts' ? 25 : 50}
                   value={form.maxItems}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, maxItems: Number(e.target.value) || 10 }))
@@ -194,7 +289,7 @@ export default function App() {
 
             <div className={styles.actions}>
               <button className={styles.cta} type="submit" disabled={loading || !health?.hasToken}>
-                {loading ? 'Scrapando…' : 'Rodar scrape'}
+                {loading ? 'Scrapando…' : mode === 'contacts' ? 'Buscar contatos' : 'Rodar scrape'}
               </button>
               {result && (
                 <>
@@ -230,21 +325,30 @@ export default function App() {
             {result && (
               <p className={styles.meta}>
                 {result.itemCount} itens · run {result.runId} · {result.status}
+                {result.enrichments
+                  ? ` · phones matched ${result.enrichments.phoneMatches}`
+                  : ''}
               </p>
             )}
           </div>
 
           {!result && !loading && (
-            <p className={styles.empty}>Nenhum scrape ainda. Escolha um modo e rode.</p>
+            <p className={styles.empty}>
+              Use Contatos para extrair e-mail e telefone de usuários LinkedIn.
+            </p>
           )}
-          {loading && <p className={styles.empty}>Aguardando Actor Apify…</p>}
+          {loading && (
+            <p className={styles.empty}>
+              Aguardando Actors Apify (e-mail e/ou telefone podem levar 1–3 min)…
+            </p>
+          )}
 
           {result && result.items.length > 0 && (
             <div className={styles.tableWrap}>
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    {previewColumns(result.items).map((col) => (
+                    {columns.map((col) => (
                       <th key={col}>{col}</th>
                     ))}
                   </tr>
@@ -252,7 +356,7 @@ export default function App() {
                 <tbody>
                   {result.items.map((item, i) => (
                     <tr key={i}>
-                      {previewColumns(result.items).map((col) => (
+                      {columns.map((col) => (
                         <td key={col}>{cellValue(item, col)}</td>
                       ))}
                     </tr>
@@ -263,7 +367,7 @@ export default function App() {
           )}
 
           {result && result.items.length === 0 && (
-            <p className={styles.empty}>Actor finalizou sem itens.</p>
+            <p className={styles.empty}>Actor finalizou sem itens (ou filtros removeram tudo).</p>
           )}
 
           {result && (
@@ -276,7 +380,8 @@ export default function App() {
       </main>
 
       <footer className={styles.footer}>
-        Dados públicos via Apify Store. Respeite os Termos do LinkedIn e limites de uso.
+        Cobertura de e-mail/telefone depende dos Actors Apify — nem todo perfil tem contato
+        encontrado. Use com APIFY_TOKEN e respeite os Termos do LinkedIn.
       </footer>
     </div>
   )
@@ -284,8 +389,22 @@ export default function App() {
 
 function buildBody(mode: ScrapeMode, form: FormState): Record<string, unknown> {
   switch (mode) {
+    case 'contacts':
+      return {
+        queries: form.query,
+        searchQuery: form.searchQuery.trim(),
+        locations: form.location ? [form.location] : [],
+        maxItems: form.maxItems,
+        includeEmail: form.includeEmail,
+        includePhone: form.includePhone,
+        onlyWithEmail: form.onlyWithEmail,
+        onlyWithPhone: form.onlyWithPhone,
+      }
     case 'profile':
-      return { queries: form.query }
+      return {
+        queries: form.query,
+        includeEmail: form.includeEmail,
+      }
     case 'search':
       return {
         searchQuery: form.query.trim(),
@@ -308,8 +427,20 @@ function buildBody(mode: ScrapeMode, form: FormState): Record<string, unknown> {
   }
 }
 
+const CONTACT_COLUMNS = [
+  'fullName',
+  'email',
+  'phone',
+  'headline',
+  'companyName',
+  'location',
+  'linkedinUrl',
+]
+
 const COLUMN_PREFS = [
   'fullName',
+  'email',
+  'phone',
   'firstName',
   'lastName',
   'headline',
@@ -326,19 +457,23 @@ const COLUMN_PREFS = [
   'description',
 ]
 
-function previewColumns(items: Record<string, unknown>[]): string[] {
+function previewColumns(items: Record<string, unknown>[], mode: ScrapeMode): string[] {
+  if (mode === 'contacts') {
+    const keys = new Set(items.flatMap((item) => Object.keys(item)))
+    return CONTACT_COLUMNS.filter((k) => keys.has(k))
+  }
   const keys = new Set<string>()
   for (const item of items.slice(0, 5)) {
     Object.keys(item).forEach((k) => keys.add(k))
   }
   const preferred = COLUMN_PREFS.filter((k) => keys.has(k))
-  if (preferred.length >= 3) return preferred.slice(0, 6)
-  return Array.from(keys).slice(0, 6)
+  if (preferred.length >= 3) return preferred.slice(0, 7)
+  return Array.from(keys).slice(0, 7)
 }
 
 function cellValue(item: Record<string, unknown>, col: string): string {
   const v = item[col]
-  if (v == null) return '—'
+  if (v == null || v === '') return '—'
   if (typeof v === 'object') return JSON.stringify(v).slice(0, 120)
   return String(v)
 }

@@ -6,14 +6,15 @@ Vite + React (UI) · Express + `apify-client` (API) · token só no servidor.
 
 ## O que scrapa
 
-| Modo | Actor Apify |
-|------|-------------|
-| Perfis | `harvestapi/linkedin-profile-scraper` |
-| Busca pessoas | `harvestapi/linkedin-profile-search` |
-| Empresas | `harvestapi/linkedin-company` |
-| Vagas | `curious_coder/linkedin-jobs-scraper` |
+| Modo | Actor Apify | Contato |
+|------|-------------|---------|
+| **Contatos** | HarvestAPI email (+ opcional `dev_fusion` / `x_guru` phone) | e-mail + telefone |
+| Perfis | `harvestapi/linkedin-profile-scraper` | e-mail opcional |
+| Busca pessoas | `harvestapi/linkedin-profile-search` | modo `Full + email search` |
+| Empresas | `harvestapi/linkedin-company` | — |
+| Vagas | `curious_coder/linkedin-jobs-scraper` | — |
 
-Não usa login/cookies do LinkedIn. Actors são pay-per-event na Apify (tier gratuito cobre testes pequenos).
+Não usa login/cookies do LinkedIn. Actors são pay-per-event na Apify (tier gratuito cobre testes pequenos). Cobertura de telefone/e-mail **não é 100%** — depende do enrichment.
 
 ## Setup
 
@@ -40,6 +41,7 @@ npm run dev
 
 ```http
 GET  /api/health
+POST /api/scrape/contacts
 POST /api/scrape/profile
 POST /api/scrape/search
 POST /api/scrape/company
@@ -48,12 +50,40 @@ POST /api/scrape/jobs
 
 ### Exemplos
 
+**Contatos (e-mail + telefone) por URL**
+
+```bash
+curl -s http://localhost:3001/api/scrape/contacts \
+  -H 'content-type: application/json' \
+  -d '{
+    "queries":["https://www.linkedin.com/in/williamhgates"],
+    "includeEmail": true,
+    "includePhone": true,
+    "maxItems": 5
+  }'
+```
+
+**Contatos por busca**
+
+```bash
+curl -s http://localhost:3001/api/scrape/contacts \
+  -H 'content-type: application/json' \
+  -d '{
+    "searchQuery":"Software Engineer",
+    "locations":["Brazil"],
+    "maxItems": 10,
+    "includeEmail": true,
+    "includePhone": true,
+    "onlyWithEmail": false
+  }'
+```
+
 **Perfil**
 
 ```bash
 curl -s http://localhost:3001/api/scrape/profile \
   -H 'content-type: application/json' \
-  -d '{"queries":["https://www.linkedin.com/in/williamhgates"]}'
+  -d '{"queries":["https://www.linkedin.com/in/williamhgates"],"includeEmail":true}'
 ```
 
 **Busca**
@@ -61,7 +91,7 @@ curl -s http://localhost:3001/api/scrape/profile \
 ```bash
 curl -s http://localhost:3001/api/scrape/search \
   -H 'content-type: application/json' \
-  -d '{"searchQuery":"Software Engineer","locations":["Brazil"],"maxItems":10}'
+  -d '{"searchQuery":"Software Engineer","locations":["Brazil"],"maxItems":10,"profileScraperMode":"Full + email search"}'
 ```
 
 **Empresa**
