@@ -1,0 +1,77 @@
+{
+  "company": {
+    "name": "Ecolab / Nalco Water (Brazil focus)",
+    "linkedinUrls": [
+      "https://www.linkedin.com/company/ecolab/",
+      "https://www.linkedin.com/company/nalco/"
+    ],
+    "companyIds": {
+      "ecolab": "4713",
+      "nalco": "5218"
+    },
+    "websites": {
+      "ecolab": "http://www.ecolab.com",
+      "nalco": "http://ecolab.com/nalco-water"
+    },
+    "employeeCountLinkedInGlobal": {
+      "ecolab": 50356,
+      "nalco": 12756
+    },
+    "relatedPage": {
+      "name": "Nalco Brasil Ltda",
+      "linkedinUrl": "https://www.linkedin.com/company/nalco-brasil-ltda/",
+      "employeeCount": 3,
+      "note": "Tiny inactive-looking page; not used for employee scrape"
+    },
+    "scrapedUnique": 49,
+    "note": "No dedicated Ecolab Brasil LinkedIn company page; Brazil profiles use global Ecolab (4713) and Nalco Water (5218 / universalName nalco). nalco-water URL resolves to nalco."
+  },
+  "actors": {
+    "companyLookup": {
+      "actor": "harvestapi/linkedin-company",
+      "runId": "Fnax0ogSwGWrB3n0n",
+      "datasetId": "rus2f0FdZgGD2o5GD",
+      "items": 7
+    },
+    "employeesBlocked": {
+      "actor": "harvestapi/linkedin-company-employees",
+      "runId": "iyIGvgFC9HoX2L60j",
+      "status": "free user run limit exceeded"
+    },
+    "profileSearchBlocked": {
+      "actor": "harvestapi/linkedin-profile-search",
+      "status": "Apify remaining usage $0.068 < Short page $0.10; later hard limit exceeded"
+    },
+    "memo23Aborted": {
+      "actor": "memo23/linkedin-company-employees-scraper",
+      "runId": "kVU2nBlUUk5vNIjrO",
+      "status": "ABORTED - maximum usage for billing cycle"
+    },
+    "aptMarbleEmpty": {
+      "actor": "apt_marble/linkedin-company-employees-scraper",
+      "runId": "ChVfcNcvmzNH0NPZh",
+      "items": 0
+    },
+    "publicDiscovery": {
+      "method": "public LinkedIn profile web search (Brazil-focused)",
+      "items": 49
+    },
+    "emailEnrichmentBlocked": {
+      "status": "Apify usage hard limit; not attempted"
+    }
+  },
+  "uniquePeople": 49,
+  "men": 39,
+  "women": 10,
+  "unknown": 0,
+  "withEmail": 0,
+  "notes": [
+    "Official Ecolab Brasil LinkedIn resolves to global Ecolab (4713).",
+    "Nalco Water LinkedIn is https://www.linkedin.com/company/nalco/ (5218); nalco-water slug redirects there.",
+    "Nalco Brasil Ltda page exists but has only ~3 employees and was not used for rostering.",
+    "HarvestAPI employees/profile-search unavailable due to free-tier/run and monthly usage limits after prior Labfert/Hyundai runs.",
+    "Roster built from company lookup + public LinkedIn discovery focused on Brazil current roles.",
+    "Men filter uses Brazilian first-name heuristics (no gender field in source).",
+    "Email enrichment not available under remaining Apify quota."
+  ]
+}

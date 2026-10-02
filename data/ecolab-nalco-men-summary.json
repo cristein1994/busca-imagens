@@ -1,0 +1,19 @@
+{
+  "total": 49,
+  "men": 39,
+  "women": 10,
+  "unknown": 0,
+  "withEmail": 0,
+  "note": "HarvestAPI linkedin-company-employees free-tier limit exceeded; linkedin-profile-search blocked by Apify monthly usage hard limit (~$0.07 remaining, Short page costs $0.10). Built Brazil-focused roster from public LinkedIn company lookup (HarvestAPI) + public web/LinkedIn profile discovery. Classification via Brazilian first-name heuristics. No email enrichment (budget/limit).",
+  "method": "brazilian-first-name-heuristics",
+  "companyLinkedInUrls": [
+    "https://www.linkedin.com/company/ecolab/",
+    "https://www.linkedin.com/company/nalco/",
+    "https://www.linkedin.com/company/nalco-brasil-ltda/"
+  ],
+  "companyIds": {
+    "ecolab": "4713",
+    "nalco": "5218",
+    "nalco-brasil-ltda": "40988023"
+  }
+}

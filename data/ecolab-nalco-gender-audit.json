@@ -1,0 +1,492 @@
+[
+  {
+    "fullName": "Alcides Tonhato Junior",
+    "firstName": "Alcides",
+    "genderGuess": "male",
+    "title": "Supervisor de área",
+    "location": "Piracicaba, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/alcides-tonhato-junior-82075a47",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Alexandre Ito",
+    "firstName": "Alexandre",
+    "genderGuess": "male",
+    "title": "Division Manager",
+    "location": "Campinas, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/alexandre-ito-6a479397",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Alfredo de Matos",
+    "firstName": "Alfredo",
+    "genderGuess": "male",
+    "title": "Vice President & Market Head Brazil",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/alfredo-de-matos-9a18a8",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Aline Costa",
+    "firstName": "Aline",
+    "genderGuess": "female",
+    "title": "Gerente de área",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/aline-pacheco-costa",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Amadeu Fabio Teles",
+    "firstName": "Amadeu",
+    "genderGuess": "male",
+    "title": "Representante de vendas / Representante de Distrito",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/amadeu-fabio-teles-a86ab9a6",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Andre Pereira",
+    "firstName": "Andre",
+    "genderGuess": "male",
+    "title": "District Account Manager",
+    "location": "São José dos Campos, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/andre-pereira-b3078175",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Bruno Bufallo",
+    "firstName": "Bruno",
+    "genderGuess": "male",
+    "title": "Representante de Serviços de Campo",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/brunobufallo",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Bruno Fabrini Marques",
+    "firstName": "Bruno",
+    "genderGuess": "male",
+    "title": "Director, Market Leader Latin America, Healthcare",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/bruno-fabrini-marques-9662498",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Bruno Nascimento",
+    "firstName": "Bruno",
+    "genderGuess": "male",
+    "title": "Sr HR Operations Manager (C&B, Payroll, HRIS and Labor Relations)",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/bruno-nascimento-4240869",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Célio Pimenta",
+    "firstName": "Célio",
+    "genderGuess": "male",
+    "title": "Gerente de desenvolvimento de projetos e negócios",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/celiopimenta",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Claudionor Serpa Neto",
+    "firstName": "Claudionor",
+    "genderGuess": "male",
+    "title": "Coordenador de operações",
+    "location": "Camaçari, Bahia, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/claudionor-serpa-neto-96bb3795",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Cristina Carla Galdino Martins",
+    "firstName": "Cristina",
+    "genderGuess": "female",
+    "title": "Coordenadora do Laboratório de Microbiologia",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/cristina-carla-galdino-martins-4a2a2424",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Diego Marchiori",
+    "firstName": "Diego",
+    "genderGuess": "male",
+    "title": "Controller (Gerente Sr)",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/diego-marchiori-74586b33",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Edson Leitão",
+    "firstName": "Edson",
+    "genderGuess": "male",
+    "title": "Técnico Químico / Representante de Distrito",
+    "location": "São Luís, Maranhão, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/edson-leit%C3%A3o-ab6b8992",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Eduardo Visoni Garcia",
+    "firstName": "Eduardo",
+    "genderGuess": "male",
+    "title": "Engenheiro de projetos sênior",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/eduardo-visoni-garcia-67977715b",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Erivelto Sartor Lima",
+    "firstName": "Erivelto",
+    "genderGuess": "male",
+    "title": "Corporate Account Director / Business Development Executive - Paper Brazil",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/erivelto-sartor-lima",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Evandro Nicolau",
+    "firstName": "Evandro",
+    "genderGuess": "male",
+    "title": "Technical Analyst Chemical Quality Control",
+    "location": "Mogi das Cruzes / Suzano, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/evandro-nicolau-2142193b",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Fabricia Costa",
+    "firstName": "Fabricia",
+    "genderGuess": "female",
+    "title": "Representante de Distrito",
+    "location": "Ananindeua, Pará, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/fabricia-costa-1a646bb5",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Fabrício Gomes Carvalho",
+    "firstName": "Fabrício",
+    "genderGuess": "male",
+    "title": "District Representative III",
+    "location": "Paraná, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/fabr%C3%ADcio-gomes-carvalho-775636211",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Felipe Amorim",
+    "firstName": "Felipe",
+    "genderGuess": "male",
+    "title": "Systems Application Specialist II",
+    "location": "Mogi Mirim, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/felipe-amorim-243a6b135",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Fernando Melo",
+    "firstName": "Fernando",
+    "genderGuess": "male",
+    "title": "Representante de Distrito",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/fernando-melo-5659254b",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Gabriel Molina",
+    "firstName": "Gabriel",
+    "genderGuess": "male",
+    "title": "Gerente de Distrito - Tissue, Utilities & Recovery",
+    "location": "Rio Grande do Sul, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/gabriel-molina-76133689",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Genisse Conceição",
+    "firstName": "Genisse",
+    "genderGuess": "female",
+    "title": "Representante técnico / Técnico responsável",
+    "location": "Guarulhos, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/genisse-concei%C3%A7%C3%A3o-b2a5791a5",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Gerusa Bartoli",
+    "firstName": "Gerusa",
+    "genderGuess": "female",
+    "title": "Gerente de Distrito - Chemical, Downstream & Power",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/gerusabartoli",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Giovana Covielo Figueiredo",
+    "firstName": "Giovana",
+    "genderGuess": "female",
+    "title": "Representante de Distrito",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/giovana-covielo-figueiredo",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Ivan Viana",
+    "firstName": "Ivan",
+    "genderGuess": "male",
+    "title": "Gerente de Supply Chain Finance",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/ivan-viana-45915434",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Jackson Frade",
+    "firstName": "Jackson",
+    "genderGuess": "male",
+    "title": "District Sales Representative",
+    "location": "Minas Gerais, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/jackson-frade-80b268143",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Jéssica Melo",
+    "firstName": "Jéssica",
+    "genderGuess": "female",
+    "title": "Corporate Account Manager Latin America South",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/j%C3%A9ssica-melo",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "João Rafael da Silva",
+    "firstName": "João",
+    "genderGuess": "male",
+    "title": "Supervisor de Serviço de Campo",
+    "location": "Campinas, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/jo%C3%A3o-rafael-da-silva-27a218aa",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Julio Pozzato",
+    "firstName": "Julio",
+    "genderGuess": "male",
+    "title": "Gerente Regional de Suporte Tecnico",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/julio-pozzato-71b74647",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Luan Amaro",
+    "firstName": "Luan",
+    "genderGuess": "male",
+    "title": "Técnico de O&M",
+    "location": "Rio de Janeiro / Paraná, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/luan-amaro96",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Marcus Magalhães",
+    "firstName": "Marcus",
+    "genderGuess": "male",
+    "title": "Digital & Technical Solutions Manager",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/marcus-magalh%C3%A3es-47209412a",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Matheus Carvalho",
+    "firstName": "Matheus",
+    "genderGuess": "male",
+    "title": "Account Manager (Food & Beverage Division)",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/matheus-carvalho-280790163",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Mayra Cavallaro Quitzau",
+    "firstName": "Mayra",
+    "genderGuess": "female",
+    "title": "Diretora de Divisão - Paper Brasil",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/mayra-cavallaro-quitzau-2a019b64",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Natalia Ferrari",
+    "firstName": "Natalia",
+    "genderGuess": "female",
+    "title": "Customer Services",
+    "location": "Suzano, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/natalia-ferrari-64936380",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Ney Souza",
+    "firstName": "Ney",
+    "genderGuess": "male",
+    "title": "Research, Development and Engineering Director",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/neywsouza",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "PAULO CESAR MARTELLI",
+    "firstName": "PAULO",
+    "genderGuess": "male",
+    "title": "Representante Técnico de Serviços (RTS)",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/paulo-cesar-martelli-a26572ba",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Rafael Souza",
+    "firstName": "Rafael",
+    "genderGuess": "male",
+    "title": "Marketing Director",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/rafael-souza-b4271432",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Renato Pudo",
+    "firstName": "Renato",
+    "genderGuess": "male",
+    "title": "Supply Chain Director",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/renato-pudo-pmp",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Ricardo Maciel",
+    "firstName": "Ricardo",
+    "genderGuess": "male",
+    "title": "Market Division Lead - Light Brasil",
+    "location": "São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/ricardo-maciel-32ba27a9",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Sérgio Da Silva",
+    "firstName": "Sérgio",
+    "genderGuess": "male",
+    "title": "Gerente de Operações / Plant Manager",
+    "location": "Suzano, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/sergioplantmanager",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Silvia Lopes",
+    "firstName": "Silvia",
+    "genderGuess": "female",
+    "title": "Gerente de Qualidade / QHSE Brasil",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/silvia-herartt-l-bara%C3%A7al",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Tarcisio Júnior",
+    "firstName": "Tarcisio",
+    "genderGuess": "male",
+    "title": "Area Manager - Water Treatment",
+    "location": "Mogi das Cruzes, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/tarcisio-j%C3%BAnior-a6ab996b",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Thiago Barreto",
+    "firstName": "Thiago",
+    "genderGuess": "male",
+    "title": "Accounting Supervisor",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/thiago-barreto-12a26538",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Tiago Felix",
+    "firstName": "Tiago",
+    "genderGuess": "male",
+    "title": "Gerente de Contas",
+    "location": "Ribeirão Pires, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/tiago-souza-felix",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Vanderlei Pereira",
+    "firstName": "Vanderlei",
+    "genderGuess": "male",
+    "title": "Representante de Distrito I",
+    "location": "Novo Horizonte, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/vanderlei-pereira-534b77158",
+    "company": "Nalco Water, An Ecolab Company"
+  },
+  {
+    "fullName": "Washington Foratini",
+    "firstName": "Washington",
+    "genderGuess": "male",
+    "title": "Business Development Manager / District Manager",
+    "location": "Belo Horizonte, Minas Gerais, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/washington-foratini-54271845",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Washington Nobre",
+    "firstName": "Washington",
+    "genderGuess": "male",
+    "title": "Gerente Nacional de Vendas / Area Manager Brazil",
+    "location": "São Paulo, São Paulo, Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/washingtonnobre",
+    "company": "Ecolab"
+  },
+  {
+    "fullName": "Willians Yogui",
+    "firstName": "Willians",
+    "genderGuess": "male",
+    "title": "Engineering Manager",
+    "location": "Brazil",
+    "email": null,
+    "linkedinUrl": "https://www.linkedin.com/in/yoguifilho",
+    "company": "Ecolab"
+  }
+]
