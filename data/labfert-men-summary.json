@@ -1,0 +1,8 @@
+{
+  "total": 67,
+  "men": 31,
+  "women": 35,
+  "unknown": 1,
+  "note": "HarvestAPI linkedin-company-employees and linkedin-profile-search have no gender filter. Classification via Brazilian first-name heuristics. No gender field in source data.",
+  "method": "brazilian-first-name-heuristics"
+}
