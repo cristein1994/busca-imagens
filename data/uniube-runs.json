@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-10-03T18:18:13.714710+00:00",
+  "schoolPages": [
+    {
+      "name": "Uniube - Universidade de Uberaba",
+      "linkedinUrl": "https://www.linkedin.com/school/uniubeoficial",
+      "aliases": [
+        "Uniube",
+        "Universidade de Uberaba",
+        "UNIUBE"
+      ],
+      "notes": "Primary school page referenced across student education sections."
+    },
+    {
+      "name": "Universidade de Uberaba",
+      "linkedinUrl": "https://www.linkedin.com/school/university-of-uberaba",
+      "aliases": [
+        "University of Uberaba"
+      ],
+      "notes": "Alternate school slug seen on some profiles (e.g. Talitha Ferreira)."
+    },
+    {
+      "name": "Núcleo de Inovação Tecnológica Universidade de Uberaba - Uniube",
+      "linkedinUrl": "https://www.linkedin.com/company/n-cleo-de-inova-o-tecnol-gica-universidade-de-uberaba-uniube",
+      "aliases": [
+        "NIT Uniube"
+      ],
+      "notes": "Related company page (research/innovation), not the main school."
+    }
+  ],
+  "apify": {
+    "attempted": [
+      {
+        "actor": "harvestapi/linkedin-company",
+        "purpose": "Lookup Uniube school/company pages",
+        "status": "FAILED",
+        "error": "Monthly usage hard limit exceeded"
+      },
+      {
+        "actor": "harvestapi/linkedin-profile-search",
+        "purpose": "People search schools=Uniube / query Uniube + Uberaba",
+        "status": "SKIPPED",
+        "error": "Monthly usage hard limit exceeded (same account quota)"
+      },
+      {
+        "actor": "apify/rag-web-browser",
+        "purpose": "Fallback web discovery via Apify",
+        "status": "FAILED",
+        "error": "Monthly usage hard limit exceeded"
+      }
+    ],
+    "spendUsd": 0
+  },
+  "fallbackSources": [
+    "Public LinkedIn-indexed search snippets (WebSearch)",
+    "Exa public person cards when LinkedIn vanity missing"
+  ],
+  "counts": {
+    "people": 50,
+    "students": 33,
+    "alumni": 17,
+    "unknownStatus": 0,
+    "men": 24,
+    "women": 26,
+    "genderUnknown": 0,
+    "withLinkedInUrl": 49,
+    "withEmail": 0
+  }
+}

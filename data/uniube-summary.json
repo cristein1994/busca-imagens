@@ -1,0 +1,67 @@
+{
+  "query": "Estuda na Uniube — LinkedIn people (students + alumni)",
+  "school": "Universidade de Uberaba (Uniube), Uberaba/MG, Brazil",
+  "schoolPages": [
+    {
+      "name": "Uniube - Universidade de Uberaba",
+      "linkedinUrl": "https://www.linkedin.com/school/uniubeoficial",
+      "aliases": [
+        "Uniube",
+        "Universidade de Uberaba",
+        "UNIUBE"
+      ],
+      "notes": "Primary school page referenced across student education sections."
+    },
+    {
+      "name": "Universidade de Uberaba",
+      "linkedinUrl": "https://www.linkedin.com/school/university-of-uberaba",
+      "aliases": [
+        "University of Uberaba"
+      ],
+      "notes": "Alternate school slug seen on some profiles (e.g. Talitha Ferreira)."
+    },
+    {
+      "name": "Núcleo de Inovação Tecnológica Universidade de Uberaba - Uniube",
+      "linkedinUrl": "https://www.linkedin.com/company/n-cleo-de-inova-o-tecnol-gica-universidade-de-uberaba-uniube",
+      "aliases": [
+        "NIT Uniube"
+      ],
+      "notes": "Related company page (research/innovation), not the main school."
+    }
+  ],
+  "method": "Apify HarvestAPI blocked by monthly hard limit; fallback to public LinkedIn-indexed web discovery.",
+  "counts": {
+    "people": 50,
+    "students": 33,
+    "alumni": 17,
+    "unknownStatus": 0,
+    "men": 24,
+    "women": 26,
+    "genderUnknown": 0,
+    "withLinkedInUrl": 49,
+    "withEmail": 0
+  },
+  "genderMethod": "brazilian-first-name-heuristics",
+  "primaryExport": "data/uniube-students-ios.csv",
+  "files": [
+    "uniube-people.json",
+    "uniube-people.csv",
+    "uniube-people-ios.csv",
+    "uniube-men.json",
+    "uniube-men.csv",
+    "uniube-men-ios.csv",
+    "uniube-students-ios.csv",
+    "uniube-people.xlsx",
+    "uniube-people.html",
+    "uniube-men.html",
+    "runs.json",
+    "summary.json"
+  ],
+  "notes": [
+    "Legitimate public data only; no LinkedIn login/cookies.",
+    "Prefer current students; alumni included and labeled.",
+    "Emails not available in public snippets (none found).",
+    "Gender filter is heuristic only — keep full list as source of truth.",
+    "Generated 2026-10-03T18:18:13.714710+00:00"
+  ]
+}
