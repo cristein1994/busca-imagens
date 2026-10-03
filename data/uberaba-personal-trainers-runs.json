@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-10-03T17:58:53.450837+00:00",
+  "city": "Uberaba, MG, Brazil",
+  "queriesAttempted": [
+    "personal trainer Uberaba",
+    "personal training Uberaba MG",
+    "estúdio personal Uberaba",
+    "personal Uberaba",
+    "musculação personal Uberaba"
+  ],
+  "apify": {
+    "preferredActor": "compass/crawler-google-places",
+    "status": "FAILED",
+    "error": "Monthly usage hard limit exceeded (platform-feature-disabled)",
+    "alsoTried": [
+      "apify/rag-web-browser"
+    ],
+    "maxTotalChargeUsdPlanned": 1.5,
+    "reportedVia": "Apify MCP report-problem"
+  },
+  "fallbackSources": [
+    "Exa Places / Google Maps-derived public listings",
+    "DoctorFit / Braga Prime Fit / Studio TR10 brand sites",
+    "Wellhub partner pages (DoctorFit, Clínica Korpus)",
+    "GuiaFix personal trainer directory",
+    "Public CNPJ / directory pages (academiaspertodemim, GuiaPJ)",
+    "OpenStreetMap Nominatim geocoding"
+  ],
+  "excludedAsFalsePositives": [
+    "KM Coaching Uberaba (career/life coaching miscategorized)",
+    "Estúdio de Danças Emerson Patricio (dance studio)",
+    "Be2you Personal Studio (same address as active DoctorFit)",
+    "DS Fit Trainer CNPJ at Braga Prime Fit address (superseded brand)"
+  ],
+  "counts": {
+    "uniquePlaces": 21,
+    "withPhone": 21,
+    "withWebsite": 13,
+    "withRating": 14
+  },
+  "files": [
+    "uberaba-personal-trainers.json",
+    "uberaba-personal-trainers.csv",
+    "uberaba-personal-trainers-ios.csv",
+    "uberaba-personal-trainers.xlsx",
+    "uberaba-personal-trainers.html",
+    "uberaba-personal-trainers-runs.json",
+    "uberaba-personal-trainers-summary.json"
+  ],
+  "osmOverpass": "unavailable_or_blocked_from_environment"
+}

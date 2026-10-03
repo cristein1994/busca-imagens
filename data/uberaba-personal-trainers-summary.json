@@ -1,0 +1,67 @@
+{
+  "title": "Personal trainers / estúdios em Uberaba/MG",
+  "uniquePlaces": 21,
+  "withPhone": 21,
+  "withWebsite": 13,
+  "withRating": 14,
+  "apifyStatus": "blocked_monthly_limit",
+  "primarySources": [
+    "Exa Places / Google Maps-derived public listings",
+    "DoctorFit / Braga Prime Fit / Studio TR10 brand sites",
+    "Wellhub partner pages (DoctorFit, Clínica Korpus)",
+    "GuiaFix personal trainer directory",
+    "Public CNPJ / directory pages (academiaspertodemim, GuiaPJ)"
+  ],
+  "topByReviews": [
+    {
+      "name": "Studio Persona Sense",
+      "rating": 5.0,
+      "reviewsCount": 86
+    },
+    {
+      "name": "Studio TR10",
+      "rating": 4.9,
+      "reviewsCount": 58
+    },
+    {
+      "name": "Ótima Forma",
+      "rating": 5.0,
+      "reviewsCount": 34
+    },
+    {
+      "name": "DoctorFit Uberaba",
+      "rating": 5.0,
+      "reviewsCount": 31
+    },
+    {
+      "name": "Marcelo Mansur - Nutricionista e Personal Trainer",
+      "rating": 5.0,
+      "reviewsCount": 17
+    },
+    {
+      "name": "W.THOMAZ PERSONAL GYM",
+      "rating": 5.0,
+      "reviewsCount": 13
+    },
+    {
+      "name": "To Move Studio Fitness",
+      "rating": 5.0,
+      "reviewsCount": 9
+    },
+    {
+      "name": "Única Pilates Fitness e Saúde",
+      "rating": 5.0,
+      "reviewsCount": 7
+    },
+    {
+      "name": "Thaíz Altiva Personal Trainer - Estúdio de Treinamento",
+      "rating": 4.7,
+      "reviewsCount": 7
+    },
+    {
+      "name": "Lucas Reis Personal Trainer",
+      "rating": 5.0,
+      "reviewsCount": 6
+    }
+  ]
+}
