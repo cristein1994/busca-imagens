@@ -106,31 +106,47 @@ def _generate_on_space(space: str, req: GenerateRequest) -> tuple[bytes, str, fl
     w = _snap_size(req.width)
     h = _snap_size(req.height)
 
-    # Prefer the multimodalart-style /generate endpoint used by NikAgs.
-    try:
-        result = client.predict(
-            req.prompt,
-            req.negative_prompt,
-            float(req.seed),
-            False,
-            float(w),
-            float(h),
-            float(req.guidance_scale),
-            float(req.num_inference_steps),
-            api_name="/generate",
-        )
-    except Exception:
-        # fantasticstar-style /generate_image
-        result = client.predict(
-            req.prompt,
-            req.negative_prompt,
-            float(min(req.num_inference_steps, 40)),
-            float(req.guidance_scale),
-            str(w),
-            str(h),
-            float(req.seed),
-            api_name="/generate_image",
-        )
+    errors: list[str] = []
+    # Try known Chroma Space endpoint shapes in order.
+    attempts = [
+        (
+            "/generate",
+            (
+                req.prompt,
+                req.negative_prompt,
+                float(req.seed),
+                False,
+                float(w),
+                float(h),
+                float(req.guidance_scale),
+                float(req.num_inference_steps),
+            ),
+        ),
+        (
+            "/generate_image",
+            (
+                req.prompt,
+                req.negative_prompt,
+                float(min(req.num_inference_steps, 40)),
+                float(req.guidance_scale),
+                str(w),
+                str(h),
+                float(req.seed),
+            ),
+        ),
+    ]
+
+    result: Any | None = None
+    for api_name, args in attempts:
+        try:
+            result = client.predict(*args, api_name=api_name)
+            break
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{api_name}: {exc}")
+            continue
+
+    if result is None:
+        raise RuntimeError("; ".join(errors) or f"No usable endpoint on {space}")
 
     data, mime = _to_image_bytes(result)
     return data, mime, time.time() - t0
