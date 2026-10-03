@@ -1,0 +1,19 @@
+export default function MoonMark({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <circle cx="24" cy="24" r="22" fill="#161b24" stroke="#b8955a" strokeWidth="1.4" />
+      <path
+        d="M30.5 10.8c-2.2 2.6-3.5 6-3.5 9.7 0 8.2 6.4 14.9 14.4 15.5-2.4 4.4-7.1 7.4-12.4 7.4-8 0-14.5-6.7-14.5-15S21 13.4 29 13.4c.5 0 1 0 1.5.1Z"
+        fill="#f0e6c8"
+      />
+      <circle cx="18.5" cy="20" r="2.2" fill="#2a4a8a" />
+      <circle cx="18.5" cy="20" r="1" fill="#d4b06e" />
+    </svg>
+  );
+}

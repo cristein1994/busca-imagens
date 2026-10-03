@@ -1,0 +1,31 @@
+{
+  "name": "wii-lua",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Wii Lua · Ateliê Lunar — playground de Lua no navegador (projeto wii)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "verify:runtime": "node scripts/verify-runtime.mjs"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "fengari": "^0.1.4",
+    "monaco-editor": "^0.52.2",
+    "next": "16.3.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

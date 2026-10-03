@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --night: #0e1218;
+  --night-soft: #161b24;
+  --paper: #f3ead8;
+  --paper-edge: #e4d6b8;
+  --moon: #f0e6c8;
+  --brass: #b8955a;
+  --brass-hot: #d4b06e;
+  --sapphire: #2a4a8a;
+  --sapphire-lit: #3d68c4;
+  --ink: #1c1914;
+  --ink-soft: #4a4338;
+  --moss: #3d7a5a;
+  --clay: #b54a3c;
+  --foam: #efe6d4;
+  --line: rgba(184, 149, 90, 0.28);
+  --background: #0e1218;
+  --foreground: #efe6d4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--night);
+  color: var(--foam);
+}
+
+.sky {
+  background:
+    radial-gradient(ellipse 42% 36% at 88% 8%, rgba(240, 230, 200, 0.16), transparent 58%),
+    radial-gradient(ellipse 50% 40% at 8% 92%, rgba(42, 74, 138, 0.38), transparent 55%),
+    radial-gradient(ellipse 28% 22% at 70% 70%, rgba(184, 149, 90, 0.08), transparent 60%),
+    linear-gradient(165deg, #121821 0%, #0e1218 48%, #141018 100%);
+}
+
+.stars {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(240, 230, 200, 0.7), transparent),
+    radial-gradient(1px 1px at 28% 72%, rgba(240, 230, 200, 0.45), transparent),
+    radial-gradient(1.4px 1.4px at 63% 24%, rgba(240, 230, 200, 0.8), transparent),
+    radial-gradient(1px 1px at 81% 61%, rgba(240, 230, 200, 0.35), transparent),
+    radial-gradient(1px 1px at 47% 88%, rgba(240, 230, 200, 0.5), transparent),
+    radial-gradient(1.2px 1.2px at 91% 36%, rgba(212, 176, 110, 0.55), transparent);
+}
+
+.paper-grain {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(184, 149, 90, 0.08), transparent 36%),
+    linear-gradient(180deg, rgba(28, 25, 20, 0.03), transparent 28%);
+}
+
+.rule {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    rgba(42, 74, 138, 0.08) 28px
+  );
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 176, 110, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 28px 2px rgba(212, 176, 110, 0.22);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-rise-delay {
+  animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+.animate-moon {
+  animation: glow 7s ease-in-out infinite;
+}
+
+::selection {
+  background: rgba(42, 74, 138, 0.28);
+  color: var(--moon);
+}
+
+.luneta-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.luneta-scroll::-webkit-scrollbar-thumb {
+  background: rgba(184, 149, 90, 0.35);
+  border-radius: 99px;
+}
