@@ -880,8 +880,8 @@ def sanitize_field(value: str, delimiter: str) -> str:
         return ""
     s = str(value).replace("\r", " ").replace("\n", " ").strip()
     if delimiter and delimiter in s:
-        s = s.replace(delimiter, " — ")
-    return s.replace('"', "'")
+        s = s.replace(delimiter + " ", " — ").replace(delimiter, " — ")
+    return " ".join(s.replace('"', "'").split())
 
 
 def write_csv(path: Path, rows: list[dict], delimiter: str = ",") -> None:
