@@ -1,13 +1,16 @@
 {
-  "name": "promptor",
+  "name": "chroma-studio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "python3 -m uvicorn server.main:app --host 0.0.0.0 --port 8787",
+    "dev:all": "npm run dev:api & npm run dev",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:demo": "python3 scripts/generate_demo.py"
   },
   "dependencies": {
     "react": "^19.2.8",

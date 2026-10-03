@@ -1,45 +1,57 @@
-# PROMPTOR
+# CHROMA Studio
 
-Gerador de **prompts completos** com personalização de **personagens de IA** e **instruções de sistema**.
+Runner do **Lodestones Chroma1-HD** (8.9B, Apache 2.0) — modelo text-to-image derivado do **FLUX.1-schnell** com modificações arquiteturais.
 
-SPA em Vite + React + TypeScript. Tudo roda no navegador — sem backend e sem API key.
+## Por que via Hugging Face Space?
 
-## Funcionalidades
+Esta VM de Cloud Agent **não tem GPU** e só tem ~5 GB de RAM livre. Carregar Chroma1-HD + T5-XXL localmente não cabe. A API em `server/` encaminha a geração para Spaces públicos que hospedam `lodestones/Chroma1-HD`.
 
-- **Personagem**: nome, arquétipo, papel, tom, heat/safadeza, atração, dinâmica, corpo, kinks, voz, background, limites
-- **Instruções**: missão, público, formato de saída, raciocínio, regras, must-include / must-avoid, critérios de sucesso
-- **Tarefa**: objetivo, contexto, extensão e criatividade
-- **Prompt ao vivo** em modo completo ou compacto (inclui diretivas NSFW quando heat > SFW)
-- **Presets** SFW + **Safadeza gay** (personagens e pacotes explícitos 21+)
-- **Biblioteca local** (localStorage): salvar, carregar, apagar, importar/exportar JSON e baixar Markdown
-- Copiar para a área de transferência
-
-> Conteúdo adulto opcional é ficção entre adultos (21+). Nada envolvendo menores.
-
-## Instalação e execução
-
-```bash
-npm install
-npm run dev
-```
-
-Abra o endereço indicado (geralmente `http://localhost:5173`).
-
-## Scripts
-
-| Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+> Pollinations `model=chroma` **não** é o Chroma da Lodestones (cai no fallback `sana`). Aqui usamos o modelo real.
 
 ## Stack
 
-- Vite + React 19 + TypeScript
-- CSS Modules + design tokens
-- Persistência via `localStorage`
+- Vite + React 19 + TypeScript (UI)
+- FastAPI + `gradio_client` (proxy de inferência)
+- Modelo: [lodestones/Chroma1-HD](https://huggingface.co/lodestones/Chroma1-HD)
+
+## Como rodar
+
+```bash
+# deps
+npm install
+pip3 install -r server/requirements.txt
+
+# API (porta 8787)
+npm run dev:api
+
+# UI (porta 5173) — em outro terminal
+npm run dev
+```
+
+Abra `http://localhost:5173`.
+
+### Gerar demo CLI
+
+```bash
+python3 scripts/generate_demo.py
+```
+
+## Variáveis
+
+Veja `.env.example`:
+
+- `CHROMA_SPACES` — lista de Spaces (padrão: `NikAgs/Chroma1-HD,fantasticstar/Chroma1-HD`)
+
+## Detalhes do modelo
+
+| Item | Valor |
+|------|--------|
+| Parâmetros | 8.9B |
+| Base | FLUX.1-schnell (modificado) |
+| Licença | Apache 2.0 |
+| Equipe | Lodestones |
+| Pipeline | `diffusers.ChromaPipeline` / ComfyUI |
 
 ## Licença
 
-Projeto de demonstração / uso pessoal.
+Código deste playground: uso pessoal / demo. Pesos do modelo: Apache 2.0 (Lodestones).
