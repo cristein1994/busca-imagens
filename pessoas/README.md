@@ -1,5 +1,8 @@
 # Pessoas — organização de conteúdo
 
+**Índice pessoa × chats:** [`INDICE_CHATS.md`](INDICE_CHATS.md)
+
+
 Espelho local da estrutura no Google Drive: **[13_Pessoas](https://drive.google.com/drive/folders/1J7QmPqs1oW1Y0ovYqa59jdx8wYJuki4L)**
 
 ## Pastas
@@ -35,3 +38,7 @@ A API não pôde mover (sem write nos arquivos antigos) nem criar Docs (cota che
 | Mateus | Alvo2_Mateus_Sousa_Freitas_OSINT.txt | https://drive.google.com/file/d/1fudQ2nPssuCGk_9s2u97x9ArBURWjMWH/view |
 | Venâncio | venancio_antonelli_dias_completo.txt | https://drive.google.com/file/d/12e0vJ9Yed7knMKS33VcFcpqyuI97Pkoh/view |
 | Venâncio | Venancio_Antonelli_Dias_OSINT.txt | https://drive.google.com/file/d/1qD-aSyEZ9p9KZop_41d31rjfMTGXPF-i/view |
+
+## Índice por chats (2026-10-03)
+
+Cada pasta tem `03_Notas/CHATS.md` com links dos agents Cursor. Upload para o Drive falhou (`storageQuotaExceeded`) — índice só no repo por enquanto.
