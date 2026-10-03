@@ -1,0 +1,39 @@
+{
+  "title": "Uber em Uberaba / MG — presença pública",
+  "status": {
+    "rides_active": true,
+    "uber_eats_promoted": true,
+    "uber_envios_promoted": true,
+    "greenlight_or_espaco_uber_local": false,
+    "cnpj_branch": "baixada",
+    "launch_date_reported": "2016-12-14",
+    "municipal_regulation": "Lei 12.963/2018",
+    "drivers_reported_by_prefeitura_2018": 1500
+  },
+  "counts": {
+    "people": 6,
+    "places_pages": 9,
+    "combined": 15,
+    "people_with_linkedin": 6,
+    "places_with_website": 9,
+    "corporate_staff_uberaba": 0,
+    "greenlight_hubs_uberaba": 0
+  },
+  "apifyStatus": "blocked_monthly_limit",
+  "primarySources": [
+    "Cursor WebSearch / WebFetch",
+    "Official Uber city / drive / courier / airport pages",
+    "Public LinkedIn profile snippets (Google/Bing indexed)",
+    "Public CNPJ directories (EmpresaDois / Econodata)",
+    "G1 Triângulo Mineiro; Diário do Transporte",
+    "99 city page (competitor context only)"
+  ],
+  "keyFindings": [
+    "Uber rides operate in Uberaba (official city + driver pages; airport UBA).",
+    "Uber Eats and Uber Envios are promoted for Uberaba on official Uber pages.",
+    "No public Espaço Uber / Greenlight hub found in Uberaba.",
+    "Uber Brasil CNPJ branch 17.895.646/0072-70 at Av. Guilherme Ferreira 1760 is BAIXADA.",
+    "6 public LinkedIn partner-driver profiles located in Uberaba; no local corporate Uber staff found.",
+    "99 also has a city driver page; nearest Casa99 listed in Belo Horizonte."
+  ]
+}

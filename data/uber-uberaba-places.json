@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Uber — cidade Uberaba",
+    "title": "Página oficial da cidade (passageiros)",
+    "type": "uber_city_page",
+    "address": "Uberaba, MG, Brasil",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://www.uber.com/global/pt-br/r/cities/uberaba-mg-br/",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Confirma app disponível 24/7; destinos populares (Shopping, ABCZ, Praça Rui Barbosa); menciona Uber Eats."
+  },
+  {
+    "name": "Uber — cadastro motorista Uberaba",
+    "title": "Página de signup para motoristas parceiros",
+    "type": "driver_signup",
+    "address": "Uberaba, MG, Brasil",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://www.uber.com/br/pt-br/e/drive/uberaba-mg-br/",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Cadastro aberto para motoristas; também promove entregas Uber Eats (2 ou 4 rodas). Requisitos: CNH, veículo elegível, checagem de segurança, 1+ ano experiência."
+  },
+  {
+    "name": "Uber Envios — Uberaba",
+    "title": "Courier / entregas locais",
+    "type": "uber_courier_page",
+    "address": "Uberaba, MG, Brasil",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://www.uber.com/br/pt-br/b/courier-services/uberaba-mg-br/",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Uber Envios / Uber Direct / opções moto e carro anunciadas para Uberaba."
+  },
+  {
+    "name": "Uber — Aeroporto de Uberaba (UBA)",
+    "title": "Página aeroporto / pickup",
+    "type": "uber_airport_page",
+    "address": "Aeroporto Mário de Almeida Franco (UBA), Uberaba, MG",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://www.uber.com/global/pt-br/r/airports/uba/?id=542",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Lista opções UberX, Priority, Uber Mulher, Moto; preços médios ilustrativos. Página oficial mistura texto de endereço com Ubá em um trecho — tratar UBA como Aeroporto de Uberaba."
+  },
+  {
+    "name": "UBER DO BRASIL TECNOLOGIA LTDA. (filial Uberaba)",
+    "title": "Filial CNPJ baixada",
+    "type": "corporate_branch_closed",
+    "address": "Avenida Guilherme Ferreira, 1760 - São Benedito, Uberaba - MG, 38022-200",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://empresadois.com.br/cnpj/uber-do-brasil-tecnologia-ltda-17895646007270",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "CNPJ 17.895.646/0072-70; abertura 27/11/2019; situação BAIXADA (não é hub ativo). CNAE intermediação/agenciamento. Fonte: registros públicos CNPJ (EmpresaDois/Econodata)."
+  },
+  {
+    "name": "Uber Greenlight / Espaço Uber Uberaba",
+    "title": "Hub presencial parceiros",
+    "type": "greenlight_hub",
+    "address": "",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://www.uber.com/br/pt-br/drive/contact/",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Nenhum Espaço Uber / Greenlight público listado para Uberaba. Suporte presencial em grandes cidades (ex.: SP Barra Funda); checar app parceiro > Ajuda > Agendar atendimento presencial."
+  },
+  {
+    "name": "G1 — Uber inicia operações em Uberaba",
+    "title": "Notícia de lançamento (14/12/2016)",
+    "type": "news",
+    "address": "Uberaba, MG",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://g1.globo.com/minas-gerais/triangulo-mineiro/noticia/2016/12/uber-inicia-oficialmente-operacoes-em-uberaba.html",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Lançamento oficial 14/12/2016 às 14h; modalidade inicial mais barata; pagamento só cartão no início. Sedest alertou sobre legislação local."
+  },
+  {
+    "name": "Diário do Transporte — regulamentação apps Uberaba",
+    "title": "Notícia regulamentação municipal (2018)",
+    "type": "news",
+    "address": "Uberaba, MG",
+    "location": "Uberaba, MG",
+    "phone": "",
+    "website": "https://diariodotransporte.com.br/2018/11/20/transporte-por-aplicativo-e-regulamentado-em-uberaba/",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "Lei municipal 12.963/2018; Prefeitura citou ~1.500 motoristas cadastrados no Uber à época; regras para Uber/99."
+  },
+  {
+    "name": "99 — cidade Uberaba (contexto concorrente)",
+    "title": "Cadastro motorista 99 em Uberaba",
+    "type": "competitor_city_page",
+    "address": "Uberaba, MG",
+    "location": "Uberaba, MG",
+    "phone": "0300 313 2421",
+    "website": "https://99app.com/cidades/mg/uberaba/",
+    "linkedinUrl": "",
+    "email": "",
+    "notes": "99 opera em Uberaba (99Pop/99Táxi). Casa99 presencial mais próxima listada em BH (não há hub 99 em Uberaba)."
+  }
+]
