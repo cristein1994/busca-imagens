@@ -1,0 +1,137 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 16, 24, 0.55);
+  display: grid;
+  place-items: end center;
+  padding: 0;
+  z-index: 40;
+}
+
+.panel {
+  width: min(560px, 100%);
+  max-height: min(92vh, 820px);
+  overflow: auto;
+  background: #fffafb;
+  border-radius: 12px 12px 0 0;
+  padding: 1.25rem 1.15rem 1.5rem;
+  box-shadow: var(--shadow);
+  animation: rise-in 0.35s ease both;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.head p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+.close {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.grid div {
+  margin: 0;
+}
+
+.grid dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.grid dd {
+  margin: 0.2rem 0 0;
+}
+
+.block {
+  margin-bottom: 0.9rem;
+}
+
+.block h3 {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.block p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.1rem 0 0.75rem;
+}
+
+.primary,
+.ghost {
+  text-decoration: none;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+}
+
+.primary {
+  background: var(--ok);
+  color: #fff;
+}
+
+.ghost {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: #fff;
+}
+
+.warn {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+@media (min-width: 720px) {
+  .backdrop {
+    place-items: center;
+    padding: 1.5rem;
+  }
+
+  .panel {
+    border-radius: calc(var(--radius) + 4px);
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
