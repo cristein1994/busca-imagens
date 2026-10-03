@@ -8,6 +8,7 @@ type Created = {
   targetUrl: string;
   label: string | null;
   smartLogger: boolean;
+  hasPhoto?: boolean;
   trackUrl: string;
   imageUrl: string;
   dashboardUrl: string;
@@ -17,6 +18,7 @@ export function CreateLinkForm() {
   const [url, setUrl] = useState("");
   const [label, setLabel] = useState("");
   const [smartLogger, setSmartLogger] = useState(true);
+  const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [created, setCreated] = useState<Created | null>(null);
@@ -26,11 +28,21 @@ export function CreateLinkForm() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/links", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, label, smartLogger }),
-      });
+      let res: Response;
+      if (image) {
+        const form = new FormData();
+        form.set("url", url);
+        form.set("label", label);
+        form.set("smartLogger", String(smartLogger));
+        form.set("image", image);
+        res = await fetch("/api/links", { method: "POST", body: form });
+      } else {
+        res = await fetch("/api/links", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, label, smartLogger }),
+        });
+      }
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Falha ao criar link");
       setCreated(data);
@@ -72,6 +84,14 @@ export function CreateLinkForm() {
             maxLength={80}
           />
         </label>
+        <label>
+          Foto no image logger (opcional)
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
+          />
+        </label>
         <label className="check">
           <input
             type="checkbox"
@@ -104,9 +124,25 @@ export function CreateLinkForm() {
             </div>
           </div>
           <div className="copy-box">
-            <strong>2) Image logger (pixel)</strong>
+            <strong>
+              2) Image logger {created.hasPhoto ? "(sua foto + track)" : "(pixel)"}
+            </strong>
             <code>{created.imageUrl}</code>
-            <code>{`<img src="${created.imageUrl}" width="1" height="1" alt="" />`}</code>
+            {created.hasPhoto ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={created.imageUrl}
+                alt="logger preview"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: 220,
+                  borderRadius: 8,
+                  marginTop: 8,
+                }}
+              />
+            ) : (
+              <code>{`<img src="${created.imageUrl}" width="1" height="1" alt="" />`}</code>
+            )}
             <div className="actions">
               <button
                 type="button"
