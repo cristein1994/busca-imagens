@@ -21,7 +21,12 @@ export function filterProfiles(profiles: GpProfile[], f: GpFilters): GpProfile[]
   }
 
   if (f.servesMen) {
-    list = list.filter((p) => p.serves.some((s) => s.toLowerCase().includes('homem')))
+    list = list.filter((p) =>
+      p.serves.some((s) => {
+        const t = s.toLowerCase()
+        return t.includes('homens') || t.includes('homem') || t === 'gays' || t === 'h'
+      }),
+    )
   }
 
   if (f.hasLocalOnly) {

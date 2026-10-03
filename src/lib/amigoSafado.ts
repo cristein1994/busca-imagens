@@ -11,12 +11,19 @@ function isAtivo(p: GpProfile): boolean {
   return p.position === 'ativo' || p.position === 'ativo-liberal'
 }
 
+function servesHomens(p: GpProfile): boolean {
+  return p.serves.some((s) => {
+    const t = s.toLowerCase()
+    return t.includes('homens') || t.includes('homem') || t === 'gays' || t === 'h'
+  })
+}
+
 function scoreForMamar(p: GpProfile, cityHint?: string): number {
   let s = p.sizeCm * 10
   if (isAtivo(p)) s += 40
   if (p.position === 'versatil') s -= 25
   if (p.position === 'passivo') s -= 50
-  if (p.serves.some((x) => x.includes('homem'))) s += 20
+  if (servesHomens(p)) s += 20
   else s -= 40
   if (cityHint && p.city.toLowerCase().includes(cityHint.toLowerCase())) s += 30
   if (p.tags.includes('pra-mamar') || p.tags.includes('dotado')) s += 10
@@ -37,7 +44,7 @@ export function pickTop(
     .filter((p) => p.age >= 21)
     .filter((p) => p.sizeCm >= minCm)
     .filter((p) => (onlyAtivo ? isAtivo(p) : true))
-    .filter((p) => p.serves.some((s) => s.includes('homem')))
+    .filter((p) => servesHomens(p))
     .sort((a, b) => scoreForMamar(b, city) - scoreForMamar(a, city))
     .slice(0, n)
 }
