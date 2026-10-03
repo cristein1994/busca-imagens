@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-10-03T18:23:02.212339+00:00",
+  "queryTypoNote": "User wrote 'uftn'. No Brazilian HEI named UFTN found. Closest names: UFNT (Universidade Federal do Norte do Tocantins) and UFT (Universidade Federal do Tocantins). Given prior Uberaba/Uniube scrapes, target is UFTM.",
+  "schoolPages": [
+    {
+      "name": "UFTM - Universidade Federal do Triângulo Mineiro",
+      "linkedinUrl": "https://www.linkedin.com/school/uftmsocial",
+      "aliases": [
+        "UFTM",
+        "Universidade Federal do Triângulo Mineiro",
+        "Federal University of Triângulo Mineiro"
+      ],
+      "notes": "Primary school page referenced across student education sections."
+    },
+    {
+      "name": "Universidade Federal do Triângulo Mineiro",
+      "linkedinUrl": "https://www.linkedin.com/school/universidade-federal-do-tri-ngulo-mineiro",
+      "aliases": [
+        "Universidade Federal do Triângulo Mineiro"
+      ],
+      "notes": "Alternate school slug seen on some profiles (e.g. Nyna Marques)."
+    },
+    {
+      "name": "UFTM (company)",
+      "linkedinUrl": "https://www.linkedin.com/company/uftmsocial",
+      "aliases": [
+        "linkedin.com/company/6853500",
+        "uftmsocial"
+      ],
+      "notes": "Institutional company/page used by some education entries."
+    }
+  ],
+  "apify": {
+    "attempted": [
+      {
+        "actor": "harvestapi/linkedin-profile-search",
+        "purpose": "People search schools=UFTM / Universidade Federal do Triângulo Mineiro",
+        "status": "FAILED",
+        "error": "Monthly usage hard limit exceeded"
+      },
+      {
+        "actor": "apify/web-fetch",
+        "purpose": "Fetch school page uftmsocial",
+        "status": "FAILED",
+        "error": "Monthly usage hard limit exceeded"
+      }
+    ],
+    "spendUsd": 0
+  },
+  "fallbackSources": [
+    "Public LinkedIn-indexed search snippets (WebSearch)",
+    "Public LinkedIn profile cards when available"
+  ],
+  "counts": {
+    "people": 57,
+    "students": 43,
+    "alumni": 14,
+    "unknownStatus": 0,
+    "men": 19,
+    "women": 38,
+    "genderUnknown": 0,
+    "withLinkedInUrl": 57,
+    "withEmail": 0,
+    "studentsMen": 15
+  }
+}
