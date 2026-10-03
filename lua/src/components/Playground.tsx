@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import MoonMark from "@/components/MoonMark";
 import OutputPanel from "@/components/OutputPanel";
@@ -25,38 +25,75 @@ const LuaEditor = dynamic(() => import("@/components/LuaEditor"), {
 const STORAGE_KEY = "wii-lua:source";
 const STORAGE_SNIPPET = "wii-lua:snippet";
 
+const firstSnippet = snippetById(DEFAULT_SNIPPET_ID) ?? SNIPPETS[0];
+
+type Draft = { source: string; activeId: string };
+
+const fallbackDraft: Draft = { source: firstSnippet.source, activeId: firstSnippet.id };
+let draftSnapshot: Draft = fallbackDraft;
+const draftListeners = new Set<() => void>();
+
+function loadDraft(): Draft {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const snippetId = localStorage.getItem(STORAGE_SNIPPET);
+    if (saved && saved.trim().length > 0) {
+      return {
+        source: saved,
+        activeId: snippetId && snippetById(snippetId) ? snippetId : "",
+      };
+    }
+  } catch {
+    /* ignore quota / private mode */
+  }
+  return fallbackDraft;
+}
+
+function sameDraft(a: Draft, b: Draft) {
+  return a.source === b.source && a.activeId === b.activeId;
+}
+
+function readDraft(): Draft {
+  const next = loadDraft();
+  if (sameDraft(draftSnapshot, next)) return draftSnapshot;
+  draftSnapshot = next;
+  return draftSnapshot;
+}
+
+function subscribeDraft(onChange: () => void) {
+  draftListeners.add(onChange);
+  return () => {
+    draftListeners.delete(onChange);
+  };
+}
+
+function writeDraft(next: Draft) {
+  if (sameDraft(draftSnapshot, next)) return;
+  draftSnapshot = next;
+  try {
+    localStorage.setItem(STORAGE_KEY, next.source);
+    localStorage.setItem(STORAGE_SNIPPET, next.activeId);
+  } catch {
+    /* ignore */
+  }
+  draftListeners.forEach((fn) => fn());
+}
+
 export default function Playground() {
-  const first = snippetById(DEFAULT_SNIPPET_ID) ?? SNIPPETS[0];
-  const [source, setSource] = useState(first.source);
-  const [activeId, setActiveId] = useState(first.id);
+  const draft = useSyncExternalStore(subscribeDraft, readDraft, () => fallbackDraft);
+  const source = draft.source;
+  const activeId = draft.activeId;
   const [result, setResult] = useState<RunResponse | null>(null);
   const [running, setRunning] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      const snippetId = localStorage.getItem(STORAGE_SNIPPET);
-      if (saved && saved.trim().length > 0) {
-        setSource(saved);
-        setActiveId(snippetId && snippetById(snippetId) ? snippetId : "");
-      }
-    } catch {
-      /* ignore quota / private mode */
-    }
-    setHydrated(true);
+  const setSource = useCallback((next: string) => {
+    writeDraft({ source: next, activeId: "" });
   }, []);
 
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, source);
-      localStorage.setItem(STORAGE_SNIPPET, activeId);
-    } catch {
-      /* ignore */
-    }
-  }, [source, activeId, hydrated]);
+  const setActiveSnippet = useCallback((snippet: Snippet) => {
+    writeDraft({ source: snippet.source, activeId: snippet.id });
+  }, []);
 
   const run = useCallback(async () => {
     setRunning(true);
@@ -87,8 +124,7 @@ export default function Playground() {
   }, [source]);
 
   function pickSnippet(snippet: Snippet) {
-    setActiveId(snippet.id);
-    setSource(snippet.source);
+    setActiveSnippet(snippet);
     setResult(null);
   }
 
@@ -97,8 +133,8 @@ export default function Playground() {
   }
 
   function resetCaderno() {
-    const snippet = snippetById(activeId) ?? first;
-    setSource(snippet.source);
+    const snippet = snippetById(activeId) ?? firstSnippet;
+    writeDraft({ source: snippet.source, activeId: snippet.id });
     setResult(null);
   }
 
@@ -138,7 +174,7 @@ export default function Playground() {
           </div>
         </header>
 
-        <div className="animate-rise-delay grid min-h-0 flex-1 grid-cols-1 overflow-hidden rounded-2xl border border-[var(--line)] bg-[rgba(14,18,24,0.45)] lg:grid-cols-[240px_minmax(0,1fr)_minmax(280px,360px)]">
+        <div className="animate-rise-delay grid min-h-0 flex-1 grid-cols-1 overflow-hidden rounded-2xl border border-[var(--line)] bg-[rgba(14,18,24,0.45)] lg:min-h-[calc(100dvh-11rem)] lg:grid-cols-[240px_minmax(0,1fr)_minmax(280px,360px)]">
           <div className="min-h-[220px] lg:min-h-0">
             <SnippetRail snippets={SNIPPETS} activeId={activeId} onPick={pickSnippet} />
           </div>
@@ -180,12 +216,15 @@ export default function Playground() {
                 </button>
               </div>
             </div>
-            <div className="paper-grain min-h-0 flex-1">
+            <div className="paper-grain relative min-h-0 flex-1">
+              <div
+                className="pointer-events-none absolute inset-y-0 left-0 z-10 w-2.5 bg-gradient-to-r from-[#b8955a]/35 to-transparent"
+                aria-hidden
+              />
               <LuaEditor
                 value={source}
                 onChange={(next) => {
                   setSource(next);
-                  setActiveId("");
                 }}
                 highlightLine={result?.line ?? null}
                 onRun={() => {

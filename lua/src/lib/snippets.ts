@@ -142,9 +142,9 @@ end
 `,
   },
   {
-    id: "luneta",
-    title: "Luneta",
-    blurb: "Metatable e __tostring",
+    id: "metatable",
+    title: "Metatable",
+    blurb: "Objeto com __tostring",
     phase: "cheia",
     source: `-- Um objeto simples com metatable
 local Lua = {}

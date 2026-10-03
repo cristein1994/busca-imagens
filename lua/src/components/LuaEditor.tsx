@@ -17,7 +17,10 @@ export default function LuaEditor({ value, onChange, highlightLine, onRun }: Pro
   const editorRef = useRef<MonacoEditorNS.IStandaloneCodeEditor | null>(null);
   const decoRef = useRef<string[]>([]);
   const onRunRef = useRef(onRun);
-  onRunRef.current = onRun;
+
+  useEffect(() => {
+    onRunRef.current = onRun;
+  }, [onRun]);
 
   const handleMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
