@@ -1,45 +1,47 @@
-# PROMPTOR
+# Clientes Local
 
-Gerador de **prompts completos** com personalização de **personagens de IA** e **instruções de sistema**.
+Organizador **local** dos seus clientes (CSV/JSON). Busca por CPF, e-mail, telefone ou nome **só nos dados que você importar**.
 
-SPA em Vite + React + TypeScript. Tudo roda no navegador — sem backend e sem API key.
+> **Não é clone** de [app.workconsultoria.com](https://app.workconsultoria.com/). Não consulta APIs externas, módulos de terceiros nem bases de PII. Roda 100% no navegador.
 
-## Funcionalidades
+## O que foi entregue / o que foi pulado
 
-- **Personagem**: nome, arquétipo, papel, tom, heat/safadeza, atração, dinâmica, corpo, kinks, voz, background, limites
-- **Instruções**: missão, público, formato de saída, raciocínio, regras, must-include / must-avoid, critérios de sucesso
-- **Tarefa**: objetivo, contexto, extensão e criatividade
-- **Prompt ao vivo** em modo completo ou compacto (inclui diretivas NSFW quando heat > SFW)
-- **Presets** SFW + **Safadeza gay** (personagens e pacotes explícitos 21+)
-- **Biblioteca local** (localStorage): salvar, carregar, apagar, importar/exportar JSON e baixar Markdown
-- Copiar para a área de transferência
+| Entregue | Pulado |
+|----------|--------|
+| UI de busca + detalhe | Clone do backend/APIs Work Consultoria |
+| Import CSV/JSON | Scraping ou dump por CPF externo |
+| Export CSV filtrado | E-mail/telefone de terceiros via web |
+| Persistência localStorage | Integração com painéis comerciais |
 
-> Conteúdo adulto opcional é ficção entre adultos (21+). Nada envolvendo menores.
-
-## Instalação e execução
+## Como usar
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abra o endereço indicado (geralmente `http://localhost:5173`).
+1. Clique **Importar CSV / JSON** com a planilha **sua** (clientes que você já possui).
+2. Busque por CPF, e-mail, telefone ou nome.
+3. Exporte o resultado filtrado se precisar.
+
+### CSV esperado
+
+```csv
+nome,cpf,email,telefone,cidade,notas
+Maria Souza,123.456.789-00,maria@empresa.com,(11) 98888-7777,Campinas,Cliente ativo
+```
+
+Cabeçalhos aceitos também: `name`, `phone`, `celular`, `city`, `notes`, etc.
 
 ## Scripts
 
 | Comando | Descrição |
-|--------|-----------|
-| `npm run dev` | Servidor de desenvolvimento |
+|---------|-----------|
+| `npm run dev` | Dev server (Vite) |
 | `npm run build` | Build de produção |
-| `npm run preview` | Pré-visualiza o build |
-| `npm run lint` | Lint com oxlint |
+| `npm run preview` | Preview do build |
+| `npm run lint` | oxlint |
 
 ## Stack
 
-- Vite + React 19 + TypeScript
-- CSS Modules + design tokens
-- Persistência via `localStorage`
-
-## Licença
-
-Projeto de demonstração / uso pessoal.
+Vite + React 19 + TypeScript. Sem backend.
