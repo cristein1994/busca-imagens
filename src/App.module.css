@@ -98,6 +98,46 @@
   gap: 12px;
 }
 
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: rgba(6, 20, 26, 0.65);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.chip:hover {
+  border-color: rgba(47, 224, 196, 0.45);
+}
+
+.chipActive {
+  background: rgba(255, 90, 54, 0.18);
+  border-color: rgba(255, 90, 54, 0.65);
+  color: #ffd4c8;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.toggle input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--accent-2);
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

@@ -40,8 +40,10 @@ DEFAULT_SPACES = [
 ]
 
 DEFAULT_NEGATIVE = (
+    "child, minor, underage, teen, boy, baby, censored, mosaic, "
+    "blurred genitals, covered penis, underwear, clothing, "
     "low quality, ugly, unfinished, out of focus, deformed, disfigure, "
-    "blurry, smudged, restricted palette, flat colors"
+    "blurry, smudged, bad anatomy"
 )
 
 app = FastAPI(title="Chroma1-HD Runner", version="1.0.0")
@@ -127,10 +129,11 @@ def _generate_on_space(space: str, req: GenerateRequest) -> tuple[bytes, str, fl
             (
                 req.prompt,
                 req.negative_prompt,
-                float(min(req.num_inference_steps, 40)),
-                float(req.guidance_scale),
-                str(w),
-                str(h),
+                # fantasticstar Space caps: steps<=20, guidance<=3; dropdowns want ints
+                float(min(req.num_inference_steps, 20)),
+                float(min(req.guidance_scale, 3.0)),
+                int(w),
+                int(h),
                 float(req.seed),
             ),
         ),

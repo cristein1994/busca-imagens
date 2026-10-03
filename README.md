@@ -1,6 +1,8 @@
-# CHROMA Studio
+# CHROMA Studio — Full NSFW
 
-Runner do **Lodestones Chroma1-HD** (8.9B, Apache 2.0) — modelo text-to-image derivado do **FLUX.1-schnell** com modificações arquiteturais.
+Runner do **Lodestones Chroma1-HD** (8.9B, Apache 2.0) em modo **Full NSFW** (nudez masculina explícita com penis). Modelo text-to-image derivado do **FLUX.1-schnell** com modificações arquiteturais.
+
+> Conteúdo adulto 21+ apenas.
 
 ## Por que via Hugging Face Space?
 
