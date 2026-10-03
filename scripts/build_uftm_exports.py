@@ -725,7 +725,7 @@ PEOPLE_RAW = [
     dict(
         fullName="Ana Laura Carvalho da Silva",
         title="Bacharel em Biomedicina UFTM | Mestranda",
-        courseOrRole="Mestrado Health Professions (2024–2026); Biomedicina (2019–2024)",
+        courseOrRole="Mestrado Health Professions (2024–2026) | Biomedicina (2019–2024)",
         location="Uberaba, Minas Gerais, Brazil",
         linkedinUrl="https://www.linkedin.com/in/analauracarvalho99",
         email="",
@@ -875,6 +875,15 @@ PEOPLE_RAW = [
 ]
 
 
+def sanitize_field(value: str, delimiter: str) -> str:
+    if value is None:
+        return ""
+    s = str(value).replace("\r", " ").replace("\n", " ").strip()
+    if delimiter and delimiter in s:
+        s = s.replace(delimiter, " — ")
+    return s.replace('"', "'")
+
+
 def write_csv(path: Path, rows: list[dict], delimiter: str = ",") -> None:
     with path.open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(
@@ -886,7 +895,7 @@ def write_csv(path: Path, rows: list[dict], delimiter: str = ",") -> None:
         )
         w.writeheader()
         for r in rows:
-            w.writerow({k: r.get(k, "") for k in COLS})
+            w.writerow({k: sanitize_field(r.get(k, ""), delimiter) for k in COLS})
 
 
 def write_html(path: Path, rows: list[dict], title: str, note: str) -> None:
