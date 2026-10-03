@@ -1,15 +1,29 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AgeGate } from './components/AgeGate'
+import { AmigoSafado } from './components/AmigoSafado'
 import { Filters } from './components/Filters'
 import { ProfileCard } from './components/ProfileCard'
 import { ProfileDetail } from './components/ProfileDetail'
 import { PROFILES } from './data/profiles'
 import { loadFavorites, saveFavorites } from './lib/favorites'
 import { defaultFilters, filterProfiles } from './lib/filter'
+import { mergeCatalog, scrapePublicListings } from './lib/scrape'
 import type { GpFilters, GpProfile } from './types/gp'
 import styles from './App.module.css'
 
 const AGE_KEY = 'boyradar_age_ok_v1'
+const SCRAPED_KEY = 'boyradar_scraped_v1'
+
+function loadScraped(): GpProfile[] {
+  try {
+    const raw = localStorage.getItem(SCRAPED_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw) as GpProfile[]
+    return Array.isArray(parsed) ? parsed.filter((p) => p.age >= 21) : []
+  } catch {
+    return []
+  }
+}
 
 export default function App() {
   const [ageOk, setAgeOk] = useState(() => localStorage.getItem(AGE_KEY) === '1')
@@ -17,16 +31,43 @@ export default function App() {
   const [favorites, setFavorites] = useState<string[]>(() => loadFavorites())
   const [selected, setSelected] = useState<GpProfile | null>(null)
   const [onlyFavs, setOnlyFavs] = useState(false)
+  const [scraped, setScraped] = useState<GpProfile[]>(() => loadScraped())
+  const [scraping, setScraping] = useState(false)
+  const [lastScrape, setLastScrape] = useState<{ count: number; errors: string[] }>()
+
+  const catalog = useMemo(() => mergeCatalog(PROFILES, scraped), [scraped])
 
   useEffect(() => {
     saveFavorites(favorites)
   }, [favorites])
 
+  useEffect(() => {
+    localStorage.setItem(SCRAPED_KEY, JSON.stringify(scraped))
+  }, [scraped])
+
   const results = useMemo(() => {
-    let list = filterProfiles(PROFILES, filters)
+    let list = filterProfiles(catalog, filters)
     if (onlyFavs) list = list.filter((p) => favorites.includes(p.id))
     return list
-  }, [filters, favorites, onlyFavs])
+  }, [catalog, filters, favorites, onlyFavs])
+
+  const runScrape = async () => {
+    setScraping(true)
+    try {
+      const result = await scrapePublicListings()
+      const before = new Set(catalog.map((p) => p.id))
+      const fresh = result.profiles.filter((p) => !before.has(p.id) && p.age >= 21)
+      setScraped((prev) => mergeCatalog(prev, result.profiles))
+      setLastScrape({ count: fresh.length, errors: result.errors })
+    } catch (e) {
+      setLastScrape({
+        count: 0,
+        errors: [e instanceof Error ? e.message : 'Falha no scrap'],
+      })
+    } finally {
+      setScraping(false)
+    }
+  }
 
   if (!ageOk) {
     return (
@@ -44,10 +85,10 @@ export default function App() {
       <header className={styles.hero}>
         <div className={styles.heroInner}>
           <p className={styles.brand}>BOYRADAR</p>
-          <h1>Buscador de garotos de programa</h1>
+          <h1>Buscador safado de garotos de programa</h1>
           <p className={styles.lead}>
-            Filtra por cidade, posição, cm e quem atende homem. Catálogo seed 21+ com links
-            públicos — combine direto no WhatsApp.
+            Teu amigo gay puto recomenda GP pelos anúncios — filtro + scrap de classificados
+            públicos (21+). Combina no WhatsApp, sem Pix adiantado.
           </p>
           <div className={styles.heroActions}>
             <button
@@ -64,6 +105,14 @@ export default function App() {
             >
               Reset Uberaba / só ativo / 17cm+
             </button>
+            <button
+              type="button"
+              className={styles.chipOn}
+              disabled={scraping}
+              onClick={() => void runScrape()}
+            >
+              {scraping ? 'Scrapando web…' : `Scrap web (${catalog.length} no radar)`}
+            </button>
           </div>
         </div>
       </header>
@@ -77,7 +126,8 @@ export default function App() {
 
         {results.length === 0 ? (
           <p className={styles.empty}>
-            Nenhum perfil com esse filtro. Afrouxe cm, cidade ou posição.
+            Nenhum perfil com esse filtro. Afrouxe cm, cidade ou manda o Amigo Safado scrapar a
+            web.
           </p>
         ) : (
           <div className={styles.grid}>
@@ -101,9 +151,16 @@ export default function App() {
       <footer className={styles.footer}>
         <strong>BOYRADAR</strong>
         <span>
-          Classificados públicos · adultos 21+ · não intermediamos · sem Pix adiantado
+          Classificados públicos · scrap local via proxy · 21+ · não intermediamos
         </span>
       </footer>
+
+      <AmigoSafado
+        catalog={catalog}
+        scraping={scraping}
+        lastScrape={lastScrape}
+        onScrape={() => void runScrape()}
+      />
 
       {selected ? (
         <ProfileDetail profile={selected} onClose={() => setSelected(null)} />

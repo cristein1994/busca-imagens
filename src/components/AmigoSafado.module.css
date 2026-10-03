@@ -1,0 +1,132 @@
+.wrap {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  background: #1a1218;
+  color: #f8eef1;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -12px 40px rgba(20, 16, 24, 0.25);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.head strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.head span {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(248, 238, 241, 0.65);
+}
+
+.head button {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  color: #f8eef1;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.65rem 1rem 0;
+}
+
+.quick button {
+  border: 0;
+  background: rgba(214, 40, 57, 0.25);
+  color: #f8eef1;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.quick button:disabled {
+  opacity: 0.5;
+}
+
+.thread {
+  max-height: 280px;
+  overflow: auto;
+  padding: 0.75rem 1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.amigo,
+.voce {
+  max-width: 92%;
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+}
+
+.amigo {
+  background: rgba(255, 255, 255, 0.08);
+  justify-self: start;
+}
+
+.voce {
+  background: var(--accent);
+  justify-self: end;
+}
+
+.amigo pre,
+.voce pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem 0.9rem;
+}
+
+.form input {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  color: #f8eef1;
+  border-radius: var(--radius);
+  padding: 0.65rem 0.75rem;
+}
+
+.form button {
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius);
+}
+
+@media (min-width: 960px) {
+  .wrap {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    width: min(380px, calc(100vw - 2rem));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
